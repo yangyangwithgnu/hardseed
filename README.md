@@ -2,7 +2,7 @@
 #hardseed
 yangyang.gnu@gmail.com
 
-![YouCompleteMe GIF demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)
+![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)
 
 ----------------
 ##english
@@ -114,7 +114,7 @@ $ make && make install
 ####『windows』  
 先进入 hardseed/bin/windows/，键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再 CMD 中键入
 ```
-$ hardseed.exe
+X:\> hardseed.exe
 ```
 这时，hardseed 开始玩命儿为你下载女神图片和种子，约 1 分钟左右，在你 home 目录下会生成类似 C:\Users\Administrator\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们在此！
 
@@ -131,7 +131,6 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 
 ###【演示】  
 http://v.youku.com/v_show/id_XNzQxOTk0NTE2.html
-<iframe height=498 width=510 src="http://player.youku.com/embed/XNzQxOTk0NTE2" frameborder=0 allowfullscreen></iframe>
 
 
 骚年，您可千万注意身体！
