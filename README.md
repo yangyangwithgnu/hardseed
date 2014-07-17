@@ -51,6 +51,7 @@ Set the range of to download topics. E.G.:
 - topics-range 2 16
 - topics-range 8 (I.E., --topics-range 1 8)
 - topics-range -1 (I.E., all topics of this av class)  
+
 The default topics range is 128.
 
 --saveas-path  
@@ -69,6 +70,7 @@ As you know, the government likes blocking adult websites, so, I do suggest you 
 - shadowsocks, --proxy socks5://127.0.0.1:1080, or socks5h://127.0.0.1:1080
 - SSH, --proxy socks4://127.0.0.1:7070
 - VPN (PPTP and openVPN), --proxy ""  
+
 It is important that you should know, you can set more proxys at the same time, split by space-char ' '. As the --concurrent-tasks option says, each proxy could more than one concurrent tasks, now, what about more proxys? Yes, yes, the speed of downloading seed and pictures is very very fast. E.G., --concurrent-tasks 8 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks4://127.0.0.1:7070, the number of concurrent tasks is 8\*3.   
 If you wanna how to install and configure various kinds of proxy, please access my homepage "3.3 搭梯翻墙" http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3   
 The default http://127.0.0.1:8087.   
