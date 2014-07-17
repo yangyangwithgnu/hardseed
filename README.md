@@ -112,7 +112,7 @@ $ make && make install
 **听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
 
 ####『windows』  
-先进入 hardseed\bin\windows\，找到并选中 hardseed.exe，设置**以管理员权限运行该程序**，接着键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再在 CMD 中键入
+先进入 hardseed\bin\windows\，找到并选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再在 CMD 中键入
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
