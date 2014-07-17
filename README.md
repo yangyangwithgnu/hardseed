@@ -127,7 +127,7 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class Aicheng_west
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
 
 ###【演示】  
-coming soon
+<embed src="http://player.youku.com/player.php/sid/XNzQxOTk0NTE2/v.swf" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 
 骚年，您可千万注意身体！
 
