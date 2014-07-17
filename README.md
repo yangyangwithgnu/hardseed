@@ -2,6 +2,8 @@
 #hardseed
 yangyang.gnu@gmail.com
 
+![YouCompleteMe GIF demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)
+
 ----------------
 ##english
 
