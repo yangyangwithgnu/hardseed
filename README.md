@@ -22,7 +22,6 @@ Show current version.
 
 --av-class  
 There are twelve av classes: 
-  
 - caoliu_west_reposted
 - caoliu_cartoon_reposted
 - caoliu_asia_mosaicked_reposted
@@ -35,8 +34,9 @@ There are twelve av classes:
 - aicheng_cartoon
 - aicheng_asia_mosaicked
 - aicheng_asia_non_mosaicked  
-  As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" is clearity, you konw which one is your best lover (yes, only one).   
-  The default is aicheng_asia_mosaicked.   
+
+As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" is clearity, you konw which one is your best lover (yes, only one).   
+The default is aicheng_asia_mosaicked.   
 
 --concurrent-tasks  
 You can set more than one proxy, each proxy could more than one concurrent tasks. This option set the number of concurrent tasks of each prox.   
