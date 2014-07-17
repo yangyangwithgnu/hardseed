@@ -2,9 +2,9 @@ hardseed
 =======
 
 **hardseed** is a batch seeds and pictures download utiltiy from CaoLiu and AiCheng forum. It's easy and simple to use. Usually, you could issue it as follow:  
->$ hardseed  
+> $ hardseed  
 or  
->$ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-class Aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
+> $ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-class Aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
 
   --help  
   Show this help infomation what you are seeing.   
