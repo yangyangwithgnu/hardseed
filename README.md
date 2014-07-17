@@ -34,7 +34,7 @@ There are twelve av classes:
 - aicheng_west
 - aicheng_cartoon
 - aicheng_asia_mosaicked
-- aicheng_asia_non_mosaicked
+- aicheng_asia_non_mosaicked  
   As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" is clearity, you konw which one is your best lover (yes, only one).   
   The default is aicheng_asia_mosaicked.   
 
@@ -50,7 +50,7 @@ The default timeout is 32 seconds.
 Set the range of to download topics. E.G.:
 - topics-range 2 16
 - topics-range 8 (I.E., --topics-range 1 8)
-- topics-range -1 (I.E., all topics of this av class)
+- topics-range -1 (I.E., all topics of this av class)  
 The default topics range is 128.
 
 --saveas-path  
