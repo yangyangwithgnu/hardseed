@@ -112,9 +112,9 @@ $ make && make install
 **听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
 
 ####『windows』  
-先进入 hardseed/bin/windows/，键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再 CMD 中键入
+先进入 hardseed\bin\windows\，键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再 CMD 中键入
 ```
-X:\> hardseed.exe
+X:\hardseed\bin\windows> hardseed.exe
 ```
 这时，hardseed 开始玩命儿为你下载女神图片和种子，约 1 分钟左右，在你 home 目录下会生成类似 C:\Users\Administrator\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们在此！
 
