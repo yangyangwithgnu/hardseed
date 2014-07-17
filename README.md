@@ -34,7 +34,7 @@ $ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-
 - aicheng_west
 - aicheng_cartoon
 - aicheng_asia_mosaicked
-- aicheng_asia_non_mosaicked   
+- aicheng_asia_non_mosaicked
   As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" is clearity, you konw which one is your best lover (yes, only one).   
   The default is aicheng_asia_mosaicked.   
 
@@ -68,7 +68,7 @@ $ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-
 - GoAgent (STRONGLY recommended), --proxy http://127.0.0.1:8087
 - shadowsocks, --proxy socks5://127.0.0.1:1080, or socks5h://127.0.0.1:1080
 - SSH, --proxy socks4://127.0.0.1:7070
-- VPN (PPTP and openVPN), --proxy ""
+- VPN (PPTP and openVPN), --proxy ""  
   It is important that you should know, you can set more proxys at the same time, split by space-char ' '. As the --concurrent-tasks option says, each proxy could more than one concurrent tasks, now, what about more proxys? Yes, yes, the speed of downloading seed and pictures is very very fast. E.G., --concurrent-tasks 8 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks4://127.0.0.1:7070, the number of concurrent tasks is 8*3.   
   If you wanna how to install and configure various kinds of proxy, please access my homepage "3.3 搭梯翻墙" http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3   
   The default http://127.0.0.1:8087.   
@@ -92,8 +92,8 @@ windows 亲，双击运行 goagent.exe （管理员权限）。
 
 『windows』  
     这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，我服务很到位的，帮你弄好了，二进制执行程序位于 hardseed/bin/windows/hardseed.exe
-
-『linux』
+ 
+『linux』  
 0）唯一依赖 libcurl，请自行安装；
 1）代码采用 C++11 编写，gcc 版本不低于 4.7.1。
 2）命令行下运行：
@@ -103,17 +103,17 @@ $ cmake .
 $ make && make install
 ```
 
-【使用】
+【使用】  
     **听好，运行 hardseed 前务必确保代理软件已正常运行，否则，你碰不到任何女神。**
 
-『windows』
+『windows』  
     先进入 hardseed/bin/windows/，键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再 CMD 中键入
 ```
 $ hardseed.exe
 ```
 这时，hardseed 开始玩命儿为你下载女神图片和种子，约 1 分钟左右，在你 home 目录下会生成类似 C:\Users\Administrator\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们在此！
 
-『linux』
+『linux』  
     同 windows 下运行一样，全用默认命令行参数运行
 ```
 $ hardseed
@@ -124,6 +124,6 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class Aicheng_west
 ```
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
 
-【演示】
+【演示】  
 
 
