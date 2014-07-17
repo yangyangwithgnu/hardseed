@@ -12,7 +12,7 @@ $ hardseed
 ```
 or  
 ```
-$ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-class Aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
+$ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-class aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
 ```
 
 --help  
@@ -123,7 +123,7 @@ $ hardseed
 ```
 执行完成后，你会看到 ~/[aicheng_asia_mosaicked][1~128]@014822/，你要的都在那儿。或者，玩点高级的
 ```
-$ hardseed --saveas-path ~/downloads --topics-range 256 --av-class Aicheng_west
+$ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 ```
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
 
