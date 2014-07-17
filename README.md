@@ -14,7 +14,7 @@ $ hardseed
 ```
 or  
 ```
-$ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64 --av-class aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
+$ hardseed --saveas-path ~/downloads --topics-range 8 64 --av-class aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087  
 ```
 
 --help  
