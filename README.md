@@ -96,7 +96,7 @@ windows 亲，双击运行 goagent.exe （**管理员权限**）。
 ###【源码安装】  
 
 ####『windows』  
-这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，我服务很到位的，帮你弄好了，二进制执行程序位于 hardseed/bin/windows/hardseed.exe
+这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，我服务很到位的，帮你弄好了，二进制执行程序位于 hardseed\bin\windows\hardseed.exe
  
 ####『linux』  
 0）唯一依赖 libcurl，请自行安装；  
@@ -116,7 +116,7 @@ $ make && make install
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
-这时，hardseed 开始玩命儿为你下载女神图片和种子，约 1 分钟左右，在你 home 目录下会生成类似 C:\Users\Administrator\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们在此！
+这时，hardseed 开始玩命儿为你下载女神图片和种子，约 1 分钟左右，在你 home 目录下会生成类似 C:\Users\Administrator\\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们在此！
 
 ####『linux』  
 同 windows 下运行一样，全用默认命令行参数运行
