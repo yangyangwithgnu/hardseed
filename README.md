@@ -138,8 +138,8 @@ A2：linux  与 windows 有很多基础设置的差异，路径表示方式就�
 
 Q3：运行 hardseed 后啥都没下载呢？还提示 There is no topic which you like？  
 A3：有几种可能：
-a）未成功翻墙。请自行参阅你的翻墙工具帮助文档，修正即可。windows 用户注意检查是否以*管理员权限运行翻墙工具*；
-b）网页翻墙已成功但仍无法下载。请检查你的代理工具是否成功接收 hardseed 的代理请求（如，goagent 窗口中可查看），windows 用户注意检查是否以*管理员权限运行 hardseed.exe*；
+a）未成功翻墙。请自行参阅你的翻墙工具帮助文档，修正即可。windows 用户注意检查是否以*管理员权限运行翻墙工具*；  
+b）网页翻墙已成功但仍无法下载。请检查你的代理工具是否成功接收 hardseed 的代理请求（如，goagent 窗口中可查看），windows 用户注意检查是否以*管理员权限运行 hardseed.exe*；  
 c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令行选项，hardseed 将查找标题中是否含有关键字 xxxx，若没有则忽略相关帖子。更换其他关键字。
 
 
