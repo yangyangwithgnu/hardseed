@@ -76,7 +76,7 @@ showHelpInfo (void)
          << "  $ hardseed" << endl
          << "or" << endl
          << "  $ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64"
-         << " --av-class Aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087" << endl;
+         << " --av-class aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087" << endl;
 
     cout << endl;
     cout << "  --help" << endl
@@ -120,7 +120,7 @@ showHelpInfo (void)
     cout << "  --saveas-path" << endl
          << "  Set the path to save seeds and pictures. The rule of dir: [avclass][range]@hhmmss. E.G., "
          << "[aicheng_west][2~32]@124908/. " << endl
-         << "  The default directory is home directory. " << endl;
+         << "  The default directory is home directory (or windows is C:\\). " << endl;
 
     cout << endl;
     cout << "  --hate" << endl
@@ -330,7 +330,7 @@ main (int argc, char* argv[])
     cmdline_arguments_list = cmdline_options.getArgumentsList("--saveas-path");
     if (cmdline_arguments_list.empty()) {
 #ifdef CYGWIN
-        const char* p_home = getenv("HOMEPATH");
+        const char* p_home = "C:\\";
 #else
         const char* p_home = getenv("HOME");
 #endif
@@ -344,17 +344,22 @@ main (int argc, char* argv[])
     }
     path += "/[";
 
-    // 1ST, av class
+    // 1st, av class
     path += av_class_name;
     path += "]";
 
-    // 2ND, range
+    // 2nd, range
     path += "[" + convNumToStr(topics_range_begin) + "~" + convNumToStr(topics_range_end) + "]@";
 
-    // 3ND, time
+    // 3rd, time
     Time current_time;
     path += current_time.getHour(2) + current_time.getMinute(2) + current_time.getSecond(2);
     path += "/";
+
+#ifdef CYGWIN
+    // windows path style
+    replace(path.begin(), path.end(), '/', '\\');
+#endif
 
     // create dir
     if (-1 == mkdir(path.c_str(), 0755)) {
@@ -363,14 +368,11 @@ main (int argc, char* argv[])
     }
 
 #ifndef CYGWIN
-    // convert raw path to standard absolute path
+    // convert raw path to standard absolute path. To call realpath() success,
+    // path must have created.
     char buffer[PATH_MAX];
     realpath(path.c_str(), buffer);
     path = buffer;
-#endif
-
-#ifdef CYGWIN
-    replace(path.begin(), path.end(), '/', '\\');
 #endif
 
     cout << "  the path to save seeds and pictures \"" << RichTxt::bold_on << path << RichTxt::bold_off << "\"; " << endl;
