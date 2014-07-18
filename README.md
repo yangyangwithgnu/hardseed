@@ -96,7 +96,7 @@ windows 亲，双击运行 goagent.exe （**管理员权限**）。
 ###【源码安装】  
 
 ####『windows』  
-这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，我服务很到位的，帮你弄好了，二进制执行程序位于 hardseed\bin\windows\hardseed.exe
+这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，帮你弄好了，我的定位是牙医界的服务人员，服务很重要，二进制执行程序位于 hardseed\bin\windows\hardseed.exe
  
 ####『linux』  
 0）唯一依赖 libcurl，请自行安装；  
@@ -112,7 +112,7 @@ $ make && make install
 **亲，听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
 
 ####『windows』  
-先进入 hardseed\bin\windows\，找到并选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 ctrl-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再在 CMD 中键入
+先进入 hardseed\bin\windows\，找到并选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 alt-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再在 CMD 中键入
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
