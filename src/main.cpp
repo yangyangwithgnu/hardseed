@@ -100,7 +100,7 @@ showHelpInfo (void)
     cout << "  --concurrent-tasks" << endl
          << "  You can set more than one proxy, each proxy could more than one concurrent tasks. This option "
          << "set the number of concurrent tasks of each prox. " << endl
-         << "  The max and default number is 16. " << endl;
+         << "  The max and default number is 8. " << endl;
 
     cout << endl;
     cout << "  --timeout-download-picture" << endl
@@ -379,7 +379,7 @@ main (int argc, char* argv[])
     // <<<<<<<<<<<<<<<<<<
 
     // --concurrent-tasks
-    unsigned threads_total = 16; // the default and the max number of threads
+    unsigned threads_total = 8; // the default and the max number of threads
     cmdline_arguments_list = cmdline_options.getArgumentsList("--concurrent-tasks");
     if (!cmdline_arguments_list.empty()) {
         unsigned tmp = strtoul(cmdline_arguments_list[0].c_str(), nullptr, 0);

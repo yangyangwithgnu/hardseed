@@ -43,7 +43,7 @@ The default is aicheng_asia_mosaicked.
 
 --concurrent-tasks  
 You can set more than one proxy, each proxy could more than one concurrent tasks. This option set the number of concurrent tasks of each proxy.   
-The max and default number is 16.   
+The max and default number is 8.   
 
 --timeout-download-picture  
 Some pictures too big to download in few seconds. So, you should set the download picture timeout seconds.   
@@ -93,7 +93,17 @@ $ python proxy.py
 windows 亲，双击运行 goagent.exe （**管理员权限**）。  
 
 
-###【源码安装】  
+###【下载】
+
+####『windows』
+亲，往右上看，找到“download ZIP”，点击下载。
+
+####『linux』
+```
+$ git clone https://github.com/yangyangwithgnu/hardseed.git
+```
+
+###【源码安装】
 
 ####『windows』  
 这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，帮你弄好了，我的定位是牙医界的服务人员，服务很重要，二进制执行程序位于 hardseed\bin\windows\hardseed.exe。
