@@ -2,8 +2,12 @@
 #hardseed
 yangyang.gnu@gmail.com
 
-![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)
-
+*hardseed*  
+![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)  
+*running*  
+![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/running.gif)  
+*more seeds and pictures*  
+![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/seeds_and_pics.gif)  
 ----------------
 ##english
 
@@ -86,7 +90,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能正常帮你拉女神。hardseed 支持 GoAgent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以并行使用多种代理以极速下载。从普及度、稳定性、高效性来看，GoAgent 最优。“我一技术小白，工作压力大，就想看看女神轻松下，你还让我折腾代理？我恨你！”，嘚，亲，我错了。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能正常帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以并行使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一技术小白，本来平时工作压力就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，我错了。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent/local/，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
