@@ -1,6 +1,7 @@
 
 #hardseed
 yangyang.gnu@gmail.com
+2014-7-20 15:05:19
 
 *hardseed*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)  
