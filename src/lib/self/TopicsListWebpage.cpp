@@ -13,7 +13,7 @@ TopicsListWebpage::TopicsListWebpage ( const string& url,
                                        const string& proxy_addr,
                                        const string& src_charset,
                                        const string& dest_charset )
-    : Webpage(url, "", proxy_addr)
+    : Webpage(url, "", proxy_addr, 16, 4, 4)
 {
     if (!isLoaded()) {
         return;

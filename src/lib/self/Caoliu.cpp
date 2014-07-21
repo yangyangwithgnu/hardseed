@@ -148,6 +148,8 @@ parseValidTopicsUrls ( Caoliu::AvClass av_class,
         }
         
         current_url = caoliu_topicslist_webpage.getNextpageUrl();
+//cout << current_url << endl;
+//sleep(6);
     }
 
 

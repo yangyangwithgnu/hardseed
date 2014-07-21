@@ -2,13 +2,20 @@
 yangyang.gnu@gmail.com  
 
 
+
 ##公告
 ----------------
 
-**2014-7-21：Caoliu 论坛问题，近期 --av-class 选项请勿选用 caoliu_* 相关参数。**
+**2014-7-21：我们应尊重各大爱的论坛，提供的资源不仅优质而且免费。请大家支持这些网站，多用页面访问、多点击页面广告、多解囊捐赠。**
 
 
-###【演示】  
+##版本
+----------------
+
+[修正 v0.1.1]：2014-7-21 13:09:39，caoliu 论坛增加了反机器人机制，若翻页过来则视为机器人行为，下载页面为空白页。此版本可以应对它的反机器人机制。
+
+
+##演示  
 ----------------
 *hardseed*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)  
@@ -107,7 +114,6 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 $ python proxy.py
 ```
 windows 亲，双击运行 goagent.exe （**管理员权限**）。  
-
 
 ###【下载】
 

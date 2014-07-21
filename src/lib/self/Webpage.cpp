@@ -12,6 +12,8 @@
 #include <cstdio>
 #include <iconv.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <curl/curl.h>
 #include "../helper/Misc.h"
 
@@ -288,7 +290,7 @@ Webpage::Webpage ( const string& url,
                    const string& proxy_addr,
                    const unsigned timeout_second,
                    const unsigned retry_times,
-                  const unsigned retry_sleep_second )
+                   const unsigned retry_sleep_second )
     : p_curl_(initLibcurl(libcurl_err_info_buff_)), url_(url), proxy_addr_(proxy_addr), b_loaded_ok_(false)
 {
     // set proxy.
@@ -381,6 +383,24 @@ Webpage::isValidLatestHttpStatusCode (void) const
             server_error_code != latest_http_status_code_str[0] );
 }
 
+// failure, return -1
+static long
+getFileSize (FILE* fs)
+{
+    // backup current offset
+    long offset_bak = ftell(fs);
+
+    // get the filesize
+    fseek(fs, 0, SEEK_END);
+    long file_size = ftell(fs);
+
+    // restore current offset
+    fseek(fs, offset_bak, SEEK_SET);
+
+
+    return(file_size);
+}
+
 // download internet file to local file, such as, webpage, picture, mp3, etc.
 // note: URL must be http, CANNOT be https
 bool
@@ -409,7 +429,7 @@ Webpage::download_ ( const string& raw_url,
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_TIMEOUT, timeout_second), libcurl_err_info_buff_);
 
     // ready for downloading webpage to locale tmp file
-    FILE* fs = fopen(filename.c_str(), "w");
+    FILE* fs = fopen(filename.c_str(), "w+");
     if (nullptr == fs) {
         cerr << "ERROR! Webpage::download() something happened. Fail to open file " << filename << endl;
         return(false);
@@ -426,7 +446,7 @@ Webpage::download_ ( const string& raw_url,
         // notice, even though there is HTTP request status error, libcurl still download
         // web file success, of course, this is not real success, so, I have to check the
         // http status code
-        if (b_ok && isValidLatestHttpStatusCode()) {
+        if (b_ok && isValidLatestHttpStatusCode() && getFileSize(fs) > 0) {
             b_downloaded = true;
             break;
         } 
@@ -438,7 +458,7 @@ Webpage::download_ ( const string& raw_url,
         // the next retry will append data to local file.
         // so, I must clear the filestream by freopen(),
         // and, neither rewind() nor fseek(fs, 0L, SEEK_SET) works.
-        fs = freopen(filename.c_str(), "w", fs);
+        fs = freopen(filename.c_str(), "w+", fs);
         if (nullptr == fs) {
             cerr << "ERROR! Webpage::download() something happened. Fail to reopen file " << filename << endl;
             fclose(fs);

@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.1.0");
+static const string g_version("0.1.1");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://www.yangyangwithgnu.net/");
@@ -395,7 +395,8 @@ main (int argc, char* argv[])
     // for example: --ignore aa bb cc "d d".
     vector<string> hate_keywords_list = { "连发", "連发", "连發", "連發",
                                           "连弹", "★㊣", "合辑", "合集",
-                                          "合輯", "nike", "最新の美女骑兵㊣" }; // force to ignore the all-in-one topics
+                                          "合輯", "nike", "最新の美女骑兵㊣",
+                                          "精選" }; // force to ignore the all-in-one topics
     cmdline_arguments_list = cmdline_options.getArgumentsList("--hate");
     if (!cmdline_arguments_list.empty()) {
         hate_keywords_list.insert(hate_keywords_list.end(), cmdline_arguments_list.begin(), cmdline_arguments_list.end());
