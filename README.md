@@ -1,12 +1,11 @@
 #hardseed
 yangyang.gnu@gmail.com  
-2014-7-20 15:05:19
 
 
 ##公告
 ----------------
 
-2014-7-21：Caoliu 论坛问题，--av-class 选项请勿选用 caoliu_* 相关参数；
+<font color=red>2014-7-21：Caoliu 论坛问题，--av-class 选项请勿选用 caoliu_* 相关参数；</font>
 
 
 ###【演示】  
