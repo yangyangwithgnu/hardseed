@@ -1,8 +1,16 @@
-
 #hardseed
 yangyang.gnu@gmail.com  
 2014-7-20 15:05:19
 
+
+##公告
+----------------
+
+2014-7-21：Caoliu 论坛问题，--av-class 选项请勿选用 caoliu_* 相关参数；
+
+
+###【演示】  
+----------------
 *hardseed*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)  
 *running*  
@@ -10,10 +18,7 @@ yangyang.gnu@gmail.com
 *more seeds and pictures*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/seeds_and_pics.gif)  
 
-##公告
-----------------
-
-2014-7-21：Caoliu 论坛问题，--av-class 选项请勿选用 caoliu_* 相关参数；
+http://v.youku.com/v_show/id_XNzQxOTk0NTE2.html
 
 
 ##english
@@ -165,8 +170,6 @@ b）网页翻墙已成功但仍无法下载。请检查你的代理工具是否�
 c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令行选项，hardseed 将查找标题中是否含有关键字 xxxx，若没有则忽略相关帖子。更换其他关键字。
 
 
-###【演示】  
-http://v.youku.com/v_show/id_XNzQxOTk0NTE2.html
 
 
 骚年，您可千万注意身体！
