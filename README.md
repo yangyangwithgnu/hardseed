@@ -9,9 +9,15 @@ yangyang.gnu@gmail.com
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/running.gif)  
 *more seeds and pictures*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/seeds_and_pics.gif)  
-----------------
-##english
 
+##公告
+----------------
+
+2014-7-21：Caoliu 论坛问题，--av-class 选项请勿选用 caoliu_* 相关参数；
+
+
+##english
+----------------
 
 **hardseed** is a batch seeds and pictures download utiltiy from CaoLiu and AiCheng forum. It's easy and simple to use. Usually, you could issue it as follow:
 ```
@@ -88,6 +94,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 
 ##中文
 --------
+
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
