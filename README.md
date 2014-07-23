@@ -6,7 +6,7 @@ yangyang.gnu@gmail.com
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，你可以考虑捐赠点碎银给我，支付宝帐号 yangyang.gnu@gmail.com**  
+**捐赠：如果觉得 hardseed 有用，你可以考虑捐赠点碎银，支付宝帐号 yangyang.gnu@gmail.com**  
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
