@@ -51,7 +51,7 @@ Show this help infomation what you are seeing.
 Show current version.   
 
 --av-class  
-There are twelve av classes: 
+There are 13 av classes: 
 - caoliu_west_reposted
 - caoliu_cartoon_reposted
 - caoliu_asia_mosaicked_reposted
@@ -60,6 +60,7 @@ There are twelve av classes:
 - caoliu_cartoon_original
 - caoliu_asia_mosaicked_original
 - caoliu_asia_non_mosaicked_original
+- caoliu_selfie
 - aicheng_west
 - aicheng_cartoon
 - aicheng_asia_mosaicked
