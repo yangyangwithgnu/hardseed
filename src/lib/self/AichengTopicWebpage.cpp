@@ -28,8 +28,8 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
             //cerr << "WARNING! parsePicturesUrlsHelper() CANNOT find the keyword " << end_keyword << endl;
             return(false);
         }
-        const string pic_url = webpage_txt.substr( keyword_pic_begin_pos + begin_keyword.size(),
-                                                   keyword_pic_end_pos - keyword_pic_begin_pos - begin_keyword.size() );
+        string pic_url = webpage_txt.substr( keyword_pic_begin_pos + begin_keyword.size(),
+                                             keyword_pic_end_pos - keyword_pic_begin_pos - begin_keyword.size() );
         b_ok = true;
         
         // there are some bad picture-webspaces, ignore them
@@ -45,10 +45,17 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
             continue;
         }
         
-        // normal, gifs are AD
-        bool b_gif = (string::npos != pic_url.rfind(".gif"));
-        if (b_gif) {
+        // ignore gif, because gifs almost are AD
+        if (string::npos != pic_url.rfind(".gif")) {
             continue;
+        }
+        
+        // convert https to http
+        static const string keyword_https("https://");
+        const auto https_pos = pic_url.find(keyword_https);
+        if (string::npos != https_pos) {
+            static const string keyword_http("http://");
+            pic_url.replace(https_pos, keyword_https.size(), keyword_http);
         }
         
         // save the picture URL

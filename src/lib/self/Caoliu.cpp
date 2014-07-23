@@ -42,6 +42,8 @@ getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
     static const string asia_mosaicked_original_part_url("thread0806.php?fid=15");
     static const string asia_non_mosaicked_original_part_url("thread0806.php?fid=2");
 
+    // selfie
+    static const string selfie_part_url("thread0806.php?fid=16");
 
     switch (av_class) {
         case Caoliu::west_reposted: 
@@ -60,6 +62,8 @@ getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
             return(asia_mosaicked_original_part_url);
         case Caoliu::asia_non_mosaicked_original: 
             return(asia_non_mosaicked_original_part_url);
+        case Caoliu::selfie:
+            return(selfie_part_url);
     }
 }
 
@@ -148,8 +152,6 @@ parseValidTopicsUrls ( Caoliu::AvClass av_class,
         }
         
         current_url = caoliu_topicslist_webpage.getNextpageUrl();
-//cout << current_url << endl;
-//sleep(6);
     }
 
 
@@ -161,6 +163,8 @@ downloadTopicPicsAndSeed ( const string& topic_url,
                            const string& proxy_addr,
                            const string& path,
                            unsigned timeout_download_pic,
+                           unsigned pictures_total,
+                           bool b_download_seed,
                            bool b_show_info )
 {
     CaoliuTopicWebpage caoliu_topics_webpage(topic_url, proxy_addr);
@@ -202,18 +206,27 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
  
     // download all pictures
+//const vector<string>& urls = caoliu_topics_webpage.getPicturesUrlsList();
+//for (const auto& e : urls) {
+    ////cout << "------------" << endl;
+    //cout << caoliu_topics_webpage.getRemoteFiletype(e) << endl;
+    ////cout << "------------" << endl;
+//}
     vector<string> fail_download_pics_urls_list;
     bool b_download_pics_success = caoliu_topics_webpage.downloadAllPictures( path,
                                                                               base_name,
                                                                               timeout_download_pic,
                                                                               fail_download_pics_urls_list,
-                                                                              2 );
+                                                                              pictures_total );
 
     // download seed
-    bool b_downloaded_seed_success = false;
-    if (!caoliu_topics_webpage.getSeedUrl().empty()) {
-        RmdownSeedWebpage rm_seed_webpage(caoliu_topics_webpage.getSeedUrl(), proxy_addr);
-        b_downloaded_seed_success = rm_seed_webpage.downloadSeed(path, base_name);
+    bool b_downloaded_seed_success = true;
+    if (b_download_seed) {
+        b_downloaded_seed_success = false;
+        if (!caoliu_topics_webpage.getSeedUrl().empty()) {
+            RmdownSeedWebpage rm_seed_webpage(caoliu_topics_webpage.getSeedUrl(), proxy_addr);
+            b_downloaded_seed_success = rm_seed_webpage.downloadSeed(path, base_name);
+        }
     }
 
     // show result info
@@ -233,7 +246,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
             copy(fail_download_pics_urls_list.cbegin(), fail_download_pics_urls_list.cend(), ostream_iterator<const string&>(cout, ", "));
             cout << "\b\b";
         }
-        if (!b_downloaded_seed_success) {
+        if (b_download_seed && !b_downloaded_seed_success) {
             if (!b_download_pics_success) {
                 cout << "; ";
             }
@@ -286,6 +299,14 @@ Caoliu::Caoliu ( AvClass av_class,
     }
     cout << endl;
 
+    // check just download picutures for dagaier?
+    unsigned pictures_total = 2;
+    bool b_download_seed = true;
+    if (Caoliu::selfie == av_class) {
+        pictures_total = 128;
+        b_download_seed = false;
+    }
+
     // download all pictures and seeds of topics
     cout << "Download the pictures and seeds of topics: " << endl;
     unsigned parsed_topics_cnt = 0;
@@ -298,6 +319,8 @@ Caoliu::Caoliu ( AvClass av_class,
                                            ref(getNextProxyAddr(proxy_addrs_list)),
                                            ref(path),
                                            timeout_download_pic,
+                                           pictures_total,
+                                           b_download_seed,
                                            true ));
         }
         for (auto& e : threads_list) {
@@ -323,6 +346,8 @@ Caoliu::Caoliu ( AvClass av_class,
                                        ref(getNextProxyAddr(proxy_addrs_list)),
                                        ref(path),
                                        timeout_download_pic,
+                                       pictures_total,
+                                       b_download_seed,
                                        true ));
     }
     for (auto& e : threads_list) {

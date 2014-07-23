@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.1.1");
+static const string g_version("0.2.0");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://www.yangyangwithgnu.net/");
@@ -88,12 +88,13 @@ showHelpInfo (void)
 
     cout << endl;
     cout << "  --av-class" << endl
-         << "  There are twelve av classes: caoliu_west_reposted, caoliu_cartoon_reposted, "
+         << "  There are 13 av classes: caoliu_west_reposted, caoliu_cartoon_reposted, "
          << "caoliu_asia_mosaicked_reposted, caoliu_asia_non_mosaicked_reposted, caoliu_west_original, "
          << "caoliu_cartoon_original, caoliu_asia_mosaicked_original, caoliu_asia_non_mosaicked_original, "
-         << "aicheng_west, aicheng_cartoon, aicheng_asia_mosaicked and aicheng_asia_non_mosaicked. " << endl
+         << "caoliu_selfie, aicheng_west, aicheng_cartoon, aicheng_asia_mosaicked and aicheng_asia_non_mosaicked. " << endl
          << "  As the name implies, \"caoliu\" stands for CaoLiu forum, \"aicheng\" for AiCheng forum, "
-         << "\"reposted\" and \"original\" is clearity, you konw which one is your best lover (yes, only one). " << endl
+         << "\"reposted\" and \"original\" is clearity, and the \"selfie\" is photos by oneself, you konw "
+         << "which one is your best lover (yes, only one). " << endl
          << "  The default is aicheng_asia_mosaicked. " << endl;
 
     cout << endl;
@@ -277,6 +278,9 @@ main (int argc, char* argv[])
     } else if ("caoliu_asia_non_mosaicked_reposted" == av_class_name) {
         caoliu_av_class = Caoliu::asia_non_mosaicked_reposted;
         b_aicheng = false;
+    } else if ("caoliu_selfie" == av_class_name) {
+        caoliu_av_class = Caoliu::selfie;
+        b_aicheng = false;
     } else if ("aicheng_west" == av_class_name) {
         aicheng_av_class = Aicheng::west;
     } else if ("aicheng_asia_mosaicked" == av_class_name) {
@@ -396,7 +400,7 @@ main (int argc, char* argv[])
     vector<string> hate_keywords_list = { "连发", "連发", "连發", "連發",
                                           "连弹", "★㊣", "合辑", "合集",
                                           "合輯", "nike", "最新の美女骑兵㊣",
-                                          "精選" }; // force to ignore the all-in-one topics
+                                          "精選", "精选" }; // force to ignore the all-in-one topics
     cmdline_arguments_list = cmdline_options.getArgumentsList("--hate");
     if (!cmdline_arguments_list.empty()) {
         hate_keywords_list.insert(hate_keywords_list.end(), cmdline_arguments_list.begin(), cmdline_arguments_list.end());

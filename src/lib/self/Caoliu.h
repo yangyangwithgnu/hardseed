@@ -13,7 +13,8 @@ class Caoliu
 {
     public:
         enum AvClass { west_reposted, cartoon_reposted, asia_mosaicked_reposted, asia_non_mosaicked_reposted,
-                       west_original, cartoon_original, asia_mosaicked_original, asia_non_mosaicked_original };
+                       west_original, cartoon_original, asia_mosaicked_original, asia_non_mosaicked_original,
+                       selfie };
 
     public:
         Caoliu ( AvClass av_class,

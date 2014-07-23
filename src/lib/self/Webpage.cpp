@@ -171,6 +171,7 @@ Webpage::unescapeHtml (const string& raw_txt) const
                                                                           make_pair("&lt;", "<"),
                                                                           make_pair("&gt;", ">"),
                                                                           make_pair("&nbsp;", " "),
+                                                                          make_pair("&#160;", " "),
                                                                           make_pair("&#12539;", "・"),
                                                                           make_pair("&#9711;", "◯"),
                                                                           make_pair("&#9834;", "♪"),
@@ -195,17 +196,17 @@ Webpage::unescapeHtml (const string& raw_txt) const
     return(unescaped_html_str);
 }
 
-void
-Webpage::requestHttpHeader_ (void)
+string
+Webpage::requestHttpHeader_ (const string& url, HttpHeader_ header_item) const 
 {
     const string random_filename = makeRandomFilename();
     FILE* fs_http_header = fopen(random_filename.c_str(), "w");
     if (nullptr == fs_http_header) {
-        return;
+        return("");
     }
 
     // get HTTP header
-    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_URL, url_.c_str()), libcurl_err_info_buff_);
+    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_URL, url.c_str()), libcurl_err_info_buff_);
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_PROXY, proxy_addr_.c_str()), libcurl_err_info_buff_);
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_NOBODY, true), libcurl_err_info_buff_); // just request the HTTP header
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_WRITEHEADER, fs_http_header), libcurl_err_info_buff_);
@@ -217,18 +218,18 @@ Webpage::requestHttpHeader_ (void)
     fclose(fs_http_header);
 
     // load the file to memory, and parse HTTP header info
+    string http_header, remote_filename, remote_filesize, remote_filetype, remote_filetime;
     static const vector<string> httpheader_keywords_list = { "Content-Type: ", // file type
                                                              "Content-Length: ", // file size
                                                              "Content-Disposition: ", // file name
                                                              "Last-Modified: " }; // file modified time
-    string remote_filetype;
     ifstream ifs(random_filename);
     string line;
     while (getline(ifs, line)) {
         // load to memory
-        http_header_ += (line + '\n');
+        http_header += (line + '\n');
         
-        // parse HTTP header info
+        // parse HTTP header item
         for (const auto& e : httpheader_keywords_list) {
             auto pos = line.find(e);
             if (string::npos == pos) {
@@ -238,49 +239,62 @@ Webpage::requestHttpHeader_ (void)
             line.pop_back(); // the last char in line is '\r'
             const string& tmp = line.substr(pos + e.size(), string::npos);
             if ("Content-Type: " == e) {
-                remote_filetype_ = tmp;
+                remote_filetype = tmp;
             } else if ("Content-Length: " == e) {
-                remote_filesize_ = tmp;
+                remote_filesize = tmp;
             } else if ("Content-Disposition: " == e) {
-                remote_filename_ = tmp;
+                remote_filename = tmp;
             } else if ("Last-Modified: " == e) {
-                remote_filetime_ = tmp;
+                remote_filetime = tmp;
             }
         }
     }
     ifs.close();
+
+    // return http header item
+    switch (header_item) {
+        case header: 
+            return(http_header);
+        case name: 
+            return(remote_filename);
+        case type: 
+            return(remote_filetype);
+        case length: 
+            return(remote_filesize);
+        case modified: 
+            return(remote_filetime);
+    }
 }
 
-const string&
-Webpage::getHttpHeader (void) const
+string
+Webpage::getHttpHeader (const string& url) const
 {
-    return(http_header_);
+    return(requestHttpHeader_(url, header));
 }
 
-const string&
-Webpage::getRemoteFiletype (void) const
+string
+Webpage::getRemoteFiletype (const string& url) const
 {
-    return(remote_filetype_);
+    return(requestHttpHeader_(url, type));
 }
 
-const string&
-Webpage::getRemoteFilename (void) const
+string
+Webpage::getRemoteFilename (const string& url) const
 {
-    return(remote_filename_);
+    return(requestHttpHeader_(url, name));
 }
 
-const string&
-Webpage::getRemoteFilesize (void) const
+string
+Webpage::getRemoteFilesize (const string& url) const
 {
-    return(remote_filesize_);
+    return(requestHttpHeader_(url, length));
 }
 
-const string&
-Webpage::getRemoteFiletime (void) const
+string
+Webpage::getRemoteFiletime (const string& url) const
 {
-    return(remote_filetime_);
+    return(requestHttpHeader_(url, modified));
 }
-
 
 // once maked Webpage obj, the page in memory, but if filename is not empty,
 // it will saveas file, otherwise, no file.
@@ -303,8 +317,7 @@ Webpage::Webpage ( const string& url,
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_PROXY, proxy_addr_.c_str()), libcurl_err_info_buff_);
 
     // don't download none-webpage file when construct the obj 
-    requestHttpHeader_();
-    if (string::npos == getRemoteFiletype().find("text/html")) {
+    if ("text/html" != getRemoteFiletype(url_)) {
         return;
     }
 

@@ -28,11 +28,11 @@ class Webpage
         long getLatestHttpStatusCode (void) const;
         bool isValidLatestHttpStatusCode (void) const; 
         
-        const string& getHttpHeader (void) const;
-        const string& getRemoteFiletype (void) const;
-        const string& getRemoteFilesize (void) const;
-        const string& getRemoteFilename (void) const;
-        const string& getRemoteFiletime (void) const;
+        string getHttpHeader (const string& url) const;
+        string getRemoteFiletype (const string& url) const;
+        string getRemoteFilesize (const string& url) const;
+        string getRemoteFilename (const string& url) const;
+        string getRemoteFiletime (const string& url) const;
         
         bool isLoaded (void) const;
         size_t convertCharset (const string& src_charset, const string& dest_charset);
@@ -55,7 +55,6 @@ class Webpage
         string unescapeHtml (const string& raw_txt) const;
 
     private:
-        void requestHttpHeader_ (void);
         bool download_ ( const string& raw_url,
                          const string& filename,
                          const string& referer,
@@ -65,15 +64,14 @@ class Webpage
         long parseLatestHttpStatusCode_ (void);
 
     private:
+        enum HttpHeader_ {header, type, length, name, modified};
+        string requestHttpHeader_ (const string& url, HttpHeader_ header_item) const;
+
+    private:
         CURL* p_curl_;
         string url_;
         char libcurl_err_info_buff_[CURL_ERROR_SIZE];
         string proxy_addr_;
-        string http_header_;
-        string remote_filetype_;
-        string remote_filesize_;
-        string remote_filename_;
-        string remote_filetime_;
         string txt_;
         string title_;
         bool b_loaded_ok_;

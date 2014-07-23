@@ -67,14 +67,23 @@ TopicWebpage::downloadAllPictures ( const string& path,
 {
     fail_download_pics_urls_list.clear();
 
-    static const string pic_postfix(".jpg");
     for ( unsigned i = 0, sucess_cnt = 0;
           i < pictures_urls_list_.size() && sucess_cnt < pictures_max_num;
           ++i ) {
+        const string& picture_url = pictures_urls_list_[i];
+        
+        // make picture filename
+        const string tmp = getRemoteFiletype(picture_url);
+        static const string keyword("image/");
+        string postfix_name;
+        const auto pos = tmp.find(keyword);
+        if (string::npos != pos) {
+            postfix_name = tmp.substr(pos + keyword.size());
+        }
         
         // download pic
-        const string pic_filename = path + "/" + base_name + "-" + convNumToStr(i) + pic_postfix;
-        if (downloadFile(pictures_urls_list_[i], pic_filename, "", timeout_download_pic)) {
+        const string pic_filename = path + "/" + base_name + "-" + convNumToStr(i) + "." + postfix_name;
+        if (downloadFile(picture_url, pic_filename, "", timeout_download_pic)) {
             ++sucess_cnt;
             continue;
         }
