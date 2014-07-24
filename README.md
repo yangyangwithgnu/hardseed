@@ -12,6 +12,9 @@ yangyang.gnu@gmail.com
 
 **声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击页面广告、多解囊捐赠。*我在干嘛 @_@#*
 
+**注意：**  
+[2014-7-24]：**慎用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制的，今天之前的预配置版本中，每天最大流量为 4G，昨天很多朋友反应无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy/goagent_3.1.19/local/proxy.ini
+
 
 ##版本
 ----------------
@@ -115,7 +118,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能正常帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以并行使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一技术小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，错了，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能正常帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以并行使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一技术小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent_3.1.19/local/，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
@@ -168,6 +171,17 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
 
 ###【FQA】  
+**Q0**：osX 下源码编译报错：
+...
+Linking CXX executable hardseed
+Undefined symbols for architecture x86_64:
+"_iconv", referenced from
+...  
+**A0**：请把 CMakeList.txt 中的
+SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread")
+替换成
+SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread -liconv")
+
 **Q1**：为何 windows 版的可执行文件目录 hardseed\bin\windows\ 下有一堆 cyg\*.dll 文件？  
 **A1**：hardseed 是用 C++ 编写的遵循 SUS（单一 unix 规范）的原生 linux 程序，理论上，在任何 unix-like（linux、BSD、osX） 系统上均可正常运行，唯独不支持 windows，为让 hardseed 具备跨平台能力，须借由某种工具（或环境）将 hardseed 转换成 windows 下的执行程序。cygwin 就是这种环境，我把 hardseed 源码纳入 cygwin 环境中重新编译，即可生成 windows 下的可执行程序 hardseed.exe，在这个过程中，cygwin 会加入些自己的代码和中转库到 hardseed.exe 中，cyg\*.dll 就是各类中转库。
 
@@ -179,6 +193,24 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 a）未成功翻墙。请自行参阅你的翻墙工具帮助文档，修正即可。windows 用户注意检查是否以**管理员权限运行翻墙工具**；  
 b）网页翻墙已成功但仍无法下载。请检查你的代理工具是否成功接收 hardseed 的代理请求（如，goagent 窗口中可查看），windows 用户注意检查是否以**管理员权限运行 hardseed.exe**；  
 c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令行选项，hardseed 将查找标题中是否含有关键字 xxxx，若没有则忽略相关帖子。更换其他关键字。
+
+**Q4**：如何设置多路代理？  
+**A4**：
+假定你在 https://shadowsocks.net/get 获取了两个 SS 帐号，一个配置的本地端口为 1080，一个 1081。然后，在 hardseed 的命令行参数设定 --proxy socks5://127.0.0.1:1080 socks5://127.0.0.1:1081，如果你的 --concurrent-tasks 设定为 16（默认值），这时，hardseed 就会启用 2 * 16 条线程并行下载。速度飞快、飞快、快 ...
+
+**Q5**：如何搜索喜欢的视频？  
+**A5**：--like 选项可以指定多个关键字（空格隔开）参数，帖子标题中出现相关关键字之一便纳入下载范围，否则不下载。通常来说，标题中文字有简体、繁体、日文等三种可能，所以你应该都指定，比如，喜欢“护士”和“情侣”系列，先简译日 http://fanyi.baidu.com/#zh/jp/，再简译繁 http://www.aies.cn/，最后指定命令行参数即可
+--like 护士 護士 看護婦 人妻 情侣 情侶 カップル
+
+**Q6**：如何下载高清？  
+**A6**：hardseed 并不直接支持高清类型下载，只能间接实现，由 --like 指定“高清”相关关键字进行下载，比如：
+--like 1080P 720P HD 高清 ハイビジョン
+
+**Q7**：  
+**A7**：
+
+**Q8**：  
+**A8**：
 
 
 ##忠告
