@@ -222,16 +222,16 @@ c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令
 * SSH, --proxy socks4://127.0.0.1:7070
 * VPN (PPTP and openVPN), --proxy ""
 
-其中，出 VPN 外（这是种全局代理模式），其他三种代理模式可混用，也就是说，你可以同时指定 goagent、shadowsocks、SSH 等三种代理模式
+其中，除 VPN 外（这是种全局代理模式），其他三种代理模式可混用，也就是说，你可以同时指定 goagent、shadowsocks、SSH 等三种代理模式
 ```
 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks4://127.0.0.1:7070
 ```
-这样，hardseed 就能用 8 * 3 条线程并行下载。另外，goagent 都是通过 GAE 集群发起到网络请求，所以不存在同个机器上配置多个 goagent 的做法；SSH（获取免费帐号 http://www.fastssh.com/ ） 和 shadowsocks（获取免费帐号 https://shadowsocks.net/get ） 代理，你可以获取多个不同的代理服务器（当然，不同的 SSH 或者 shadowsocks 代理的本地端口必须自行设置成不同的），因此可以实现多个不同 IP 发起网络请求。换言之，你可以有 1 * goagent + n * SSH + m * shadowsocks 的代理 IP，每个 IP 本来就有 8 条线程，那么共计有 (1 + n + m) * 8 条线程并行下载，速度自然上去了。  
-我个人偏爱 shadowsocks，所以以此举例来说：先在 https://shadowsocks.net/get 获取了 4 个 shadowsocks 帐号，本地端口分别配置成 1080、1081、1082、1083，运行此 4 个 shadowsocks 代理程序；同时，运行 goagent 代理程序；然后，在 hardseed 的命令行参数设定为
+这样，hardseed 就能用 8 * 3 条线程并行下载。另外，goagent 都是通过 GAE 集群发起到网络请求，所以不存在同个机器上配置多个 goagent 的做法；SSH（获取免费帐号 http://www.fastssh.com/ ） 和 shadowsocks（获取免费帐号 https://shadowsocks.net/get ） 代理，你可以获取多个不同的代理服务器（不同的 SSH 或者 shadowsocks 代理的本地端口必须自行设置成不同的），因此可以实现多个不同 IP 发起网络请求。换言之，你可以有 1 * goagent + n * SSH + m * shadowsocks 个代理 IP，每个 IP 本来就有 8 条线程，那么共计有 (1 + n + m) * 8 条线程并行下载，速度自然上去了。  
+我个人偏爱 shadowsocks，以此举例来说：先在 https://shadowsocks.net/get 获取了 4 个 shadowsocks 帐号，本地端口分别配置成 1080、1081、1082、1083，运行此 4 个 shadowsocks 代理程序；同时，运行 goagent 代理程序；然后，在 hardseed 的命令行参数设定为
 ```
 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks5://127.0.0.1:1081 socks5://127.0.0.1:1082 socks5://127.0.0.1:1083
 ```
-这时，如果你的 --concurrent-tasks 设定为 8（默认值），那么，hardseed 将启用 5 * 8 条线程并行下载。那速度飞快、飞快、快 ...  
+这时，如果你的 --concurrent-tasks 设定为 8（默认值），那么，hardseed 将启用 (4 + 1) * 8 条线程并行下载。那速度飞快、飞快、快 ...  
 *（有些 shadowsocks 代理服务器禁止下载，若有异常，将其从 --proxy 代理列表中剔除之。若求稳定，只用 goagent）*
 
 **Q6**：如何搜索喜欢的视频？  
