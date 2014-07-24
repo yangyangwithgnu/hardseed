@@ -172,20 +172,30 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 
 ###【FQA】  
 **Q0**：osX 下源码编译报错：
+```
 ...
 Linking CXX executable hardseed
 Undefined symbols for architecture x86_64:
 "_iconv", referenced from
-...  
+...
+```
 **A0**：请把 CMakeList.txt 中的
+```
 SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread")
+```
 替换成
+```
 SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread -liconv")
+```
 
 **Q1**：为何 windows 版的可执行文件目录 hardseed\bin\windows\ 下有一堆 cyg\*.dll 文件？  
 **A1**：hardseed 是用 C++ 编写的遵循 SUS（单一 unix 规范）的原生 linux 程序，理论上，在任何 unix-like（linux、BSD、osX） 系统上均可正常运行，唯独不支持 windows，为让 hardseed 具备跨平台能力，须借由某种工具（或环境）将 hardseed 转换成 windows 下的执行程序。cygwin 就是这种环境，我把 hardseed 源码纳入 cygwin 环境中重新编译，即可生成 windows 下的可执行程序 hardseed.exe，在这个过程中，cygwin 会加入些自己的代码和中转库到 hardseed.exe 中，cyg\*.dll 就是各类中转库。
 
-**Q2**：为何运行 windows 版的执行程序总有如下警告：Preferred POSIX equivalent is: /cygdrive/c/xxxx, CYGWIN environment variable option "nodosfilewarning" turns off this warning. Consult the user's guide for more details about POSIX paths ...，影响正常运行么？  
+**Q2**：为何运行 windows 版的执行程序总有如下警告
+```
+Preferred POSIX equivalent is: /cygdrive/c/xxxx, CYGWIN environment variable option "nodosfilewarning" turns off this warning. Consult the user's guide for more details about POSIX paths ...
+```
+这影响正常运行么？  
 **A2**：linux 与 windows 有很多基础设施的差异，路径表示方式就算其一，如，前者是 /this/is/linux/path/，后者 C:\this\is\windows\path\，A1 中提过 hardseed 是 linux 下的原生程序，代码中全采用的 linux 路径规则，运行 hardseed.exe 时， cygwin 自动进行路径规则转换，所以出现本问题中的警告信息以告知用户路径可能有变化。这完全不影响 hardseed.exe 正常运行。如果厌恶这些提示，可以在环境变量中增加 CYGWIN=nodosfilewarning （win7 用户：computer - properties - advanced system settings - advanced - environment variables - new，variable name 填入 CYGWIN，variable value 中填入 nodosfilewarning，保存即可）。
 
 **Q3**：运行 hardseed 后啥都没下载呢？还提示 There is no topic which you like？  
