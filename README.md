@@ -176,7 +176,8 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 ...
 Linking CXX executable hardseed
 Undefined symbols for architecture x86_64:
-"_iconv", referenced from
+"_iconv", referenced from:
+Webpage::convertCharset(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) in Webpage.o
 ...
 ```
 **A0**：请把 CMakeList.txt 中的
@@ -205,7 +206,7 @@ b）网页翻墙已成功但仍无法下载。请检查你的代理工具是否�
 c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令行选项，hardseed 将查找标题中是否含有关键字 xxxx，若没有则忽略相关帖子。更换其他关键字。
 
 **Q4**：我以及在墙外，为何仍下载失败？  
-**A4**：hardseed 默认采用 goagent 作为代理工具，即，默认本地代理中转地址为 http://127.0.0.1:8087。如果你已在墙外无须代理即可访问 caoliu 和 aicheng 论坛，那么需要告知 hardseed 不再走本地代理中转而应直接访问，即：
+**A4**：hardseed 默认采用 goagent 作为代理工具，即，默认本地代理中转地址为 http://127.0.0.1:8087 。如果你已在墙外无须代理即可访问 caoliu 和 aicheng 论坛，那么需要告知 hardseed 不再走本地代理中转而应直接访问，即：
 ```
 --proxy ""
 ```
@@ -213,7 +214,7 @@ c）hardseed 翻墙已成功但仍无法下载。你指定了 --like xxxx 命令
 **Q5**：如何加快下载速度？  
 **A5**：最直接会想到多线程下载，一条线程负责下载一个页面，逻辑上，线程数越多、下载速度越快，实际上，存在代理服务器和被访服务器两方面的限制：
 * 代理服务器方面的限制，代理服务器为不同用户提供代理服务，为避免相互影响，通常它会限制单个用户的流量和请求频率，所以，hardseed 在指定代理服务器上的线程数一定是有个上限；
-* 被访服务器方面到限制，你访问的论坛不会低能到不控制请求频率，举个例，正常情况你 4 秒钟可以打开 4 张 caoliu 论坛的帖子，一旦 caoliu 服务器发现你 1 秒钟打开了 32 张帖子那一定将此视为机器人行为，从而拒绝响应。
+* 被访服务器方面到限制，你访问的论坛不会低能到不控制请求频率，举个例，正常情况你 4 秒钟可以打开 4 张 caoliu 论坛的帖子，一旦 caoliu 服务器发现你 1 秒钟打开了 32 张帖子那一定将此视为机器人行为，从而拒绝响应。  
 综合代理服务器和被访服务器两方面的限制，线程数不能无限大，从我多次测试的经验来看，**单个代理服务器**访问被访服务器的并行线程数设定为 8 条最为稳定，否则容易引起代理服务器和被访服务器停服。同个时刻有大量用户在访问 caoliu 论坛，肯定远超 1 秒钟打开了 32 张帖子的频率，为何 caoliu 没对所有用户拒绝请求？显然，这些请求来自不同 IP 的电脑终端，按这个思路，如果 hardseed 若能同个多个不同 IP 访问 caoliu，那完全可以绕开 caoliu 对单个 IP 请求频率过快的限制。由于我们采用代理访问，发起访问请求的 IP 就是代理服务器的 IP，显然，只要 hardseed 多个代理服务器，那么一切问题就简单了。所以，我**赋予了 hardseed 多路代理的能力**。hardseed 支持 4 种代理模式：
 * goagent (STRONGLY recommended), --proxy http://127.0.0.1:8087
 * shadowsocks, --proxy socks5://127.0.0.1:1080, or socks5h://127.0.0.1:1080
