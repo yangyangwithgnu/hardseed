@@ -30,6 +30,7 @@ class Webpage
         
         string getHttpHeader (const string& url) const;
         string getRemoteFiletype (const string& url) const;
+        string getRemoteFilecharset (const string& url) const;
         string getRemoteFilesize (const string& url) const;
         string getRemoteFilename (const string& url) const;
         string getRemoteFiletime (const string& url) const;
@@ -64,8 +65,12 @@ class Webpage
         long parseLatestHttpStatusCode_ (void);
 
     private:
-        enum HttpHeader_ {header, type, length, name, modified};
-        string requestHttpHeader_ (const string& url, HttpHeader_ header_item) const;
+        enum HttpHeader_ {header, type, charset, length, name, modified};
+        string requestHttpHeader_ ( const string& raw_url,
+                                    HttpHeader_ header_item,
+                                    const unsigned timeout_second = 4,
+                                    const unsigned retry_times = 2,
+                                    const unsigned retry_sleep_second = 2 ) const;
 
     private:
         CURL* p_curl_;

@@ -84,9 +84,9 @@ static string
 makeRandomFilename (void) 
 {
 #ifdef CYGWIN
-    return("c:\\hardseed_tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
+    return("c:\\tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
 #else
-    return("/tmp/hardseed_tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
+    return("/tmp/tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
 #endif
 }
 
@@ -197,7 +197,11 @@ Webpage::unescapeHtml (const string& raw_txt) const
 }
 
 string
-Webpage::requestHttpHeader_ (const string& url, HttpHeader_ header_item) const 
+Webpage::requestHttpHeader_ ( const string& raw_url,
+                              HttpHeader_ header_item,
+                              const unsigned timeout_second,
+                              const unsigned retry_times,
+                              const unsigned retry_sleep_second ) const 
 {
     const string random_filename = makeRandomFilename();
     FILE* fs_http_header = fopen(random_filename.c_str(), "w");
@@ -205,20 +209,31 @@ Webpage::requestHttpHeader_ (const string& url, HttpHeader_ header_item) const
         return("");
     }
 
+    // deal with raw URL, first unescape html, second escape URL
+    const string url = escapeUrl(unescapeHtml(raw_url));
+
+    // timeout
+    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_TIMEOUT, timeout_second), libcurl_err_info_buff_);
+
     // get HTTP header
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_URL, url.c_str()), libcurl_err_info_buff_);
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_PROXY, proxy_addr_.c_str()), libcurl_err_info_buff_);
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_NOBODY, true), libcurl_err_info_buff_); // just request the HTTP header
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_WRITEHEADER, fs_http_header), libcurl_err_info_buff_);
-    checkErrLibcurl(curl_easy_perform(p_curl_), libcurl_err_info_buff_);
+    for (unsigned i = 0; i < retry_times; ++i) {
+        if (checkErrLibcurl(curl_easy_perform(p_curl_), libcurl_err_info_buff_)) {
+            break;
+        }
+        sleep(retry_sleep_second);
+    }
 
     // reset, I.E., request HTTP body
-    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_NOBODY, false), libcurl_err_info_buff_); // just request the HTTP header
+    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_NOBODY, false), libcurl_err_info_buff_);
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_WRITEHEADER, nullptr), libcurl_err_info_buff_); 
     fclose(fs_http_header);
 
     // load the file to memory, and parse HTTP header info
-    string http_header, remote_filename, remote_filesize, remote_filetype, remote_filetime;
+    string http_header, remote_filename, remote_filesize, remote_filetype, remote_filecharset, remote_filetime;
     static const vector<string> httpheader_keywords_list = { "Content-Type: ", // file type
                                                              "Content-Length: ", // file size
                                                              "Content-Disposition: ", // file name
@@ -231,21 +246,28 @@ Webpage::requestHttpHeader_ (const string& url, HttpHeader_ header_item) const
         
         // parse HTTP header item
         for (const auto& e : httpheader_keywords_list) {
-            auto pos = line.find(e);
-            if (string::npos == pos) {
+            const auto item_name_pos = line.find(e);
+            if (string::npos == item_name_pos) {
                 continue;
             }
             
             line.pop_back(); // the last char in line is '\r'
-            const string& tmp = line.substr(pos + e.size(), string::npos);
+            const string& item_content = line.substr(item_name_pos + e.size());
             if ("Content-Type: " == e) {
-                remote_filetype = tmp;
+                static const string kyeword_separator("; ");
+                const auto separator_pos = item_content.find(kyeword_separator);
+                if (string::npos == separator_pos) {
+                    remote_filetype = item_content;
+                } else {
+                    remote_filetype = item_content.substr(0, separator_pos);
+                    remote_filecharset = item_content.substr(separator_pos + kyeword_separator.size());
+                }
             } else if ("Content-Length: " == e) {
-                remote_filesize = tmp;
+                remote_filesize = item_content;
             } else if ("Content-Disposition: " == e) {
-                remote_filename = tmp;
+                remote_filename = item_content;
             } else if ("Last-Modified: " == e) {
-                remote_filetime = tmp;
+                remote_filetime = item_content;
             }
         }
     }
@@ -259,6 +281,8 @@ Webpage::requestHttpHeader_ (const string& url, HttpHeader_ header_item) const
             return(remote_filename);
         case type: 
             return(remote_filetype);
+        case charset: 
+            return(remote_filecharset);
         case length: 
             return(remote_filesize);
         case modified: 
@@ -276,6 +300,12 @@ string
 Webpage::getRemoteFiletype (const string& url) const
 {
     return(requestHttpHeader_(url, type));
+}
+
+string
+Webpage::getRemoteFilecharset (const string& url) const
+{
+    return(requestHttpHeader_(url, charset));
 }
 
 string
