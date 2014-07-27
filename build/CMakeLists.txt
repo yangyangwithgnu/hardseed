@@ -18,12 +18,14 @@ SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread")
 #SET(CMAKE_CXX_FLAGS "-std=c++11 -Werror -Weverything -Wno-documentation -Wno-disabled-macro-expansion -Wno-float-equal -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-global-constructors -Wno-exit-time-destructors -Wno-missing-prototypes -Wno-padded")
 #SET(CMAKE_BUILD_TYPE debug)
 #ADD_EXECUTABLE(main ${SRC_LIST})
+#TARGET_LINK_LIBRARIES(main curl)
 
 # release
 SET(CMAKE_CXX_COMPILER "g++")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 SET(CMAKE_BUILD_TYPE release)
 ADD_EXECUTABLE(hardseed ${SRC_LIST})
+TARGET_LINK_LIBRARIES(hardseed curl)
 INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
 
 #<<<<<<<<<<<<<<<<<<<<<<
@@ -32,7 +34,7 @@ INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
 ## cygwin
 ##>>>>>>>>>>>>>>>>>>>>>>
 
-#SET(CMAKE_CXX_COMPILER "clang++")
+#SET(CMAKE_CXX_COMPILER "g++")
 #SET(CMAKE_CXX_FLAGS "-std=c++11 -O3 -s -DCYGWIN")
 #SET(CMAKE_BUILD_TYPE release)
 #ADD_EXECUTABLE(hardseed ${SRC_LIST})

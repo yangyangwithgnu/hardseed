@@ -1,6 +1,6 @@
 #hardseed
 yangyang.gnu@gmail.com  
-2014-7-26 21:55:11   
+2014-7-28 01:03:04   
 
 
 ##公告
@@ -171,23 +171,6 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
 
 ###【FQA】  
-**Q0**：osX 下源码编译报错：
-```
-...
-Linking CXX executable hardseed
-Undefined symbols for architecture x86_64:
-"_iconv", referenced from:
-Webpage::convertCharset(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&) in Webpage.o
-...
-```
-**A0**：请把 CMakeList.txt 中的
-```
-SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread")
-```
-替换成
-```
-SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread -liconv")
-```
 
 **Q1**：为何 windows 版的可执行文件目录 hardseed\bin\windows\ 下有一堆 cyg\*.dll 文件？  
 **A1**：hardseed 是用 C++ 编写的遵循 SUS（单一 unix 规范）的原生 linux 程序，理论上，在任何 unix-like（linux、BSD、osX） 系统上均可正常运行，唯独不支持 windows，为让 hardseed 具备跨平台能力，须借由某种工具（或环境）将 hardseed 转换成 windows 下的执行程序。cygwin 就是这种环境，我把 hardseed 源码纳入 cygwin 环境中重新编译，即可生成 windows 下的可执行程序 hardseed.exe，在这个过程中，cygwin 会加入些自己的代码和中转库到 hardseed.exe 中，cyg\*.dll 就是各类中转库。
