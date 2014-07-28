@@ -21,6 +21,7 @@
 using namespace std;
 
 
+
 static bool
 checkErrLibcurl (const CURLcode curl_code, const char* libcurl_err_info, bool b_exit = false, bool b_show_err_info = false)
 {
@@ -96,13 +97,13 @@ parseTitle (const string& webpage_txt)
     static const string keyword_title_begin("<title>");
     const auto keyword_title_begin_pos = webpage_txt.find(keyword_title_begin);
     if (string::npos == keyword_title_begin_pos) {
-        cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_begin << "_" << endl;
+        //cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_begin << "_" << endl;
         return("");
     }
     static const string keyword_title_end("</title>");
     const auto keyword_title_end_pos = webpage_txt.find(keyword_title_end, keyword_title_begin_pos);
     if (string::npos == keyword_title_end_pos) {
-        cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_end << "_" << endl;
+        //cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_end << "_" << endl;
         return("");
     }
     
@@ -272,6 +273,7 @@ Webpage::requestHttpHeader_ ( const string& raw_url,
         }
     }
     ifs.close();
+    remove(random_filename.c_str()); 
 
     // return http header item
     switch (header_item) {
