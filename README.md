@@ -13,7 +13,7 @@ yangyang.gnu@gmail.com
 **声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击页面广告、多解囊捐赠。*我在干嘛 @_@#*
 
 **注意：**  
-[2014-7-24]：**慎用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy/goagent_3.1.19/local/proxy.ini ，节约公共流量。
+[2014-7-24]：**惜用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy/goagent_3.1.19/local/proxy.ini ，节约公共流量。
 
 
 ##版本
@@ -169,7 +169,7 @@ $ hardseed
 ```
 $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 ```
-其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。
+其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。完整命令行选项请 --hlep 查看。
 
 ###【FQA】  
 
@@ -253,5 +253,5 @@ failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pict
 ##忠告
 -------------
 
-你，党之栋梁、国之人才，千万注意身体！
+你，党之栋梁、国之人才，注意身体，千万！
 
