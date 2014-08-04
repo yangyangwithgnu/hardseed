@@ -1,16 +1,16 @@
 #hardseed
 yangyang.gnu@gmail.com  
-2014-7-28 11:08:04   
+2014-8-4 22:29:32   
 
 
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$**  
+**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（致谢：#羽、#松、程#雷、杨#理、杜#伟、#程、刘#惜、曾#戈、#杰、李#杰、萧#蔷、谢#葛）*  
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
-**声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击页面广告、多解囊捐赠。*我在干嘛 @_@#*
+**声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击页面广告、多解囊捐赠。*我.在.干.嘛  @_@#*
 
 **注意：**  
 [2014-7-24]：**惜用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy/goagent_3.1.19/local/proxy.ini ，节约公共流量。
@@ -119,7 +119,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能正常帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以并行使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一技术小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent_3.1.19/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一技术小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent_3.1.19/local/，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
@@ -158,7 +158,7 @@ $ make && make install
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
-这时，hardseed 开始玩命儿为你下载女神图片和种子，经过 2 分钟 8 秒，找到类似 C:\\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们那儿等你！
+这时，hardseed 开始玩命儿地为你下载女神图片和种子，经过 2 分钟 8 秒，找到类似 C:\\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们那儿等你！
 
 ####『linux』  
 同 windows 下运行一样，全用默认命令行参数运行
@@ -169,7 +169,7 @@ $ hardseed
 ```
 $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 ```
-其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张帖子到第 256 张帖子；--av-class 指定女神类型为欧美。完整命令行选项请 --hlep 查看。
+其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张到第 256 张帖子；--av-class 指定女神类型为欧美。完整命令行选项请 --hlep 查看。
 
 ###【FQA】  
 
@@ -210,13 +210,12 @@ Preferred POSIX equivalent is: /cygdrive/c/xxxx, CYGWIN environment variable opt
 ```
 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks4://127.0.0.1:7070
 ```
-这样，hardseed 就能用 8 * 3 条线程并行下载。另外，goagent 都是通过 GAE 集群发起到网络请求，所以不存在同个机器上配置多个 goagent 的做法；SSH（获取免费帐号 http://www.fastssh.com/ ） 和 shadowsocks（获取免费帐号 https://shadowsocks.net/get ） 代理，你可以获取多个不同的代理服务器（不同的 SSH 或者 shadowsocks 代理的本地端口必须自行设置成不同的），因此可以实现多个不同 IP 发起网络请求。换言之，你可以有 1 * goagent + n * SSH + m * shadowsocks 个代理 IP，每个 IP 本来就有 8 条线程，那么共计有 (1 + n + m) * 8 条线程并行下载，速度自然上去了。  
-我个人偏爱 shadowsocks，以此举例来说：先在 https://shadowsocks.net/get 获取了 4 个 shadowsocks 帐号，本地端口分别配置成 1080、1081、1082、1083，运行此 4 个 shadowsocks 代理程序；同时，运行 goagent 代理程序；然后，在 hardseed 的命令行参数设定为
+这样，hardseed 就能用 8 * 3 条线程并行下载。另外，goagent 都是通过 GAE 集群发起到网络请求，所以不存在同个机器上配置多个 goagent 的做法；SSH（获取免费帐号 http://www.fastssh.com/ ） 和 shadowsocks（获取免费帐号 https://shadowsocks.net/get ） 代理，你可以获取多个不同的代理服务器（不同的 SSH 或者 shadowsocks 代理的本地端口必须自行设置成不同的），因此可以实现多个不同 IP 发起网络请求。换言之，你可以同时拥有 1 个 goagent、n 个 SSH、m 个 shadowsocks 个代理出口 IP，每个 IP 本来允许使用 8 条线程，那么共计就有 (1 + n + m) * 8 条线程并行下载，速度自然上去了。  
+我个人偏爱 shadowsocks，以此举例来说：先在 https://shadowsocks.net/get 获取了 4 个 shadowsocks 帐号，本地端口分别配置成 1080、1081、1082、1083，运行此 4 个 shadowsocks 代理程序；同时，运行 goagent 代理程序；然后，在 hardseed 的命令行参数设定
 ```
 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks5://127.0.0.1:1081 socks5://127.0.0.1:1082 socks5://127.0.0.1:1083
 ```
-这时，如果你的 --concurrent-tasks 设定为 8（默认值），那么，hardseed 将启用 (4 + 1) * 8 条线程并行下载。那速度飞快、飞快、快 ...  
-*（有些 shadowsocks 代理服务器禁止下载，若有异常，将其从 --proxy 代理列表中剔除之。若求稳定，只用 goagent）*
+这时，如果你的 --concurrent-tasks 设定为 8（默认值），那么，hardseed 将启用 (4 + 1) * 8 条线程并行下载。那速度，飞快、快 ... *（注，有些 shadowsocks 代理服务器禁止下载，若有异常，将其从 --proxy 代理列表中剔除之。若求稳定，只用 goagent）*
 
 **Q6**：如何搜索喜欢的视频？  
 **A6**：--like 选项可以指定多个关键字（空格隔开）参数，帖子标题中出现相关关键字之一便纳入下载范围，否则不下载。通常来说，帖子标题中文字有简体、繁体、日文等三种可能，所以你应该都指定，比如，喜欢“护士”和“情侣”系列，先简译繁 http://www.aies.cn/ ，简译日 http://fanyi.baidu.com/#zh/jp/ ，再由 --topics-range 指定搜索的帖子数量，由 --like 指定搜索关键字：
