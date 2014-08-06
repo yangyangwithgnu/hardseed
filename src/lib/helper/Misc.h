@@ -9,6 +9,7 @@
 using std::string;
 using std::ostringstream;
 using std::vector;
+using std::pair;
 
 
 // why not std::to_string()? 
@@ -32,3 +33,18 @@ splitStr ( const string& str,
            vector<string>& splited_substr_list,
            vector<char>& appeared_tokens_list );
 
+// fetch string from txt betwen keyword_begin and keyword_end.
+// case sensitive 
+pair<string, size_t>
+fetchStringBetweenKeywords ( const string& txt,
+                             const string& keyword_begin,
+                             const string& keyword_end,
+                             size_t from_pos = 0 );
+
+// get file size by FILE*
+long
+getFileSize (FILE* fs);
+
+// get random filename, include path
+string
+makeRandomFilename (void);

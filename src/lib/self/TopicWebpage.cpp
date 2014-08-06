@@ -81,6 +81,11 @@ TopicWebpage::downloadAllPictures ( const string& path,
             postfix_name = tmp.substr(pos + keyword.size());
         }
         
+        // ignore gif, because gifs almost are AD
+        if ("gif" == postfix_name) {
+            continue;
+        }
+        
         // download pic
         const string pic_filename = path + "/" + base_name + "-" + convNumToStr(i) + "." + postfix_name;
         if (downloadFile(picture_url, pic_filename, "", timeout_download_pic)) {

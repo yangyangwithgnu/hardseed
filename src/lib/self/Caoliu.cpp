@@ -283,7 +283,7 @@ Caoliu::Caoliu ( AvClass av_class,
                  const string& path )
 {
     // parse the URLs of valid topics by: range, hate keywords, like keywords
-    cout << "Parse the URLs of topics from " << range_begin << " to " << range_end << ": ";
+    cout << "Parse the URLs of topics from " << range_begin << " to " << range_end << ": " << flush;
     vector<string> valid_topics_urls_list;
     parseValidTopicsUrls( av_class,
                           getNextProxyAddr(proxy_addrs_list),

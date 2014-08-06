@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <unistd.h>
+#include "../helper/Misc.h"
+
 
 using namespace std;
 
@@ -12,26 +14,20 @@ parsePostMultiSections ( const string& webpage_txt,
                          vector<pair<string, string>>& post_sections_list ) 
 {
     // parse the code section
-    static const string& keyword_code_section_begin("<input type=text name=code size=30 value=");
-    const auto keyword_code_section_begin_pos = webpage_txt.find(keyword_code_section_begin);
-    if (string::npos == keyword_code_section_begin_pos) {
-        cerr << "WARNING! JandownSeedWebpage::JandownSeedWebpage() CANNOT find the keyword \""
-             << keyword_code_section_begin << endl;
+    static const string keyword_code_section_begin("<input type=text name=code size=30 value=");
+    static const string keyword_code_section_end(" >");
+    const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+                                                                       keyword_code_section_begin,
+                                                                       keyword_code_section_end );
+    const string& ref_content = pair_tmp.first;
+    if (ref_content.empty()) {
+        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword "
+             << "\"" << keyword_code_section_begin << "\"" << " and "
+             << "\"" << keyword_code_section_end << "\"" << endl;
         return(false);
     }
-    static const string& keyword_code_section_end(" >");
-    const auto keyword_code_section_end_pos = webpage_txt.find( keyword_code_section_end,
-                                                                keyword_code_section_begin_pos + keyword_code_section_begin.size() );
-    if (string::npos == keyword_code_section_end_pos) {
-        cerr << "WARNING! JandownSeedWebpage::JandownSeedWebpage() CANNOT find the keyword \""
-             << keyword_code_section_end << endl;
-        return(false);
-    }
-    const string ref_content = webpage_txt.substr( keyword_code_section_begin_pos + keyword_code_section_begin.size(),
-                                                   keyword_code_section_end_pos - keyword_code_section_begin_pos - keyword_code_section_begin.size() );
+
     post_sections_list.push_back(make_pair("code", ref_content));
-
-
     return(true);
 }
 

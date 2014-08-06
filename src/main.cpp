@@ -23,12 +23,11 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.0");
+static const string g_version("0.2.2");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://www.yangyangwithgnu.net/");
 static const string g_mywebspace_color(RichTxt::bold_on + RichTxt::foreground_green + g_mywebspace + RichTxt::reset_all);
-
 
 static void
 showSexyGirl (void)
@@ -234,6 +233,7 @@ main (int argc, char* argv[])
     // show the sexy girl ASCII art
     showSexyGirl();
     cout << endl;
+    sleep(2);
 
     // prompt turn on the goagent
     cout << RichTxt::bold_on

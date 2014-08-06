@@ -21,7 +21,6 @@
 using namespace std;
 
 
-
 static bool
 checkErrLibcurl (const CURLcode curl_code, const char* libcurl_err_info, bool b_exit = false, bool b_show_err_info = false)
 {
@@ -61,10 +60,6 @@ initLibcurl (const char* libcurl_err_info_buff)
     // to allow multi-threaded unix applications to still set/use all timeout options etc, without risking getting signals
     checkErrLibcurl(curl_easy_setopt(p_curl, CURLOPT_NOSIGNAL, true), libcurl_err_info_buff);
 
-    // pretend as firefox browser
-    checkErrLibcurl( curl_easy_setopt(p_curl, CURLOPT_USERAGENT, "Mozilla/5.0 (X11; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0"),
-                     libcurl_err_info_buff );
-
     // automatically set the Referer to redirect source
     checkErrLibcurl(curl_easy_setopt(p_curl, CURLOPT_AUTOREFERER, true), libcurl_err_info_buff);
 
@@ -81,35 +76,82 @@ cleanupLibcul (CURL* p_curl)
     curl_easy_cleanup(p_curl);
 }
 
-static string
-makeRandomFilename (void) 
+// check proxy by http://ip38.com
+static pair<string, string>
+parseProxyOutIpAndRegionByThirdparty (const string& proxy_addr)
 {
-#ifdef CYGWIN
-    return("c:\\tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
-#else
-    return("/tmp/tmp_" + convNumToStr(getpid()) + convNumToStr(pthread_self()));
-#endif
+    static const string thirdparty("http://ip38.com");
+    Webpage webpage(thirdparty, "", proxy_addr, 16, 2, 2);
+    if (!webpage.isLoaded()) {
+        //cerr << "ERROR! " << thirdparty << " loaded failure. " << endl;
+        return(make_pair("", ""));
+    }
+
+    webpage.convertCharset("GBK", "UTF-8");
+    const string& webpage_txt = webpage.getTxt();
+
+    static const string keyword_outip_begin("<font color=#FF0000>");
+    static const string keyword_outip_end("</font>");
+    const pair<string, size_t> pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+                                                                      keyword_outip_begin,
+                                                                      keyword_outip_end );
+    const string outip = pair_tmp.first;
+    const size_t outip_end_pos = pair_tmp.second;
+
+    static const string keyword_region_begin("来自：<font color=#FF0000>");
+    static const string keyword_region_end("</font>");
+    const string region = fetchStringBetweenKeywords( webpage_txt,
+                                                      keyword_region_begin,
+                                                      keyword_region_end,
+                                                      outip_end_pos ).first;
+
+
+    return(make_pair(outip, region));
 }
 
-static string
-parseTitle (const string& webpage_txt) 
+string
+Webpage::checkProxyOutIpByThirdparty (void) const
 {
-    static const string keyword_title_begin("<title>");
-    const auto keyword_title_begin_pos = webpage_txt.find(keyword_title_begin);
-    if (string::npos == keyword_title_begin_pos) {
-        //cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_begin << "_" << endl;
-        return("");
-    }
-    static const string keyword_title_end("</title>");
-    const auto keyword_title_end_pos = webpage_txt.find(keyword_title_end, keyword_title_begin_pos);
-    if (string::npos == keyword_title_end_pos) {
-        //cerr << "WARNING! parseTitle() CANNOT find the keyword _" << keyword_title_end << "_" << endl;
-        return("");
-    }
-    
+    return(parseProxyOutIpAndRegionByThirdparty(proxy_addr_).first);
+}
 
-    return(webpage_txt.substr( keyword_title_begin_pos + keyword_title_begin.size(),
-                               keyword_title_end_pos - keyword_title_begin_pos - keyword_title_begin.size() ));
+string
+Webpage::checkProxyOutRegionByThirdparty (void) const
+{
+    return(parseProxyOutIpAndRegionByThirdparty(proxy_addr_).second);
+}
+
+string
+Webpage::getProxyAddr (void) const
+{
+    return(proxy_addr_);
+}
+
+string
+Webpage::getUserAgent (void) const
+{
+    return(user_agent_);
+}
+
+// check user agent by http://www.useragentstring.com/index.php string
+string
+Webpage::checkUserAgentByThirdparty (void) const
+{
+    static const string thirdparty("http://www.useragentstring.com");
+    Webpage webpage(thirdparty, "", "", 16, 2, 2, user_agent_);
+    if (!webpage.isLoaded()) {
+        //cerr << "ERROR! " << thirdparty << " loaded failure. " << endl;
+        return("");
+    }
+
+    static const string keyword_user_agent_begin("<textarea name=\'uas\' id=\'uas_textfeld\' rows=\'4\' cols=\'30\'>");
+    static const string keyword_user_agent_end("</textarea>");
+    const string user_agent = fetchStringBetweenKeywords( webpage.getTxt(),
+                                                          keyword_user_agent_begin,
+                                                          keyword_user_agent_end ).first;
+
+
+    return(user_agent);
 }
 
 // some chars invalid in URL string, such as, space char, chinese char, so I have to
@@ -330,14 +372,21 @@ Webpage::getRemoteFiletime (const string& url) const
 
 // once maked Webpage obj, the page in memory, but if filename is not empty,
 // it will saveas file, otherwise, no file.
-// notice, no https
+// notes:
+// 0) no https
+// 1) List of User Agent Strings, see http://www.useragentstring.com/pages/useragentstring.php
 Webpage::Webpage ( const string& url,
                    const string& filename,
                    const string& proxy_addr,
                    const unsigned timeout_second,
                    const unsigned retry_times,
-                   const unsigned retry_sleep_second )
-    : p_curl_(initLibcurl(libcurl_err_info_buff_)), url_(url), proxy_addr_(proxy_addr), b_loaded_ok_(false)
+                   const unsigned retry_sleep_second,
+                   const string& user_agent )
+    : p_curl_(initLibcurl(libcurl_err_info_buff_)),
+      url_(url),
+      proxy_addr_(proxy_addr),
+      b_loaded_ok_(false),
+      user_agent_(user_agent)
 {
     // set proxy.
     // proxy_addr is made up of protocol, IP and port.
@@ -347,6 +396,12 @@ Webpage::Webpage ( const string& url,
     // protocol support as follow: http, https, socks4, socks4a, socks5, socks5h.
     // if proxy_addr is "", disable proxy
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_PROXY, proxy_addr_.c_str()), libcurl_err_info_buff_);
+
+    // pretend as browser
+    if (!user_agent.empty()) {
+        checkErrLibcurl( curl_easy_setopt(p_curl_, CURLOPT_USERAGENT, user_agent_.c_str()),
+                         libcurl_err_info_buff_ );
+    }
 
     // don't download none-webpage file when construct the obj 
     if ("text/html" != getRemoteFiletype(url_)) {
@@ -378,7 +433,8 @@ Webpage::Webpage ( const string& url,
     }
 
     // parse title
-    title_ = unescapeHtml(parseTitle(txt_));
+    static const string title_keyword_begin("<title>"), title_keyword_end("</title>");
+    title_ = unescapeHtml(fetchStringBetweenKeywords(txt_, title_keyword_begin, title_keyword_end).first);
 }
 
 Webpage::~Webpage ()
@@ -426,24 +482,6 @@ Webpage::isValidLatestHttpStatusCode (void) const
     const string& latest_http_status_code_str = convNumToStr(latest_http_status_code_);
     return( client_error_code != latest_http_status_code_str[0] && 
             server_error_code != latest_http_status_code_str[0] );
-}
-
-// failure, return -1
-static long
-getFileSize (FILE* fs)
-{
-    // backup current offset
-    long offset_bak = ftell(fs);
-
-    // get the filesize
-    fseek(fs, 0, SEEK_END);
-    long file_size = ftell(fs);
-
-    // restore current offset
-    fseek(fs, offset_bak, SEEK_SET);
-
-
-    return(file_size);
 }
 
 // download internet file to local file, such as, webpage, picture, mp3, etc.
@@ -620,7 +658,8 @@ Webpage::convertCharset (const string& src_charset, const string& dest_charset)
 
     txt_ = dest_charset_str;
 
-    title_ = unescapeHtml(parseTitle(txt_));
+    static const string title_keyword_begin("<title>"), title_keyword_end("</title>");
+    title_ = unescapeHtml(fetchStringBetweenKeywords(txt_, title_keyword_begin, title_keyword_end).first);
 
     return(txt_.size());
 }
@@ -630,4 +669,5 @@ Webpage::getTitle (void) const
 {
     return(title_);
 }
+
 

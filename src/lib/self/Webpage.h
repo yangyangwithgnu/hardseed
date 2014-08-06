@@ -18,12 +18,19 @@ class Webpage
                            const string& proxy_addr = "",
                            const unsigned timeout_second = 16,
                            const unsigned retry_times = 2,
-                           const unsigned retry_sleep_second = 2 );
+                           const unsigned retry_sleep_second = 2,
+                           const string& user_agent = "Mozilla/5.0 (X11; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0" );
         virtual ~Webpage ();
+        
+        string getProxyAddr (void) const;
+        string checkProxyOutIpByThirdparty (void) const; 
+        string checkProxyOutRegionByThirdparty (void) const; 
+        
+        string getUserAgent (void) const;
+        string checkUserAgentByThirdparty (void) const; 
         
         const string& getTxt (void) const;
         const string& getTitle (void) const;
-        //const string& getUrl (void) const;
         
         long getLatestHttpStatusCode (void) const;
         bool isValidLatestHttpStatusCode (void) const; 
@@ -81,5 +88,6 @@ class Webpage
         string title_;
         bool b_loaded_ok_;
         long latest_http_status_code_;
+        const string user_agent_;
 };
 

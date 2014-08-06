@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iterator>
 #include <algorithm>
+#include "../helper/Misc.h"
 
 
 using namespace std;
@@ -11,25 +12,23 @@ using namespace std;
 static bool
 parsePicturesUrlsHelper ( const string& webpage_txt,
                           vector<string>& pictures_urls_list,
-                          const string& begin_keyword,
-                          const string& end_keyword ) 
+                          const string& keyword_begin,
+                          const string& keyword_end ) 
 {
     bool b_ok = false;
 
-    size_t keyword_pic_begin_pos = 0, keyword_pic_end_pos = 0;
+    size_t keyword_pic_begin_pos = 0;
     while (true) {
         // parse picture URL
-        keyword_pic_begin_pos = webpage_txt.find(begin_keyword, keyword_pic_end_pos);
-        if (string::npos == keyword_pic_begin_pos) {
+        const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+                                                                           keyword_begin,
+                                                                           keyword_end,
+                                                                           keyword_pic_begin_pos );
+        string pic_url = pair_tmp.first;
+        if (pic_url.empty()) {
             break;
         }
-        keyword_pic_end_pos = webpage_txt.find(end_keyword, keyword_pic_begin_pos + begin_keyword.size());
-        if (string::npos == keyword_pic_end_pos) {
-            //cerr << "WARNING! parsePicturesUrlsHelper() CANNOT find the keyword " << end_keyword << endl;
-            return(false);
-        }
-        string pic_url = webpage_txt.substr( keyword_pic_begin_pos + begin_keyword.size(),
-                                             keyword_pic_end_pos - keyword_pic_begin_pos - begin_keyword.size() );
+        keyword_pic_begin_pos = pair_tmp.second;
         b_ok = true;
         
         // there are some bad picture-webspaces, ignore them
@@ -42,11 +41,6 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
             }
         }
         if (bad_pic_websapce) {
-            continue;
-        }
-        
-        // ignore gif, because gifs almost are AD
-        if (string::npos != pic_url.rfind(".gif")) {
             continue;
         }
         
@@ -95,41 +89,26 @@ parsePicturesUrls (const string& webpage_txt, vector<string>& pictures_urls_list
 static bool
 parseSeedUrl (const string& webpage_txt, string& seed_url) 
 {
-    static const string keyword_prefix("<a href=\"");
     static const vector<string> keywords_seed_begin_list = { "http://www.jandown.com", 
                                                              "http://jandown.com", 
                                                              "http://www6.mimima.com",
                                                              "http://mimima.com" };
-    auto keyword_seed_begin_pos = string::npos;
-    bool b_find_begin = false;
+
     for (const auto& e : keywords_seed_begin_list) {
-        keyword_seed_begin_pos = webpage_txt.find(keyword_prefix + e);
-        if (string::npos != keyword_seed_begin_pos) {
-            b_find_begin = true;
-            break;
+        const string& keyword_seed_begin = e;
+        static const string keyword_seed_end("\"");
+        
+        const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+                                                                           keyword_seed_begin,
+                                                                           keyword_seed_end );
+        if (!pair_tmp.first.empty()) {
+            seed_url = keyword_seed_begin + pair_tmp.first;
+            return(true);
         }
     }
-    if (!b_find_begin) {
-        //cerr << "WARNING! parseSeedUrl() cannot find any keywords " << keyword_prefix << " + : ";
-        //copy( keywords_seed_begin_list.cbegin(), keywords_seed_begin_list.cend(),
-              //ostream_iterator<const string&>(cerr, " ") );
-        //cerr << endl;
-        return(false);
-    }
-
-    static const string keyword_seed_end("\"");
-    const auto keyword_seed_end_pos = webpage_txt.find( keyword_seed_end,
-                                                        keyword_seed_begin_pos + keyword_prefix.size() );
-    if (string::npos == keyword_seed_end_pos) {
-        //cerr << "WARNING! parseSeedUrl() cannot find the keyword " << keyword_seed_end << endl;
-        return(false);
-    }
-
-    seed_url = webpage_txt.substr( keyword_seed_begin_pos + keyword_prefix.size(),
-                                   keyword_seed_end_pos - keyword_seed_begin_pos - keyword_prefix.size() );
 
 
-    return(true);
+    return(false);
 }
 
 AichengTopicWebpage::AichengTopicWebpage (const string& url, const string& proxy_addr)

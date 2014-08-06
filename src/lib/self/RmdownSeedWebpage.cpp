@@ -4,6 +4,8 @@
 #include <iostream>
 #include <algorithm>
 #include <unistd.h>
+#include "../helper/Misc.h"
+
 
 using namespace std;
 
@@ -12,36 +14,35 @@ parsePostMultiSections ( const string& webpage_txt,
                          vector<pair<string, string>>& post_sections_list ) 
 {
     // parse the ref section
-    static const string& keyword_ref_section("<INPUT size=58 name=\"ref\" value=\"");
-    const auto keyword_ref_section_begin_pos = webpage_txt.find(keyword_ref_section);
-    if (string::npos == keyword_ref_section_begin_pos) {
-        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword \""
-             << keyword_ref_section << endl;
+    static const string& keyword_ref_section_begin("<INPUT size=58 name=\"ref\" value=\"");
+    static const string& keyword_ref_section_end("\"");
+    const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+                                                                       keyword_ref_section_begin,
+                                                                       keyword_ref_section_end );
+    const string& ref_content = pair_tmp.first;
+    if (ref_content.empty()) {
+        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword "
+             << "\"" << keyword_ref_section_begin << "\"" << " and "
+             << "\"" << keyword_ref_section_end << "\"" << endl;
         return(false);
     }
-    const auto keyword_ref_section_end_pos = webpage_txt.find("\"", keyword_ref_section_begin_pos + keyword_ref_section.size());
-    if (string::npos == keyword_ref_section_end_pos) {
-        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword _\"_" << endl;
-        return(false);
-    }
-    const string ref_content = webpage_txt.substr(  keyword_ref_section_begin_pos + keyword_ref_section.size(),
-                                                    keyword_ref_section_end_pos - keyword_ref_section_begin_pos - keyword_ref_section.size() );
     post_sections_list.push_back(make_pair("ref", ref_content));
+    const auto keyword_ref_section_end_pos = pair_tmp.second;
 
     // parse the reff section
-    static const string& keyword_reff_section("value=\"");
-    const auto keyword_reff_section_begin_pos = webpage_txt.find(keyword_reff_section, keyword_ref_section_end_pos);
-    if (string::npos == keyword_reff_section_begin_pos) {
-        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword _" << keyword_reff_section << "_" << endl;
+    static const string& keyword_reff_section_begin("value=\"");
+    static const string& keyword_reff_section_end("\"");
+    const pair<string, size_t>& pair_tmp2 = fetchStringBetweenKeywords( webpage_txt,
+                                                                       keyword_reff_section_begin,
+                                                                       keyword_reff_section_end,
+                                                                       keyword_ref_section_end_pos );
+    const string& reff_content = pair_tmp2.first;
+    if (reff_content.empty()) {
+        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword "
+             << "\"" << keyword_reff_section_begin << "\"" << " and "
+             << "\"" << keyword_reff_section_end << "\"" << endl;
         return(false);
     }
-    const auto keyword_reff_section_end_pos = webpage_txt.find("\"", keyword_reff_section_begin_pos + keyword_reff_section.size());
-    if (string::npos == keyword_reff_section_end_pos) {
-        cerr << "WARNING! parsePostMultiSections() CANNOT find the keyword _\"_" << endl;
-        return(false);
-    }
-    const string reff_content = webpage_txt.substr( keyword_reff_section_begin_pos + keyword_reff_section.size(),
-                                                    keyword_reff_section_end_pos - keyword_reff_section_begin_pos - keyword_reff_section.size() );
     post_sections_list.push_back(make_pair("reff", reff_content));
 
 

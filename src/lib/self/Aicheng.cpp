@@ -192,7 +192,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
                                                                                base_name,
                                                                                timeout_download_pic,
                                                                                fail_download_pics_urls_list,
-                                                                               8 );
+                                                                               32 );
 
     // download seed
     bool b_downloaded_seed_success = false;
@@ -255,7 +255,7 @@ Aicheng::Aicheng ( AvClass av_class,
                    const string& path )
 {
     // parse the URLs of valid topics by: range, hate keywords, like keywords
-    cout << "Parse the URLs of topics from " << range_begin << " to " << range_end << ": ";
+    cout << "Parse the URLs of topics from " << range_begin << " to " << range_end << ": " << flush;
     vector<string> valid_topics_urls_list;
     parseValidTopicsUrls( av_class,
                           getNextProxyAddr(proxy_addrs_list),
