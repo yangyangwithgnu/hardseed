@@ -255,7 +255,7 @@ failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pict
 **Q13**：hardseed 在 windows 环境下载的文件部分无法删除？  
 **A13**：hardseed 正在写文件时被 ctrl-c 强制退出，文件锁未被 cyg\*.dll 释放所至。请尝试：
 ```
-rd /SQ C：\\[aicheng_west][1~128]@010825\
+rd /SQ C:\[aicheng_west][1~128]@010825\
 ```
 
 
