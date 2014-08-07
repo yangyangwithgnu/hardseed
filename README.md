@@ -253,9 +253,9 @@ failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pict
 **A12**：果断换 QQ 旋风。迅雷通过 URI 唯一确定资源，即便用 bencode 更改种子目录内的文件名也无效，所以仍然用迅雷的骚年，戒爱吧。我最近开始用 QQ 旋风，发现其优势有三：一是即便同样被视为违规资源但完全不影响下载速度，二是 QQ 旋风有个网页版支持跨平台（所以 linux 下可用 xfdown），三是资源消耗奇低。
 
 **Q13**：hardseed 在 windows 环境下载的文件部分无法删除？  
-**A13**：hardseed 正在写文件时被 ctrl-c 强制退出，文件锁未被 cyg\*.dll 释放所至。请尝试：
+**A13**：hardseed 正在写文件时被 ctrl-c 强制退出，文件锁未被 cyg\*.dll 释放所至。请先关闭所有 CMD 窗口，再开新 CMD 窗口后执行
 ```
-rd /SQ C:\[aicheng_west][1~128]@010825\
+rd /S C:\[aicheng_west][1~128]@010825\
 ```
 
 
