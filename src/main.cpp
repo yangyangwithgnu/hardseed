@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.2");
+static const string g_version("0.2.3");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://www.yangyangwithgnu.net/");
@@ -100,7 +100,7 @@ showHelpInfo (void)
     cout << "  --concurrent-tasks" << endl
          << "  You can set more than one proxy, each proxy could more than one concurrent tasks. This option "
          << "set the number of concurrent tasks of each prox. " << endl
-         << "  The max and default number is 8. " << endl;
+         << "  The default number is 8. " << endl;
 
     cout << endl;
     cout << "  --timeout-download-picture" << endl
@@ -114,7 +114,7 @@ showHelpInfo (void)
          << "    --topics-range 2 16" << endl
          << "    --topics-range 8 (I.E., --topics-range 1 8)" << endl
          << "    --topics-range -1 (I.E., all topics of this av class)" << endl
-         << "  The default topics range is 128" << endl;
+         << "  The default topics range is 1 to 64. " << endl;
 
     cout << endl;
     cout << "  --saveas-path" << endl
@@ -313,7 +313,7 @@ main (int argc, char* argv[])
     // --topics-range 2 16,
     // --topics-range 8 (I.E., --topics-range 1 8),
     // --topics-range 4 -1 (I.E., all topics of this class av)
-    unsigned topics_range_begin = 1, topics_range_end = 128; // default range
+    unsigned topics_range_begin = 1, topics_range_end = 64; // default range
     cmdline_arguments_list = cmdline_options.getArgumentsList("--topics-range");
     if (!cmdline_arguments_list.empty()) {
         if (!parseTopicsRangeArgument(cmdline_arguments_list, topics_range_begin, topics_range_end)) {
@@ -383,12 +383,12 @@ main (int argc, char* argv[])
     // <<<<<<<<<<<<<<<<<<
 
     // --concurrent-tasks
-    unsigned threads_total = 8; // the default and the max number of threads
+    unsigned threads_total = 8; // the default number of threads
     cmdline_arguments_list = cmdline_options.getArgumentsList("--concurrent-tasks");
     if (!cmdline_arguments_list.empty()) {
         unsigned tmp = strtoul(cmdline_arguments_list[0].c_str(), nullptr, 0);
-        if (tmp <= 0 || tmp > threads_total) {
-            cerr << "ERROR! --concurrent-tasks argument setting wrong. The max and default number is 16. " << endl;
+        if (tmp <= 0) {
+            cerr << "ERROR! --concurrent-tasks argument setting wrong. " << endl;
             return(EXIT_FAILURE);
         }
         threads_total = tmp;
@@ -396,7 +396,7 @@ main (int argc, char* argv[])
     cout << "  the number of concurrent tasks \"" << RichTxt::bold_on << threads_total << RichTxt::bold_off << "\"; " << endl;
 
     // --hate. ignore the topics by user setting keywords in topic title, split by space-char ' '.
-    // for example: --ignore aa bb cc "d d".
+    // for example: --hate aa bb cc "d d".
     vector<string> hate_keywords_list = { "连发", "連发", "连發", "連發",
                                           "连弹", "★㊣", "合辑", "合集",
                                           "合輯", "nike", "最新の美女骑兵㊣",

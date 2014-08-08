@@ -73,12 +73,18 @@ TopicWebpage::downloadAllPictures ( const string& path,
         const string& picture_url = pictures_urls_list_[i];
         
         // make picture filename
-        const string tmp = getRemoteFiletype(picture_url);
-        static const string keyword("image/");
-        string postfix_name;
-        const auto pos = tmp.find(keyword);
-        if (string::npos != pos) {
-            postfix_name = tmp.substr(pos + keyword.size());
+        string postfix_name("jpeg"); // sometime get the remote filetype failure, so I set the default postfix
+        static const unsigned get_remote_filetype_retry_times = 2;
+        static const unsigned get_remote_filetype_sleep_second = 2;
+        for (unsigned j = 0; j < get_remote_filetype_retry_times; ++j) {
+            const string tmp = getRemoteFiletype(picture_url);
+            static const string keyword("image/");
+            const auto pos = tmp.find(keyword);
+            if (string::npos != pos) {
+                postfix_name = tmp.substr(pos + keyword.size());
+                break;
+            }
+            sleep(get_remote_filetype_sleep_second);
         }
         
         // ignore gif, because gifs almost are AD

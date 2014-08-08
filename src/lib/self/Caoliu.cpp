@@ -209,6 +209,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
 //const vector<string>& urls = caoliu_topics_webpage.getPicturesUrlsList();
 //for (const auto& e : urls) {
     ////cout << "------------" << endl;
+    //cout << e << "\n\t";
     //cout << caoliu_topics_webpage.getRemoteFiletype(e) << endl;
     ////cout << "------------" << endl;
 //}
