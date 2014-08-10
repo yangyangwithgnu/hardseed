@@ -77,7 +77,7 @@ TopicWebpage::downloadAllPictures ( const string& path,
         static const unsigned get_remote_filetype_retry_times = 2;
         static const unsigned get_remote_filetype_sleep_second = 2;
         for (unsigned j = 0; j < get_remote_filetype_retry_times; ++j) {
-            const string tmp = getRemoteFiletype(picture_url);
+            const string& tmp = getRemoteFiletype(picture_url);
             static const string keyword("image/");
             const auto pos = tmp.find(keyword);
             if (string::npos != pos) {

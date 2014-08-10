@@ -63,6 +63,12 @@ initLibcurl (const char* libcurl_err_info_buff)
     // automatically set the Referer to redirect source
     checkErrLibcurl(curl_easy_setopt(p_curl, CURLOPT_AUTOREFERER, true), libcurl_err_info_buff);
 
+    // Set low speed limit in bytes per second.
+    // It contains the average transfer speed in bytes per second that the transfer should be below
+    // during CURLOPT_LOW_SPEED_TIME seconds for libcurl to consider it to be too slow and abort.
+    // The default is 8KB/s.
+    checkErrLibcurl(curl_easy_setopt(p_curl, CURLOPT_LOW_SPEED_LIMIT, 8 * 1024), libcurl_err_info_buff);
+
     //// display libcurl action info
     //checkErrLibcurl(curl_easy_setopt(p_curl, CURLOPT_VERBOSE, true), libcurl_err_info_buff);
 
@@ -157,9 +163,9 @@ Webpage::checkUserAgentByThirdparty (void) const
 // some chars invalid in URL string, such as, space char, chinese char, so I have to
 // escape to legal URL.
 // OK, curl_easy_escape() likely do this job, but it's stupid: the function converts
-// all input characters that are not a-z, A-Z, 0-9, '-', '.', '_' or '~' to their
-// "URL escaped" version (%NN where NN is a two-digit hexadecimal number), in the other
-// words, it always convert ':', '/', and '?', that's a bad news. 
+// all characters that are not a-z, A-Z, 0-9, '-', '.', '_' or '~' to their "URL escaped"
+// version (%NN where NN is a two-digit hexadecimal number), in the other words, it always
+// convert ':', '/', '?', and so on, that's a bad news. 
 // This is my way to escape URL:
 // 0) split one raw URL string to more sub-string by token chars, such as ':', '/', '='
 // and '?' (may be more);
@@ -169,7 +175,7 @@ string
 Webpage::escapeUrl (const string& raw_url) const
 {
     // split one raw URL string to more sub-string by token chars
-    static const string tokens_list(":/=?&,;");
+    static const string tokens_list(":/=?&,;%");
     vector<string> splited_substr_list;
     vector<char> appeared_tokens_list;
     splitStr(raw_url, tokens_list, splited_substr_list, appeared_tokens_list);
@@ -508,8 +514,13 @@ Webpage::download_ ( const string& raw_url,
         curl_easy_setopt(p_curl_, CURLOPT_REFERER, referer.c_str());
     }
 
-    // timeout
+    // timeout to abort
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_TIMEOUT, timeout_second), libcurl_err_info_buff_);
+
+    // low speed to abort.
+    // If the speed below the CURLOPT_LOW_SPEED_LIMIT too long time, abort it.
+    checkErrLibcurl( curl_easy_setopt(p_curl_, CURLOPT_LOW_SPEED_TIME, max(timeout_second / 2, 8U)), 
+                     libcurl_err_info_buff_ );
 
     // ready for downloading webpage to locale tmp file
     FILE* fs = fopen(filename.c_str(), "w+");
@@ -535,7 +546,7 @@ Webpage::download_ ( const string& raw_url,
         } 
         
         //cerr << "WARNING! Webpage::download() something happened. Fail to download " << url
-             //<< ", sleeping " << retry_sleep_second << " seconds will retry " << i + 1 << ". " << flush;
+             //<< ", sleeping " << retry_sleep_second << " seconds will retry " << i + 1 << ". " << endl;
         
         // if libcurl download internet file failure,
         // the next retry will append data to local file.

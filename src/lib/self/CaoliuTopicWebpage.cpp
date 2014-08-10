@@ -34,7 +34,7 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
         
         // there are some bad picture-webspaces, ignore them
         bool bad_pic_websapce = false;
-        static const vector<string> bad_pic_websapces_list = {/* "uploadfr.com", "picrar.com" */};
+        static const vector<string> bad_pic_websapces_list = { "iceimg.com", };
         for (const auto& e : bad_pic_websapces_list) {
             if (string::npos != pic_url.find(e)) {
                 bad_pic_websapce = true;

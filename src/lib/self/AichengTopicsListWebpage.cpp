@@ -58,7 +58,7 @@ parseTitlesAndUrls ( const string& webpage_txt,
         const pair<string, size_t>& pair_title = fetchStringBetweenKeywords( webpage_txt,
                                                                              keyword_topic_title_begin,
                                                                              keyword_topic_title_end,
-                                                                             keyword_topic_url_end_pos );
+                                                                             keyword_topic_url_end_pos - keyword_topic_title_begin.size() );
         const string& topic_title = pair_title.first;
         keyword_topic_url_begin_pos = pair_title.second;
         

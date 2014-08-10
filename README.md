@@ -1,12 +1,12 @@
-#hardseed
+#hardseed :D
 yangyang.gnu@gmail.com  
-2014-8-8 16:15:27   
+2014-8-10 22:14:38   
 
 
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（致谢：#羽、#松、程#雷、杨#理、杜#伟、#程、刘#惜、曾#戈、#杰、李#杰、萧#蔷、谢#葛）*  
+**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（致谢：#羽、#松、程#雷、杨#理、杜#伟、#程、刘#惜、曾#戈、#杰、李#杰、萧#蔷、谢#葛、童#涛、#亮、余#顺）*  
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
@@ -19,7 +19,8 @@ yangyang.gnu@gmail.com
 ##版本
 ----------------
 
-**[v0.2.3，修正，2014-8-8]**：修正部分图片缺失扩展名的问题；默认下载帖子数量从 128 调整为 64；更换新的 GGC IP 进行代理工具 goagent 的 proxy.ini 中以提升代理速度。  
+**[v0.2.4，修正，2014-8-10]**：由于对 % 进行 URL 转义使得部分图片的 URL 生成错误，导致图片下载失败，本版本已修正；剔除长年显示异常的图床网站 iceimg.com；设定平均速度低于 8KB/s 时终止本次下载，重新向服务端发起新请求，开启新一次的下载，以缩短下载错误图片 URL 等待时长；修正 aicheng 帖子列表页面中帖子名解析错误的问题；取消单个代理服务器并行下载上限数 8 的限制。  
+**[v0.2.3，修正，2014-8-8]**：修正部分图片缺失扩展名的问题；默认下载帖子数量从 128 调整为 64；更换新的 GGC IP 进代理工具 goagent 的 proxy.ini 中以提升代理速度。  
 **[v0.2.2，优化，2014-8-6]**：程序无任何功能变更，仅是优化代码，合并部分通用代码至公共库、增加用于验证代理出口 IP 和伪装浏览器的 user-agent 的接口。  
 **[v0.2.1，修正，2014-7-28]**：修正临时文件未删除的错误。  
 **[v0.2.0，新增，2014-7-23]**：应 @sigmadog 需求，增加抓取 caoliu 上自拍套图（江湖人称“達蓋爾的旗幟”）的功能。  
@@ -239,7 +240,7 @@ Preferred POSIX equivalent is: /cygdrive/c/xxxx, CYGWIN environment variable opt
 
 **Q10**：为何常有类似下面的图片下载报错
 ```
-failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pictures error: http://p1.imageab.com/2014/07/24/902135bff7a83cd71836764b795c0879.jpg, http://p1.imageab.com/2014/07/24/6cea50f80bba80536ba6cd9da7ba17df.jpg)
+failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pictures error: http://p1.imageab.com/2014/07/24/902135bff7a83cd71836764b795c0879.jpg, http://p1.imageab.com/2014/07/24/6cea50f80bba80536ba6cd9da7ba17df.jpg )
 ```
 **A10**：几张图片下载失败无伤大雅。具体原因很多，常见如下：
 * 图床挂了，hardseed 无能为力；
@@ -251,13 +252,22 @@ failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pict
 **A11**：两方面原因。一方面，合集均是把以往的单个帖子合并一起再发布，完全重复；一方面，虽然帖子中有多部不同片子的图片，但实际上帖子中的种子只是其中一部片子的，没有意义。
 
 **Q12**：很多片子迅雷报违规资源，下载速度奇慢，如何破？  
-**A12**：果断换 QQ 旋风。迅雷通过 URI 唯一确定资源，即便用 bencode 更改种子目录内的文件名也无效，所以仍然用迅雷的骚年，戒爱吧。我最近开始用 QQ 旋风，发现其优势有三：一是即便同样被视为违规资源但完全不影响下载速度，二是 QQ 旋风有个网页版支持跨平台（所以 linux 下可用 xfdown），三是资源消耗奇低。
+**A12**：果断换 QQ 旋风。迅雷通过 URI 唯一确定资源，即便用 bencode 更改种子目录内的文件名也无效，所以仍然用迅雷的骚年，戒爱吧。我最近开始用 QQ 旋风，发现其优势有三：一是即便同样被视为违规资源但完全不影响下载速度，二是 QQ 旋风有个网页版支持跨平台（所以 linux 下诞生了 xfdown），三是资源消耗奇低。
 
 **Q13**：hardseed 在 windows 环境下载的文件部分无法删除？  
-**A13**：hardseed 正在写文件时被 ctrl-c 强制退出，文件锁未被 cyg\*.dll 释放，而 cyg\*.dll 已加载至 CMD 进程空间，所以，请先关闭所有 CMD 窗口，再开新 CMD 窗口后执行
+**A13**：hardseed 正在写文件时被 ctrl-c 强制退出，文件锁未被 cyg\*.dll 释放，而 cyg\*.dll 已加载至 CMD 进程空间，所以，请先关闭所有 CMD 窗口，尝试删除相关文件，若不行，请再开新 CMD 窗口后执行
 ```
 X:\> rd /S C:\[aicheng_west][1~128]@010825\
 ```
+
+**Q13**：为何出现类似如下的报错
+```
+"" - failure (download error from http://cl.man.lv/htm_data/4/1408/1189943.html. seed error: )
+```
+**A13**：代理工具的问题。尝试：
+* 设定 --concurrent-tasks 减少单个代理的并行下载数量；
+* 如果使用 SSH 或 shadowsocks 代理，请更换同类的其他服务器；
+* 如果使用 goagent 代理，请更换 GGC IP，即 proxy.ini 中的 iplist。可借助 checkgoogleip 查找你网络环境下速度最快的 GGC IP。
 
 
 ##忠告
