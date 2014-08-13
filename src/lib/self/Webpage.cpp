@@ -501,7 +501,15 @@ Webpage::download_ ( const string& raw_url,
                      const unsigned retry_sleep_second )
 {
     // deal with raw URL, first unescape html, second escape URL
-    const string url = escapeUrl(unescapeHtml(raw_url));
+    string url = escapeUrl(unescapeHtml(raw_url));
+        
+    // convert https to http
+    static const string keyword_https("https://");
+    const auto https_pos = url.find(keyword_https);
+    if (string::npos != https_pos) {
+        static const string keyword_http("http://");
+        url.replace(https_pos, keyword_https.size(), keyword_http);
+    }
 
     // set the target URL
     curl_easy_setopt(p_curl_, CURLOPT_URL, url.c_str());
@@ -514,12 +522,10 @@ Webpage::download_ ( const string& raw_url,
         curl_easy_setopt(p_curl_, CURLOPT_REFERER, referer.c_str());
     }
 
-    // timeout to abort
-    checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_TIMEOUT, timeout_second), libcurl_err_info_buff_);
-
     // low speed to abort.
     // If the speed below the CURLOPT_LOW_SPEED_LIMIT too long time, abort it.
-    checkErrLibcurl( curl_easy_setopt(p_curl_, CURLOPT_LOW_SPEED_TIME, max(timeout_second / 2, 8U)), 
+    static const unsigned low_speed_timeout = 4;
+    checkErrLibcurl( curl_easy_setopt(p_curl_, CURLOPT_LOW_SPEED_TIME, low_speed_timeout), 
                      libcurl_err_info_buff_ );
 
     // ready for downloading webpage to locale tmp file
@@ -533,6 +539,12 @@ Webpage::download_ ( const string& raw_url,
     // download the URL webpage to locale file
     bool b_downloaded = false;
     for (unsigned i = 0; i < retry_times; ++i) {
+        // timeout to abort. if current download failured, next time
+        // the download timeout increase one timeout_second
+        checkErrLibcurl( curl_easy_setopt(p_curl_, CURLOPT_TIMEOUT, (long)(timeout_second * (i + 1))), 
+                         libcurl_err_info_buff_ );
+        
+        // download
         bool b_ok = checkErrLibcurl(curl_easy_perform(p_curl_), libcurl_err_info_buff_);
         latest_http_status_code_ = parseLatestHttpStatusCode_(); // notice, parseLatestHttpStatusCode_() must
                                                                  // very close every curl_easy_perform(p_curl_)

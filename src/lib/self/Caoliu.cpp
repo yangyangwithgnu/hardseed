@@ -304,7 +304,7 @@ Caoliu::Caoliu ( AvClass av_class,
     unsigned pictures_total = 2;
     bool b_download_seed = true;
     if (Caoliu::selfie == av_class) {
-        pictures_total = 128;
+        pictures_total = 256; // the max total
         b_download_seed = false;
     }
 

@@ -57,7 +57,7 @@ TopicWebpage::getSeedUrl (void) const
     return(seed_url_);
 }
 
-// the name rule of pictures: topictitle0.jpg, topictitle1.jpg, topictitle[x].jpg
+// the name rule of pictures: topictitle-0.jpg, topictitle-1.jpg, topictitle-[x].jpg
 bool
 TopicWebpage::downloadAllPictures ( const string& path,
                                     const string& base_name,
@@ -72,7 +72,7 @@ TopicWebpage::downloadAllPictures ( const string& path,
           ++i ) {
         const string& picture_url = pictures_urls_list_[i];
         
-        // make picture filename
+        // make picture postfix name
         string postfix_name("jpeg"); // sometime get the remote filetype failure, so I set the default postfix
         static const unsigned get_remote_filetype_retry_times = 2;
         static const unsigned get_remote_filetype_sleep_second = 2;
@@ -86,14 +86,13 @@ TopicWebpage::downloadAllPictures ( const string& path,
             }
             sleep(get_remote_filetype_sleep_second);
         }
-        
-        // ignore gif, because gifs almost are AD
+        // ignore gif, because gifs almost be AD
         if ("gif" == postfix_name) {
             continue;
         }
         
         // download pic
-        const string pic_filename = path + "/" + base_name + "-" + convNumToStr(i) + "." + postfix_name;
+        const string& pic_filename = path + "/" + base_name + "-" + convNumToStr(sucess_cnt) + "." + postfix_name;
         if (downloadFile(picture_url, pic_filename, "", timeout_download_pic)) {
             ++sucess_cnt;
             continue;

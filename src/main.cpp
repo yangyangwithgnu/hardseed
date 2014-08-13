@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.4");
+static const string g_version("0.2.5");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://www.yangyangwithgnu.net/");
@@ -238,7 +238,7 @@ main (int argc, char* argv[])
     // prompt turn on the goagent
     cout << RichTxt::bold_on
          << "************************ !! IMPORTANCE !! ************************" << endl
-         << "********  please make sure the proxy software is running  ********" << endl
+         << "********  please make sure the proxy program is running  ********" << endl
          << "************************ !! IMPORTANCE !! ************************" << endl
          << RichTxt::bold_off << endl;
 

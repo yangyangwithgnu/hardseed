@@ -31,16 +31,18 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
         keyword_pic_begin_pos = pair_tmp.second;
         b_ok = true;
         
-        // there are some bad picture-webspaces, ignore them
-        bool bad_pic_websapce = false;
-        static const vector<string> bad_pic_websapces_list = { "iceimg.com", };
-        for (const auto& e : bad_pic_websapces_list) {
+        // there are some bad picture-webspaces and logo pci, ignore them
+        bool b_ignore_url = false;
+        static const vector<string> ignore_urls_keywords_list = {
+                                                                  "iceimg.com",
+                                                                };
+        for (const auto& e : ignore_urls_keywords_list) {
             if (string::npos != pic_url.find(e)) {
-                bad_pic_websapce = true;
+                b_ignore_url = true;
                 break;
             }
         }
-        if (bad_pic_websapce) {
+        if (b_ignore_url) {
             continue;
         }
         
@@ -64,26 +66,19 @@ parsePicturesUrls (const string& webpage_txt, vector<string>& pictures_urls_list
 {
     pictures_urls_list.clear();
 
-    static const string begin_keyword0("<img src=\"");
-    static const string end_keyword0("\"");
-    if (parsePicturesUrlsHelper(webpage_txt, pictures_urls_list, begin_keyword0, end_keyword0)) {
-        return(true);
+    // the list may be on the webpage at the same time
+    static const vector<pair<string, string>> begin_and_end_keywords_list = { make_pair("<img src=\"", "\""), 
+                                                                              make_pair("<img src='", "'") };
+    
+    bool b_ok = false;
+    for (const auto& e : begin_and_end_keywords_list) {
+        if (parsePicturesUrlsHelper(webpage_txt, pictures_urls_list, e.first, e.second)) {
+            b_ok = true;
+        }
     }
 
-    static const string begin_keyword1("<img src=");
-    static const string end_keyword1(" ");
-    if (parsePicturesUrlsHelper(webpage_txt, pictures_urls_list, begin_keyword1, end_keyword1)) {
-        return(true);
-    }
-    
-    static const string begin_keyword2("<img src='");
-    static const string end_keyword2(" ");
-    if (parsePicturesUrlsHelper(webpage_txt, pictures_urls_list, begin_keyword2, end_keyword2)) {
-        return(true);
-    }
-    
 
-    return(false);
+    return(b_ok);
 }
 
 static bool

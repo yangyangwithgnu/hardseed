@@ -50,7 +50,7 @@ class Webpage
                             const string& filename,
                             const string& referer = "",
                             const unsigned timeout_second = 0,
-                            const unsigned retry_times = 2,
+                            const unsigned retry_times = 4,
                             const unsigned retry_sleep_second = 2);
         bool submitMultiPost ( const string& url,
                                const string& filename,
