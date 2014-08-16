@@ -1,12 +1,12 @@
 #hardseed
 yangyang.gnu@gmail.com  
-2014-8-13 11:20:12   
+2014-8-17 01:09:06   
 
 
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（杰出人才：#申豫、#羽、#松、#程雷、#季理、星伟、#程、#宏惜、#露戈、#杰、#忠杰、#蔷蔷、#金葛、#涛、#亮、#扬顺、#昊然、#进）*  
+**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（杰出人才：#申豫、#羽、#松、#露璐（女？）、#程雷、#基理、#星伟、#程、#宏惜、#露戈、#杰、#忠杰、#蔷蔷、#金葛、#涛、#亮、#扬顺、#昊然、#进）*  
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
@@ -19,6 +19,7 @@ yangyang.gnu@gmail.com
 ##版本
 ----------------
 
+**[v0.2.5，优化，2014-8-17]**：程序功能无任何更新，仅更新代理工具 goagent 配置文件 proxy.ini：一是设置 obfuscate = 1 开启流量混淆以正确解析可用 GGC IP，一是设置 pagespeed = 1 以提升 GAE 的下行速度。  
 **[v0.2.5，修正，2014-8-13]**：0）修正帖子部分图片 URL 未解析的问题；1）修正图片序号错误的问题；2）优化图片下载等待时长算法，不再以 --timeout-download-picture 作为绝对等待时长，而是将其作为指导值，一旦图片下载失败 hardseed 将自动计算下次重新下载所需的等待时长，同时，与“速度过低视为下载失败”的机制结合，提升图片下载等待耗时；3）升级 goagent 至 3.1.21，采用 goagent 默认 proxy.ini，而不再使用自定义 iplist （很多朋友反应采用先前我自定义 iplist 版本的 goagent 速度不理想，这是由于 GGC IP 与不同网络环境有关，我用 checkgoogleip 跑出来 GGC IP 最适合我的网络环境，不见得适合你，所以，权衡之下，还是用 goagent 自带的 GGC IP，至少这合适于大多数人）。  
 **[v0.2.4，修正，2014-8-10]**：0）由于对 % 进行 URL 转义使得部分图片的 URL 生成错误，导致图片下载失败，本版本已修正；1）剔除长年显示异常的图床网站 iceimg.com；2）引入均速过低视为下载失败的机制，在持续（8s）低速（4KB/s）下情况下终止本次下载，重新向服务端发起新请求，开启新一次的下载，以缩短下载错误 URL 图片等待时长；3）修正 aicheng 帖子列表页面中帖子名解析错误的问题；4）取消单个代理服务器并行下载上限数 8 的限制。  
 **[v0.2.3，修正，2014-8-8]**：0）修正部分图片缺失扩展名的问题；1）默认下载帖子数量从 128 调整为 64；2）更换新的 GGC IP 进代理工具 goagent 的 proxy.ini 中以提升代理速度。  
@@ -123,7 +124,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent_3.1.19/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent/local/，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
@@ -267,8 +268,8 @@ X:\> rd /S C:\[aicheng_west][1~128]@010825\
 ```
 **A14**：代理工具的问题。尝试：
 * 设定 --concurrent-tasks 减少单个代理的并行下载数量；
-* 如果使用 SSH 或 shadowsocks 代理，请更换同类的其他服务器；
-* 如果使用 goagent 代理，请更换 GGC IP，即 proxy.ini 中的 iplist。可借助 checkgoogleip 查找你网络环境下速度最快的 GGC IP。
+* 如果使用 goagent 代理，重启之；若仍存在类似问题，请更换 GGC IP，即 proxy.ini 中的 iplist。可借助 checkgoogleip 查找你网络环境下速度最快的 GGC IP。
+* 如果使用 SSH 或 shadowsocks 代理，请更换同类的其他服务器。
 
 
 ##忠告
