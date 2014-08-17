@@ -6,14 +6,14 @@ yangyang.gnu@gmail.com
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（杰出人才：#申豫、#羽、#松、#露璐（女？）、#程雷、#基理、#星伟、#程、#宏惜、#露戈、#杰、#忠杰、#蔷蔷、#金葛、#涛、#亮、#扬顺、#昊然、#进）*  
+**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com ，不好意思，$_$** *（杰出人才：#就成、#申豫、#羽、#松、#露璐（女？）、#程雷、#基理、#星伟、#程、#宏惜、#露戈、#杰、#忠杰、#蔷蔷、#金葛、#涛、#亮、#扬顺、#昊然、#进、#晓平、#宏）*  
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
 **声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击广告、多解囊捐赠。*我.在.干.嘛  @_@#*
 
 **注意：**  
-[2014-7-24]：**惜用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy/goagent/local/proxy.ini ，节约公共流量。
+[2014-7-24]：**惜用源码包中的代理工具**。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy_goagent/local/proxy.ini ，节约公共流量。
 
 
 ##版本
@@ -124,7 +124,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy/goagent/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy_goagent/local/，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
