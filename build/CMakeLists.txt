@@ -8,7 +8,7 @@ SET(SRC_LIST ../src/main.cpp
              ../src/lib/self/SeedWebpage.cpp ../src/lib/self/JandownSeedWebpage.cpp ../src/lib/self/RmdownSeedWebpage.cpp
              ../src/lib/self/Aicheng.cpp ../src/lib/self/Caoliu.cpp
              ../src/lib/helper/Time.cpp ../src/lib/helper/CmdlineOption.cpp ../src/lib/helper/Misc.cpp)
-SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread")
+SET(CMAKE_EXE_LINKER_FLAGS "-lcurl -lpthread -liconv")
 
 # linux
 #>>>>>>>>>>>>>>>>>>>>>>
