@@ -36,10 +36,9 @@ import ycm_core
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
 flags = [
     '-std=c++11',
-    '-stdlib=libc++',
     '-Werror',
     '-Weverything',
-	'-Wno-documentation',
+    '-Wno-documentation',
     '-Wno-deprecated-declarations',
     '-Wno-disabled-macro-expansion',
     '-Wno-float-equal',
@@ -56,7 +55,7 @@ flags = [
     '-I', 
     '/usr/include/', 
     '-I', 
-    '/usr/include/c++/v1/'
+    '/usr/include/c++/4.8/'
 ]
 
 

@@ -169,7 +169,14 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     remove_copy_if( topic_webpage_title.cbegin(),
                     (string::npos == keyword_logo_pos) ? topic_webpage_title.cend() : topic_webpage_title.cbegin() + (int)keyword_logo_pos,
                     back_inserter(base_name),
-                    [] (char ch) {return('\\' == ch || '/' == ch);} );
+                    [] (char ch) {return( '|' == ch || // invalid chars in filename
+                                          '/' == ch ||
+                                          '<' == ch ||
+                                          '>' == ch ||
+                                          '?' == ch ||
+                                          '*' == ch ||
+                                          ':' == ch ||
+                                          '\\' == ch );} );
 
     // 2) the path + filename max length must less than pathconf(, _PC_NAME_MAX)
     const unsigned filename_max_length_without_postfix = (unsigned)pathconf(path.c_str(), _PC_NAME_MAX)
