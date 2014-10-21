@@ -117,7 +117,9 @@ As you know, the government likes blocking adult websites, so, I do suggest you 
 - VPN (PPTP and openVPN), --proxy ""  
 
 It is important that you should know, you can set more proxys at the same time, split by space-char ' '. As the --concurrent-tasks option says, each proxy could more than one concurrent tasks, now, what about more proxys? Yes, yes, the speed of downloading seed and pictures is very very fast. E.G., --concurrent-tasks 8 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 socks4://127.0.0.1:7070, the number of concurrent tasks is 8\*3.   
-If you wanna how to install and configure various kinds of proxy, please access my homepage "3.3 搭梯翻墙" http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3   
+If you wanna how to install and configure various kinds of proxy, please access my homepage "3.2 搭梯翻墙" https://github.com/yangyangwithgnu/the_new_world_linux#3.2   
+If you are not good at computer, there is a newest goagent for floks who are not good at computer by me, yes, out of box. see https://github.com/yangyangwithgnu/goagent_out_of_box_yang  
+
 The default http://127.0.0.1:8087.   
 
 That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.yangyangwithgnu.net/, big thanks to you. Kiddo, take care of your body. :-)  
