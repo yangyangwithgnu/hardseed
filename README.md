@@ -122,7 +122,7 @@ If you are not good at computer, there is a newest goagent for floks who are not
 
 The default http://127.0.0.1:8087.   
 
-That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.yangyangwithgnu.net/, big thanks to you. Kiddo, take care of your body. :-)  
+That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://yangyangwithgnu.github.io/, big thanks to you. Kiddo, take care of your body. :-)  
 
 
 ##中文

@@ -12,7 +12,7 @@ using namespace std;
 static const string&
 getPortalWebpageUrl (void) 
 {
-    static const string portal_url("http://www.ac168.info/bt/");
+    static const string portal_url("http://www.ac168.info");
     return(portal_url);
 }
 
@@ -39,8 +39,8 @@ parseTitlesAndUrls ( const string& webpage_txt,
 
     while (true) {
         // parse topic URL
-        static const string keyword_topic_url_begin("<li><a href=\"");
-        static const string keyword_topic_url_end("\">");
+        static const string keyword_topic_url_begin("<h3><a href=\"");
+        static const string keyword_topic_url_end("\"");
         const pair<string, size_t>& pair_url = fetchStringBetweenKeywords( webpage_txt,
                                                                            keyword_topic_url_begin,
                                                                            keyword_topic_url_end,
@@ -49,16 +49,17 @@ parseTitlesAndUrls ( const string& webpage_txt,
         if (topic_url_part.empty()) {
             break;
         }
-        const string topic_url = getPortalWebpageUrl() + topic_url_part;
+        const string topic_url = getPortalWebpageUrl() + "/bt/" + topic_url_part;
         keyword_topic_url_end_pos = pair_url.second;
         
         // parse topic title
-        static const string keyword_topic_title_begin("\">");
-        static const string keyword_topic_title_end("</a>");
+        static const string keyword_topic_title_begin("target=_blank>");
+        static const string keyword_topic_title_end("</a></h3>");
         const pair<string, size_t>& pair_title = fetchStringBetweenKeywords( webpage_txt,
                                                                              keyword_topic_title_begin,
                                                                              keyword_topic_title_end,
-                                                                             keyword_topic_url_end_pos - keyword_topic_title_begin.size() );
+                                                                             //keyword_topic_url_end_pos - keyword_topic_title_begin.size() );
+                                                                             keyword_topic_url_end_pos );
         const string& topic_title = pair_title.first;
         keyword_topic_url_begin_pos = pair_title.second;
         
@@ -74,8 +75,8 @@ parseNextpageUrl (const string& webpage_txt, string& nextpage_url)
 {
     nextpage_url.empty();
 
-    static const string keyword_nextpage_begin("</b>&nbsp; <a href=");
-    static const string keyword_nextpage_end(">");
+    static const string keyword_nextpage_begin("</b><a href=\"");
+    static const string keyword_nextpage_end("\">");
     const string& nextpage_url_part = fetchStringBetweenKeywords( webpage_txt,
                                                                   keyword_nextpage_begin,
                                                                   keyword_nextpage_end ).first;

@@ -23,10 +23,10 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.7");
+static const string g_version("0.2.8");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
-static const string g_mywebspace("http://www.yangyangwithgnu.net/");
+static const string g_mywebspace("http://yangyangwithgnu.github.io/");
 static const string g_mywebspace_color(RichTxt::bold_on + RichTxt::foreground_green + g_mywebspace + RichTxt::reset_all);
 
 static void
@@ -60,8 +60,8 @@ showSexyGirl (void)
             "|'=============================================================='|" << endl << 
           //"||                                       yangyang.gnu@gmail.com ||" << endl << 
             "||                                       " << g_myemail_color << " ||" << endl << 
-            //"||                              http://www.yangyangwithgnu.net/ ||" << endl << 
-            "||                              " << g_mywebspace_color << " ||" << endl << 
+          //"||                            http://yangyangwithgnu.github.io/ ||" << endl << 
+            "||                            " << g_mywebspace_color << " ||" << endl << 
             "'================================================================'" << endl;
 }
 
@@ -92,7 +92,7 @@ showHelpInfo (void)
          << "caoliu_cartoon_original, caoliu_asia_mosaicked_original, caoliu_asia_non_mosaicked_original, "
          << "caoliu_selfie, aicheng_west, aicheng_cartoon, aicheng_asia_mosaicked and aicheng_asia_non_mosaicked. " << endl
          << "  As the name implies, \"caoliu\" stands for CaoLiu forum, \"aicheng\" for AiCheng forum, "
-         << "\"reposted\" and \"original\" is clearity, and the \"selfie\" is photos by oneself, you konw "
+         << "\"reposted\" and \"original\" are clearity, and the \"selfie\" is photos by oneself, you konw "
          << "which one is your best lover (yes, only one). " << endl
          << "  The default is aicheng_asia_mosaicked. " << endl;
 
@@ -148,7 +148,9 @@ showHelpInfo (void)
          << "very very fast. E.G., --concurrent-tasks 8 --proxy http://127.0.0.1:8087 socks5://127.0.0.1:1080 "
          << "socks4://127.0.0.1:7070, the number of concurrent tasks is 8*3. " << endl
          << "  If you wanna how to install and configure various kinds of proxy, please access my homepage "
-         << "\"3.3 搭梯翻墙\" http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3 " << endl
+         << "\"3.2 搭梯翻墙\" https://github.com/yangyangwithgnu/the_new_world_linux#3.2 " << endl
+         << "  If you are not good at computer, there is a newest goagent for floks who are not good at computer "
+         << "by me, yes, out of box. see https://github.com/yangyangwithgnu/goagent_out_of_box_yang "
          << "  The default http://127.0.0.1:8087. " << endl;
 
     cout << endl;

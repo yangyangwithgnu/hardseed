@@ -188,7 +188,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     remove_copy_if( topic_webpage_title.cbegin(),
                     (string::npos == keyword_logo_pos) ? topic_webpage_title.cend() : topic_webpage_title.cbegin() + (int)keyword_logo_pos,
                     back_inserter(base_name),
-                    [] (char ch) {return( '|' == ch || // invalid chars in filename
+                    [] (char ch) {return( '|' == ch || // invalid chars in windows-sytle filename
                                           '/' == ch ||
                                           '<' == ch ||
                                           '>' == ch ||

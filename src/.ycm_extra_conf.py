@@ -48,6 +48,7 @@ flags = [
     '-Wno-exit-time-destructors',
     '-Wno-missing-prototypes',
     '-Wno-padded',
+    '-Wno-old-style-cast',
     '-x', 
     'c++', 
     '-I', 

@@ -23,17 +23,17 @@ static mutex g_mtx;
 static const string&
 getPortalWebpageUrl (void) 
 {
-    static const string portal_url("http://www.ac168.info/bt/simple/");
+    static const string portal_url("http://www.ac168.info/bt/");
     return(portal_url);
 }
 
 static const string&
 getTopicsListWebpagePartUrl (Aicheng::AvClass av_class) 
 {
-    static const string west_part_url("index.php?f5.html");
-    static const string cartoon_part_url("index.php?f6.html");
-    static const string asia_mosaicked_part_url("index.php?f4.html");
-    static const string asia_non_mosaicked_part_url("index.php?f16.html");
+    static const string west_part_url("thread.php?fid=5");
+    static const string cartoon_part_url("thread.php?fid=6");
+    static const string asia_mosaicked_part_url("thread.php?fid=4");
+    static const string asia_non_mosaicked_part_url("thread.php?fid=16");
 
     switch (av_class) {
         case Aicheng::west: 
@@ -157,7 +157,15 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     static const vector<string> keyword_logos_list = { " 亚洲无码区 bt下载 - powered by phpwind.net",
                                                        " 亚洲有码区 bt下载 - powered by phpwind.net",
                                                        " 欧美区 bt下载 - powered by phpwind.net",
-                                                       " 动漫区 bt下载 - powered by phpwind.net" };
+                                                       " 动漫区 bt下载 - powered by phpwind.net",
+                                                       "|亚洲无码区 - bt下载 爱城 bt下载 ",
+                                                       "亚洲无码区 - bt下载 爱城 bt下载 ",
+                                                       "|亚洲有码区 - bt下载 爱城 bt下载 ",
+                                                       "亚洲有码区 - bt下载 爱城 bt下载 ",
+                                                       "|动漫区 - bt下载 爱城 bt下载 ",
+                                                       "动漫区 - bt下载 爱城 bt下载 ",
+                                                       "|欧美区 - bt下载 爱城 bt下载 ",
+                                                       "欧美区 - bt下载 爱城 bt下载 " };
     const string& topic_webpage_title = aicheng_topics_webpage.getTitle();
     auto keyword_logo_pos = string::npos;
     for (const auto& f : keyword_logos_list) {
@@ -169,7 +177,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     remove_copy_if( topic_webpage_title.cbegin(),
                     (string::npos == keyword_logo_pos) ? topic_webpage_title.cend() : topic_webpage_title.cbegin() + (int)keyword_logo_pos,
                     back_inserter(base_name),
-                    [] (char ch) {return( '|' == ch || // invalid chars in filename
+                    [] (char ch) {return( '|' == ch || // invalid chars in windows-style filename
                                           '/' == ch ||
                                           '<' == ch ||
                                           '>' == ch ||
