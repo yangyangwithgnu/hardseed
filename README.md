@@ -1,6 +1,7 @@
 #hardseed
 yangyang.gnu@gmail.com  
-2014-9-25 15:45:04   
+http://yangyangwithgnu.github.io/  
+2014-10-21 17:20:27   
 
 
 ##公告
@@ -13,18 +14,19 @@ yangyang.gnu@gmail.com
 **声明**：我本人绝对尊重各大爱的论坛，提供的资源不仅优质而且免费，我只是懒、足够的懒。请大家支持这些论坛，多用页面访问、多点击广告、多解囊捐赠。*我..在..干..嘛  @_@#*
 
 **注意**  
-+ 惜用源码包中的代理工具。源码包中有个 proxy/ 目录，这是我为小白用户预配置的 goagent 代理工具以方便其正常使用 hardseed。简单来说，goagent 的服务端 GAE 每天有流量限制，今天之前的预配置版本中，每天最大流量设置为 4G，所有使用该预配置的 hardseed 用户共用这 4G 公共流量，昨天很多朋友反应突然无法下载种子和图片，估计是流量耗尽，我登陆 GAE 确认果然如此，所以，0）请有动手能力的朋友尽量用自己的代理工具，勿占用公共流量，可参考 http://www.yangyangwithgnu.net/the_new_world_linux/#index_3_3_3 ；1）我把预配置版本代理的流量上限调整到 GAE 允许的最大值，每天 25G，请小白用户更新配置文件 https://github.com/yangyangwithgnu/hardseed/blob/master/proxy_goagent/local/proxy.ini ，节约公共流量。
-+ windows 用户需赋予 hardseed\bin\windows\hardseed.exe 和 hardseed\proxy_goagent\local\goagent.exe 管理员运行权限。具体请右键，选中 properties - compatibility - privilege level - run this program as an admin
++ 代理是一切的先决条件。你可以使用自己的代理工具，用 hardseed 的命令行选项 --proxy 指定本地中转地址及端口，也可以用我为你预配置的 goagent 代理工具，位于 https://github.com/yangyangwithgnu/goagent_out_of_box_yang
++ windows 用户需赋予 hardseed\bin\windows\hardseed.exe 管理员运行权限。具体请右键，选中 properties - compatibility - privilege level - run this program as an admin
 
 
 ##版本
 ----------------
 
-**[v0.2.7，修正，2014-9-25]**：windows 禁止文件名中含有 /:\*?\\<>"| 等字符，否则将导致非法路径错误，修正该问题。  
+**[v0.2.8，修正，2014-10-21]**：0）仅解析主贴的图片而不再解析回帖，以避免下载无关图片；1）aicheng 论坛地址变更；2）部分用户有自己的代理工具，为缩短下载时长，将预配置的 goagent 独立成一个 github 项目。  
+**[v0.2.7，修正，2014-9-25]**：windows 禁止文件名中含有 /:\*?\\<>"| 等字符，否则将导致非法路径错误，修正 hardseed 生成的文件名中可能含有如上字符的问题。  
 **[v0.2.6，优化，2014-9-9]**：caoliu 原地址无法访问，更新地址；取消 caoliu 自拍套图最多只能下载 256 张的限制。  
 **[v0.2.5，优化，2014-8-17]**：程序功能无任何更新，仅更新代理工具 goagent 配置文件 proxy.ini：一是设置 obfuscate = 1 开启流量混淆以正确解析出可用 GGC IP，一是设置 pagespeed = 1 以提升 GAE 的下行速度。  
 **[v0.2.5，修正，2014-8-13]**：0）修正帖子部分图片 URL 未解析的问题；1）修正图片序号错误的问题；2）优化图片下载等待时长算法，不再以 --timeout-download-picture 作为绝对等待时长，而是将其作为指导值，一旦图片下载失败 hardseed 将自动计算下次重新下载所需的等待时长，同时，与“速度过低视为下载失败”的机制结合，提升图片下载等待耗时；3）升级 goagent 至 3.1.21，采用 goagent 默认 proxy.ini，而不再使用自定义 iplist （很多朋友反应采用先前我自定义 iplist 版本的 goagent 速度不理想，这是由于 GGC IP 与不同网络环境有关，我用 checkgoogleip 跑出来 GGC IP 最适合我的网络环境，不见得适合你，所以，权衡之下，还是用 goagent 自带的 GGC IP，至少这合适于大多数人）。  
-**[v0.2.4，修正，2014-8-10]**：0）由于对 % 进行 URL 转义使得部分图片的 URL 生成错误，导致图片下载失败，本版本已修正；1）剔除长年显示异常的图床网站 iceimg.com；2）引入均速过低视为下载失败的机制，在持续（8s）低速（4KB/s）下情况下终止本次下载，重新向服务端发起新请求，开启新一次的下载，以缩短下载错误 URL 图片等待时长；3）修正 aicheng 帖子列表页面中帖子名解析错误的问题；4）取消单个代理服务器并行下载上限数 8 的限制。  
+**[v0.2.4，修正，2014-8-10]**：0）由于对 % 进行 URL 转义使得部分图片的 URL 生成错误，导致图片下载失败，本版本已修正；1）剔除长年显示异常的图床网站 iceimg.com；2）引入均速过低视为下载失败的机制，持续（8s）低速（4KB/s）终止当次下载，重新向服务端发起新请求，开启新一次的下载，以缩短下载错误 URL 图片等待时长；3）修正 aicheng 帖子列表页面中帖子名解析错误的问题；4）取消单个代理服务器并行下载上限数 8 的限制。  
 **[v0.2.3，修正，2014-8-8]**：0）修正部分图片缺失扩展名的问题；1）默认下载帖子数量从 128 调整为 64；2）更换新的 GGC IP 进代理工具 goagent 的 proxy.ini 中以提升代理速度。  
 **[v0.2.2，优化，2014-8-6]**：程序无任何功能变更，仅是优化代码，合并部分通用代码至公共库、增加用于验证代理出口 IP 和伪装浏览器的 user-agent 的接口。  
 **[v0.2.1，修正，2014-7-28]**：修正临时文件未删除的错误。  
@@ -78,7 +80,7 @@ There are 13 av classes:
 - aicheng_asia_mosaicked
 - aicheng_asia_non_mosaicked  
 
-As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" is clearity, you konw which one is your best lover (yes, only one).   
+As the name implies, "caoliu" stands for CaoLiu forum, "aicheng" for AiCheng forum, "reposted" and "original" are clearity, you konw which one is your best lover (yes, only one).   
 The default is aicheng_asia_mosaicked.   
 
 --concurrent-tasks  
@@ -95,7 +97,7 @@ Set the range of to download topics. E.G.:
 - topics-range 8 (I.E., --topics-range 1 8)
 - topics-range -1 (I.E., all topics of this av class)  
 
-The default topics range is 128.
+The default topics range is 64.
 
 --saveas-path  
 Set the path to save seeds and pictures. The rule of dir: [avclass][range]@hhmmss. E.G., [aicheng_west][2~32]@124908/. 
@@ -127,7 +129,7 @@ That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://www.
 硬盘女神，你懂嘀！hardseed 是个种子下载工具，它从浓（ai）情（cheng）蜜（she）意（qu）和爱（cao）意（liu）无（she）限（qu）的地方获取女神种子、图片。  
 
 ###【翻墙】  
-你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 hardseed/proxy_goagent/local/，linux 用户，命令行中运行
+你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 https://github.com/yangyangwithgnu/goagent_out_of_box_yang ，下载后，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
@@ -166,7 +168,7 @@ $ make && make install
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
-这时，hardseed 开始玩命儿地为你下载女神图片和种子，经过 2 分钟 8 秒，找到类似 C:\\[aicheng_asia_mosaicked][1~128]@014822\ 的目录，女神们那儿等你！
+这时，hardseed 开始玩命儿地为你下载女神图片和种子，经过 2 分 8 秒，找到类似 C:\\[aicheng_asia_mosaicked][1~128]@20140822\ 的目录，女神们那儿等你！
 
 ####『linux』  
 同 windows 下运行一样，全用默认命令行参数运行
