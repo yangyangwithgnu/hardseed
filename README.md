@@ -1,4 +1,4 @@
-#hardseed
+#给不了你梦中情人，至少还有硬盘女神：hardseed
 yangyang.gnu@gmail.com  
 http://yangyangwithgnu.github.io/  
 2014-10-21 17:20:27   
@@ -7,7 +7,10 @@ http://yangyangwithgnu.github.io/
 ##公告
 ----------------
 
-**捐赠：如果觉得 hardseed 有用，可以考虑捐赠点碎银，支付宝 yangyang.gnu@gmail.com （https://shenghuo.alipay.com/send/payment/fill.htm ），不好意思，$_$** *（杰出人才：#捷飞、#就成、#羽、#松、#露璐（女？）、#程雷、#基理、#星伟、#程、#宏惜、#露戈、#杰、#忠杰、#蔷蔷、#金葛、#涛、#亮、#扬顺、#昊然、#进、#晓平、#宏）*  
+* **捐赠：支付宝 yangyang.gnu@gmail.com 。支付宝链接 https://shenghuo.alipay.com/send/payment/fill.htm?optEmail=yangyang.gnu@gmail.com ，支付宝二维码 $_$**
+<div align="center">
+<img src="https://raw.githubusercontent.com/yangyangwithgnu/yangyangwithgnu.github.io/master/pics/donate_qr.png" alt=""/><br>
+</div>
 
 **讨论**：任何意见建议移步 http://www.v2ex.com/t/123175  
 
