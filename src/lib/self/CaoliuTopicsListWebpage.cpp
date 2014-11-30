@@ -12,7 +12,7 @@ using namespace std;
 static const string&
 getPortalWebpageUrl (void) 
 {
-    static const string portal_url("http://1024go.info/");
+    static const string portal_url("http://www.caoliu2014.com/");
     return(portal_url);
 }
 

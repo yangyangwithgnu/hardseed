@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.8");
+static const string g_version("0.2.9");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://yangyangwithgnu.github.io/");
@@ -74,7 +74,7 @@ showHelpInfo (void)
          << "It's easy and simple to use. Usually, you could issue it as follow: " << endl
          << "  $ hardseed" << endl
          << "or" << endl
-         << "  $ hardseed --saveas-path ~/downloads --multi-threads 4 --topics-range 8 64"
+         << "  $ hardseed --saveas-path ~/downloads --concurrent-tasks 4 --topics-range 8 64"
          << " --av-class aicheng_west --timeout-download-picture 32 --hate X-Art --proxy http://127.0.0.1:8087" << endl;
 
     cout << endl;
