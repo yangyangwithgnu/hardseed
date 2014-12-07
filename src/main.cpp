@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.9");
+static const string g_version("0.2.10");
 static const string g_myemail("yangyang.gnu@gmail.com");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://yangyangwithgnu.github.io/");

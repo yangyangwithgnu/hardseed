@@ -5,14 +5,13 @@
 #include <cstdlib>
 #include "../helper/Misc.h"
 
-
 using namespace std;
 
 
 static const string&
 getPortalWebpageUrl (void) 
 {
-    static const string portal_url("http://www.caoliu2014.com/");
+    static const string portal_url("http://wo.yao.cl/");
     return(portal_url);
 }
 

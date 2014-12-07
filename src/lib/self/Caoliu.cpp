@@ -17,13 +17,12 @@
 
 using namespace std;
 
-
 static mutex g_mtx;
 
 static const string&
 getPortalWebpageUrl (void) 
 {
-    static const string portal_url("http://www.caoliu2014.com/");
+    static const string portal_url("http://wo.yao.cl/");
     return(portal_url);
 }
 
