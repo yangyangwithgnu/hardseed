@@ -1,5 +1,5 @@
 #给不了你梦中情人，至少还有硬盘女神：hardseed
-yangyang.gnu@gmail.com  
+yangyangwithgnu@yeah.net  
 http://yangyangwithgnu.github.io/  
 2014-12-7 20:51:52
 
@@ -7,7 +7,7 @@ http://yangyangwithgnu.github.io/
 ##公告
 ----------------
 
-* **捐赠：支付宝 yangyang.gnu@gmail.com 。支付宝链接 https://shenghuo.alipay.com/send/payment/fill.htm?optEmail=yangyang.gnu@gmail.com ，支付宝二维码 $_$**
+* **捐赠：支付宝 yangyangwithgnu@yeah.net 。支付宝链接 https://shenghuo.alipay.com/send/payment/fill.htm?optEmail=yangyangwithgnu@yeah.net ，支付宝二维码 $_$**
 <div align="center">
 <img src="https://raw.githubusercontent.com/yangyangwithgnu/yangyangwithgnu.github.io/master/pics/donate_qr.png" alt=""/><br>
 </div>
@@ -127,7 +127,7 @@ If you are not good at computer, there is a newest goagent for floks who are not
 
 The default http://127.0.0.1:8087.   
 
-That's all. Any suggestions let me know by yangyang.gnu@gmail.com or http://yangyangwithgnu.github.io/, big thanks to you. Kiddo, take care of your body. :-)  
+That's all. Any suggestions let me know by yangyangwithgnu@yeah.net or http://yangyangwithgnu.github.io/, big thanks to you. Kiddo, take care of your body. :-)  
 
 
 ##中文
