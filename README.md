@@ -157,7 +157,7 @@ $ git clone https://github.com/yangyangwithgnu/hardseed.git
 ####『windows』  
 这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，帮你弄好了，我的定位是牙医界的服务人员，服务很重要，二进制执行程序位于 hardseed\bin\windows\hardseed.exe。
  
-####『linux』  
+####『linux』
 0）唯一依赖 libcurl，请自行安装；  
 1）代码采用 C++11 编写，gcc 版本不低于 4.7.1。  
 2）命令行下运行：  
@@ -166,6 +166,19 @@ $ cd hardseed/build/
 $ cmake .
 $ make && make install
 ```
+ 
+####『osX』
+先将 build/CMakeLists.txt 中的  
+```
+TARGET_LINK_LIBRARIES(hardseed curl pthread)
+```
+替换成
+```
+TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
+```
+其他同 linux 构建方法。
+
+
 
 ###【使用】  
 **亲，听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
