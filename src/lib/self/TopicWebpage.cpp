@@ -73,7 +73,8 @@ TopicWebpage::downloadAllPictures ( const string& path,
         const string& picture_url = pictures_urls_list_[i];
         
         // make picture postfix name
-        string postfix_name("jpeg"); // sometime get the remote filetype failure, so I set the default postfix
+        //string postfix_name("jpeg"); // sometime get the remote filetype failure, so I set the default postfix
+        string postfix_name("");
         static const unsigned get_remote_filetype_retry_times = 2;
         static const unsigned get_remote_filetype_sleep_second = 2;
         for (unsigned j = 0; j < get_remote_filetype_retry_times; ++j) {
@@ -86,8 +87,8 @@ TopicWebpage::downloadAllPictures ( const string& path,
             }
             sleep(get_remote_filetype_sleep_second);
         }
-        // ignore gif, because gifs almost be AD
-        if ("gif" == postfix_name) {
+        // neither gif (because gifs almost be AD) nor cannot get the file type, ignore 
+        if ("gif" == postfix_name || "" == postfix_name) {
             continue;
         }
         

@@ -82,30 +82,30 @@ cleanupLibcul (CURL* p_curl)
     curl_easy_cleanup(p_curl);
 }
 
-// check proxy by http://ip38.com
+// check proxy by http://www.ip-adress.com/
 static pair<string, string>
 parseProxyOutIpAndRegionByThirdparty (const string& proxy_addr)
 {
-    static const string thirdparty("http://ip38.com");
+    static const string thirdparty("http://www.ip-adress.com/");
     Webpage webpage(thirdparty, "", proxy_addr, 16, 2, 2);
     if (!webpage.isLoaded()) {
-        //cerr << "ERROR! " << thirdparty << " loaded failure. " << endl;
+        cerr << "ERROR! " << thirdparty << " loaded failure. " << endl;
         return(make_pair("", ""));
     }
 
-    webpage.convertCharset("GBK", "UTF-8");
+    //webpage.convertCharset("GBK", "UTF-8");
     const string& webpage_txt = webpage.getTxt();
 
-    static const string keyword_outip_begin("<font color=#FF0000>");
-    static const string keyword_outip_end("</font>");
+    static const string keyword_outip_begin("<h3>Your IP address is: ");
+    static const string keyword_outip_end("</h3>");
     const pair<string, size_t> pair_tmp = fetchStringBetweenKeywords( webpage_txt,
                                                                       keyword_outip_begin,
                                                                       keyword_outip_end );
     const string outip = pair_tmp.first;
     const size_t outip_end_pos = pair_tmp.second;
 
-    static const string keyword_region_begin("来自：<font color=#FF0000>");
-    static const string keyword_region_end("</font>");
+    static const string keyword_region_begin("height=\"11\"> ");
+    static const string keyword_region_end("</h3>");
     const string region = fetchStringBetweenKeywords( webpage_txt,
                                                       keyword_region_begin,
                                                       keyword_region_end,
@@ -303,7 +303,7 @@ Webpage::requestHttpHeader_ ( const string& raw_url,
             line.pop_back(); // the last char in line is '\r'
             const string& item_content = line.substr(item_name_pos + e.size());
             if ("Content-Type: " == e) {
-                static const string kyeword_separator("; ");
+                static const string kyeword_separator(";");
                 const auto separator_pos = item_content.find(kyeword_separator);
                 if (string::npos == separator_pos) {
                     remote_filetype = item_content;
@@ -387,7 +387,8 @@ Webpage::Webpage ( const string& url,
                    const unsigned timeout_second,
                    const unsigned retry_times,
                    const unsigned retry_sleep_second,
-                   const string& user_agent )
+                   const string& user_agent,
+                   const string& cookie )
     : p_curl_(initLibcurl(libcurl_err_info_buff_)),
       url_(url),
       proxy_addr_(proxy_addr),
@@ -402,6 +403,11 @@ Webpage::Webpage ( const string& url,
     // protocol support as follow: http, https, socks4, socks4a, socks5, socks5h.
     // if proxy_addr is "", disable proxy
     checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_PROXY, proxy_addr_.c_str()), libcurl_err_info_buff_);
+
+    if (!cookie.empty()) {
+        checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_COOKIEFILE, ""), libcurl_err_info_buff_); // enable the cookie engine
+        checkErrLibcurl(curl_easy_setopt(p_curl_, CURLOPT_COOKIE, cookie.c_str()), libcurl_err_info_buff_); // set the cookie
+    }
 
     // pretend as browser
     if (!user_agent.empty()) {
@@ -466,6 +472,13 @@ Webpage::downloadFile ( const string& url,
                       retry_sleep_second ));
 }
 
+double
+Webpage::getAvarSpeedDownload (void) const
+{
+    checkErrLibcurl(curl_easy_getinfo(p_curl_, CURLINFO_SPEED_DOWNLOAD, &aver_speed_download_), libcurl_err_info_buff_);
+    return(aver_speed_download_);
+}
+
 long
 Webpage::parseLatestHttpStatusCode_ (void)
 {
@@ -491,6 +504,7 @@ Webpage::isValidLatestHttpStatusCode (void) const
 }
 
 // download internet file to local file, such as, webpage, picture, mp3, etc.
+// if non-webpage, b_normal_file set true. for check whether this is a webpage by <body>.
 // note: URL must be http, CANNOT be https
 bool
 Webpage::download_ ( const string& raw_url,
@@ -502,7 +516,7 @@ Webpage::download_ ( const string& raw_url,
 {
     // deal with raw URL, first unescape html, second escape URL
     string url = escapeUrl(unescapeHtml(raw_url));
-        
+
     // convert https to http
     static const string keyword_https("https://");
     const auto https_pos = url.find(keyword_https);
@@ -552,7 +566,7 @@ Webpage::download_ ( const string& raw_url,
         // notice, even though there is HTTP request status error, libcurl still download
         // web file success, of course, this is not real success, so, I have to check the
         // http status code
-        if (b_ok && isValidLatestHttpStatusCode() && getFileSize(fs) > 0) {
+        if (b_ok && isValidLatestHttpStatusCode() && (getFileSize(fs) > 0)) {
             b_downloaded = true;
             break;
         } 

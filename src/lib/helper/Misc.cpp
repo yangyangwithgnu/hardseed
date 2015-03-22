@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <cstdlib>
+#include <cstdio>
 #include <ctime>
 #include <unistd.h>
 #include <sys/types.h>

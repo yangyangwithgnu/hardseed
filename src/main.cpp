@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.10");
+static const string g_version("0.2.11");
 static const string g_myemail("yangyangwithgnu@yeah.net");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://yangyangwithgnu.github.io/");
@@ -35,7 +35,7 @@ showSexyGirl (void)
     cout    << endl << 
             ".================================================================." << endl << 
           //"||                        *hardseed* vx.y.z                     ||" << endl << 
-            "||                         " << g_softname << " v" << g_version << "                      ||" << endl << 
+            "||                        " << g_softname << " v" << g_version << "                      ||" << endl << 
             "|'--------------------------------------------------------------'|" << endl << 
             "||       -- SEX IS ZERO (0), so, who wanna be the ONE (1), aha? ||" << endl << 
             "|'=============================================================='|" << endl << 
@@ -58,8 +58,8 @@ showSexyGirl (void)
             "||      ..::::                  ':::::::::::'         :'''`     ||" << endl << 
             "||   ..''''':'                    '::::::.'                     ||" << endl << 
             "|'=============================================================='|" << endl << 
-          //"||                                       yangyangwithgnu@yeah.net ||" << endl << 
-            "||                                       " << g_myemail_color << " ||" << endl << 
+          //"||                                     yangyangwithgnu@yeah.net ||" << endl << 
+            "||                                     " << g_myemail_color << " ||" << endl << 
           //"||                            http://yangyangwithgnu.github.io/ ||" << endl << 
             "||                            " << g_mywebspace_color << " ||" << endl << 
             "'================================================================'" << endl;
@@ -106,7 +106,7 @@ showHelpInfo (void)
     cout << "  --timeout-download-picture" << endl
          << "  Some pictures too big to download in few seconds. So, you should set the download picture "
          << "timeout seconds. " << endl
-         << "  The default timeout is 32 seconds." << endl;
+         << "  The default timeout is 16 seconds." << endl;
 
     cout << endl;
     cout << "  --topics-range" << endl
@@ -300,7 +300,7 @@ main (int argc, char* argv[])
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     // --timeout-download-picture
-    unsigned timeout_download_pic = 32; // default timeout seconds
+    unsigned timeout_download_pic = 16; // default timeout seconds
     cmdline_arguments_list = cmdline_options.getArgumentsList("--timeout-download-picture");
     if (!cmdline_arguments_list.empty()) {
         unsigned tmp = strtoul(cmdline_arguments_list[0].c_str(), nullptr, 0);

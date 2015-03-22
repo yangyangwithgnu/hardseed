@@ -80,7 +80,8 @@ parsePicturesUrls (const string& webpage_txt, vector<string>& pictures_urls_list
 
     // the list may be on the webpage at the same time
     static const vector<pair<string, string>> begin_and_end_keywords_list = { make_pair("<img src=\"", "\""), 
-                                                                              make_pair("<img src='", "'") };
+                                                                              make_pair("<img src='", "'"),
+                                                                              make_pair("<img src=", " ") };
     bool b_ok = false;
 
     for (const auto& e : begin_and_end_keywords_list) {
@@ -101,11 +102,18 @@ parseSeedUrl (const string& webpage_txt, string& seed_url)
                                                              "http://www6.mimima.com",
                                                              "http://mimima.com" };
 
+    const auto body_pos = webpage_txt.find("<body>");
+    if (string::npos == body_pos) {
+        //cerr << "warning! parseseedurl() cannot find the keyword \"<body>\"" << endl;
+        return(false);
+    }
+    const string& body = webpage_txt.substr(body_pos);
+
     for (const auto& e : keywords_seed_begin_list) {
         const string& keyword_seed_begin = e;
         static const string keyword_seed_end("\"");
         
-        const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( webpage_txt,
+        const pair<string, size_t>& pair_tmp = fetchStringBetweenKeywords( body,
                                                                            keyword_seed_begin,
                                                                            keyword_seed_end );
         if (!pair_tmp.first.empty()) {

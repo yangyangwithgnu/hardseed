@@ -18,8 +18,9 @@ class Webpage
                            const string& proxy_addr = "",
                            const unsigned timeout_second = 16,
                            const unsigned retry_times = 2,
-                           const unsigned retry_sleep_second = 2,
-                           const string& user_agent = "Mozilla/5.0 (X11; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0" );
+                           const unsigned retry_sleep_second = 4,
+                           const string& user_agent = "Mozilla/5.0 (X11; Linux i686; rv:30.0) Gecko/20100101 Firefox/30.0",
+                           const string& cookie = "" );
         virtual ~Webpage ();
         
         string getProxyAddr (void) const;
@@ -42,6 +43,8 @@ class Webpage
         string getRemoteFilename (const string& url) const;
         string getRemoteFiletime (const string& url) const;
         
+        double getAvarSpeedDownload (void) const;
+        
         bool isLoaded (void) const;
         size_t convertCharset (const string& src_charset, const string& dest_charset);
         bool saveasFile (const string& filename) const;
@@ -51,13 +54,13 @@ class Webpage
                             const string& referer = "",
                             const unsigned timeout_second = 0,
                             const unsigned retry_times = 4,
-                            const unsigned retry_sleep_second = 2);
+                            const unsigned retry_sleep_second = 4 );
         bool submitMultiPost ( const string& url,
                                const string& filename,
                                const vector<pair<string, string>>& post_sections_list,
                                const unsigned timeout_second = 32,
-                               const unsigned retry_times = 2,
-                               const unsigned retry_sleep_second = 2 );
+                               const unsigned retry_times = 4,
+                               const unsigned retry_sleep_second = 4 );
         
         string escapeUrl (const string& raw_url) const;
         string unescapeHtml (const string& raw_txt) const;
@@ -88,6 +91,7 @@ class Webpage
         string title_;
         bool b_loaded_ok_;
         long latest_http_status_code_;
+        double aver_speed_download_;
         const string user_agent_;
 };
 
