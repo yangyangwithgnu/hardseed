@@ -23,7 +23,7 @@ using namespace std;
 
 
 static const string g_softname(RichTxt::bold_on + "hardseed" + RichTxt::bold_off);
-static const string g_version("0.2.11");
+static const string g_version("0.2.12");
 static const string g_myemail("yangyangwithgnu@yeah.net");
 static const string g_myemail_color(RichTxt::bold_on + RichTxt::foreground_green + g_myemail + RichTxt::reset_all);
 static const string g_mywebspace("http://yangyangwithgnu.github.io/");
@@ -32,36 +32,36 @@ static const string g_mywebspace_color(RichTxt::bold_on + RichTxt::foreground_gr
 static void
 showSexyGirl (void)
 {
-    cout    << endl << 
-            ".================================================================." << endl << 
-          //"||                        *hardseed* vx.y.z                     ||" << endl << 
-            "||                        " << g_softname << " v" << g_version << "                      ||" << endl << 
-            "|'--------------------------------------------------------------'|" << endl << 
-            "||       -- SEX IS ZERO (0), so, who wanna be the ONE (1), aha? ||" << endl << 
-            "|'=============================================================='|" << endl << 
-            "||                                .::::.                        ||" << endl << 
-            "||                              .::::::::.                      ||" << endl << 
-            "||                              :::::::::::                     ||" << endl << 
-            "||                              ':::::::::::..                  ||" << endl << 
-            "||                              .:::::::::::::::'               ||" << endl << 
-            "||                                '::::::::::::::.`             ||" << endl << 
-            "||                                  .::::::::::::::::.'         ||" << endl << 
-            "||                                .::::::::::::..               ||" << endl << 
-            "||                              .::::::::::::::''               ||" << endl << 
-            "||                   .:::.       '::::::::''::::                ||" << endl << 
-            "||                 .::::::::.      ':::::'  '::::               ||" << endl << 
-            "||                .::::':::::::.    :::::    '::::.             ||" << endl << 
-            "||              .:::::' ':::::::::. :::::.     ':::.            ||" << endl << 
-            "||            .:::::'     ':::::::::.::::::.      '::.          ||" << endl << 
-            "||          .::::''         ':::::::::::::::'       '::.        ||" << endl << 
-            "||         .::''              '::::::::::::::'        ::..      ||" << endl << 
-            "||      ..::::                  ':::::::::::'         :'''`     ||" << endl << 
-            "||   ..''''':'                    '::::::.'                     ||" << endl << 
-            "|'=============================================================='|" << endl << 
-          //"||                                     yangyangwithgnu@yeah.net ||" << endl << 
-            "||                                     " << g_myemail_color << " ||" << endl << 
-          //"||                            http://yangyangwithgnu.github.io/ ||" << endl << 
-            "||                            " << g_mywebspace_color << " ||" << endl << 
+    cout    << endl <<
+            ".================================================================." << endl <<
+          //"||                        *hardseed* vx.y.z                     ||" << endl <<
+            "||                        " << g_softname << " v" << g_version << "                      ||" << endl <<
+            "|'--------------------------------------------------------------'|" << endl <<
+            "||       -- SEX IS ZERO (0), so, who wanna be the ONE (1), aha? ||" << endl <<
+            "|'=============================================================='|" << endl <<
+            "||                                .::::.                        ||" << endl <<
+            "||                              .::::::::.                      ||" << endl <<
+            "||                              :::::::::::                     ||" << endl <<
+            "||                              ':::::::::::..                  ||" << endl <<
+            "||                              .:::::::::::::::'               ||" << endl <<
+            "||                                '::::::::::::::.`             ||" << endl <<
+            "||                                  .::::::::::::::::.'         ||" << endl <<
+            "||                                .::::::::::::..               ||" << endl <<
+            "||                              .::::::::::::::''               ||" << endl <<
+            "||                   .:::.       '::::::::''::::                ||" << endl <<
+            "||                 .::::::::.      ':::::'  '::::               ||" << endl <<
+            "||                .::::':::::::.    :::::    '::::.             ||" << endl <<
+            "||              .:::::' ':::::::::. :::::.     ':::.            ||" << endl <<
+            "||            .:::::'     ':::::::::.::::::.      '::.          ||" << endl <<
+            "||          .::::''         ':::::::::::::::'       '::.        ||" << endl <<
+            "||         .::''              '::::::::::::::'        ::..      ||" << endl <<
+            "||      ..::::                  ':::::::::::'         :'''`     ||" << endl <<
+            "||   ..''''':'                    '::::::.'                     ||" << endl <<
+            "|'=============================================================='|" << endl <<
+          //"||                                     yangyangwithgnu@yeah.net ||" << endl <<
+            "||                                     " << g_myemail_color << " ||" << endl <<
+          //"||                            http://yangyangwithgnu.github.io/ ||" << endl <<
+            "||                            " << g_mywebspace_color << " ||" << endl <<
             "'================================================================'" << endl;
 }
 
@@ -244,7 +244,7 @@ main (int argc, char* argv[])
          << "************************ !! IMPORTANCE !! ************************" << endl
          << RichTxt::bold_off << endl;
 
-    // --av-class 
+    // --av-class
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     cout << "Your command arguments: " << endl;
     string av_class_name("aicheng_asia_mosaicked");
@@ -415,7 +415,7 @@ main (int argc, char* argv[])
     }
     cout << RichTxt::bold_off << "\b\b\"; " << endl;
 
-    // --like. 
+    // --like.
     vector<string> like_keywords_list;
     cmdline_arguments_list = cmdline_options.getArgumentsList("--like");
     if (!cmdline_arguments_list.empty()) {
@@ -438,7 +438,7 @@ main (int argc, char* argv[])
     cout << "  the proxy \"" << RichTxt::bold_on;
     copy(proxy_addrs_list.cbegin(), proxy_addrs_list.cend(), ostream_iterator<string>(cout, ", "));
     cout << "\b\b" << RichTxt::bold_off << "\". " << endl << endl;
-    
+
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

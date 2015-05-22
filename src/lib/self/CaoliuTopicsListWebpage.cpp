@@ -1,4 +1,4 @@
-// last modified 
+// last modified
 
 #include "CaoliuTopicsListWebpage.h"
 #include <iostream>
@@ -9,15 +9,15 @@ using namespace std;
 
 
 static const string&
-getPortalWebpageUrl (void) 
+getPortalWebpageUrl (void)
 {
-    static const string portal_url("http://wo.yao.cl/");
+    static const string portal_url("http://www.t66y.com/");
     return(portal_url);
 }
 
 static bool
 parseTitlesAndUrls ( const string& webpage_txt,
-                     vector<pair<string, string>>& titles_and_urls_list ) 
+                     vector<pair<string, string>>& titles_and_urls_list )
 {
     const unsigned size_back = titles_and_urls_list.size();
 
@@ -42,7 +42,7 @@ parseTitlesAndUrls ( const string& webpage_txt,
         }
         const string& topic_url = getPortalWebpageUrl() + keyword_topic_url_begin2 + topic_url_part;
         keyword_topic_url_end_pos = pair_url.second;
-        
+
         // parse topic title
         static const string keyword_topic_title_begin("id=\"\">");
         static const string keyword_topic_title_end("</a></h3>");
@@ -52,8 +52,8 @@ parseTitlesAndUrls ( const string& webpage_txt,
                                                                              keyword_topic_url_end_pos );
         const string& topic_title = pair_title.first;
         keyword_topic_url_begin_pos = pair_title.second;
-        
-        // save url and title of the topic 
+
+        // save url and title of the topic
         titles_and_urls_list.push_back(make_pair(topic_title, topic_url));
     }
 
@@ -61,7 +61,7 @@ parseTitlesAndUrls ( const string& webpage_txt,
 }
 
 static bool
-parseNextpageUrl (const string& webpage_txt, string& nextpage_url) 
+parseNextpageUrl (const string& webpage_txt, string& nextpage_url)
 {
     nextpage_url.empty();
 
@@ -87,7 +87,7 @@ parseNextpageUrl (const string& webpage_txt, string& nextpage_url)
 
     nextpage_url = getPortalWebpageUrl() +
                    webpage_txt.substr(nextpage_suburl_begin_pos, nextpage_suburl_end_pos - nextpage_suburl_begin_pos);
-    
+
 
     return(true);
 }
