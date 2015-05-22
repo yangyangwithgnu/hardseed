@@ -1,4 +1,4 @@
-// last modified 
+// last modified
 
 #include "Caoliu.h"
 #include <iostream>
@@ -20,14 +20,14 @@ using namespace std;
 static mutex g_mtx;
 
 static const string&
-getPortalWebpageUrl (void) 
+getPortalWebpageUrl (void)
 {
-    static const string portal_url("http://wo.yao.cl/");
+    static const string portal_url("http://www.t66y.com/");
     return(portal_url);
 }
 
 static const string&
-getTopicsListWebpagePartUrl (Caoliu::AvClass av_class) 
+getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
 {
     // reposted
     static const string west_reposted_part_url("thread0806.php?fid=19");
@@ -45,21 +45,21 @@ getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
     static const string selfie_part_url("thread0806.php?fid=16");
 
     switch (av_class) {
-        case Caoliu::west_reposted: 
+        case Caoliu::west_reposted:
             return(west_reposted_part_url);
-        case Caoliu::cartoon_reposted: 
+        case Caoliu::cartoon_reposted:
             return(cartoon_reposted_part_url);
-        case Caoliu::asia_mosaicked_reposted: 
+        case Caoliu::asia_mosaicked_reposted:
             return(asia_mosaicked_reposted_part_url);
-        case Caoliu::asia_non_mosaicked_reposted: 
+        case Caoliu::asia_non_mosaicked_reposted:
             return(asia_non_mosaicked_reposted_part_url);
-        case Caoliu::west_original: 
+        case Caoliu::west_original:
             return(west_original_part_url);
-        case Caoliu::cartoon_original: 
+        case Caoliu::cartoon_original:
             return(cartoon_original_part_url);
-        case Caoliu::asia_mosaicked_original: 
+        case Caoliu::asia_mosaicked_original:
             return(asia_mosaicked_original_part_url);
-        case Caoliu::asia_non_mosaicked_original: 
+        case Caoliu::asia_non_mosaicked_original:
             return(asia_non_mosaicked_original_part_url);
         case Caoliu::selfie:
             return(selfie_part_url);
@@ -67,7 +67,7 @@ getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
 }
 
 static const string
-getTopicsListWebpageUrl (Caoliu::AvClass av_class) 
+getTopicsListWebpageUrl (Caoliu::AvClass av_class)
 {
     return(getPortalWebpageUrl() + getTopicsListWebpagePartUrl(av_class));
 }
@@ -106,19 +106,19 @@ parseValidTopicsUrls ( Caoliu::AvClass av_class,
         if (!caoliu_topicslist_webpage.isLoaded()) {
             return(false);
         }
-        
+
         const vector<pair<string, string>>& topics_title_and_url = caoliu_topicslist_webpage.getTitlesAndUrlsList();
         for (const auto& e : topics_title_and_url) {
             if (++topics_cnt > range_end) {
                 b_stop = true;
                 break;
             }
-            
+
             const string& topic_title = e.first;
             const string& topic_url = e.second;
             static const string o_flag(RichTxt::bold_on + "O" + RichTxt::bold_off);
             static const string x_flag("x");
-            
+
             // ignore the topics which do not in range
             if (topics_cnt < range_begin) {
                 if (b_progress) {
@@ -128,7 +128,7 @@ parseValidTopicsUrls ( Caoliu::AvClass av_class,
             }
             // ignore the topics which contain hate keyword by user set
             string which_keyword;
-            if (isThereInList(topic_title, hate_keywords_list, which_keyword)) { 
+            if (isThereInList(topic_title, hate_keywords_list, which_keyword)) {
                 if (b_progress) {
                     cout << x_flag << " " << flush;
                 }
@@ -136,20 +136,20 @@ parseValidTopicsUrls ( Caoliu::AvClass av_class,
             }
             // ignore the topics which do not contain like keyword by user set
             if ( !like_keywords_list.empty() &&
-                 !isThereInList(topic_title, like_keywords_list, which_keyword) ) { 
+                 !isThereInList(topic_title, like_keywords_list, which_keyword) ) {
                 if (b_progress) {
                     cout << x_flag << " " << flush;
                 }
                 continue;
             }
-            
+
             valid_topics_urls_list.push_back(topic_url);
-            
+
             if (b_progress) {
                 cout << o_flag << " " << flush;
             }
         }
-        
+
         current_url = caoliu_topicslist_webpage.getNextpageUrl();
     }
 
@@ -201,16 +201,16 @@ downloadTopicPicsAndSeed ( const string& topic_url,
                                                          - string("99").size() // picture number
                                                          - string(".torrent").size();
     if (base_name.size() >= filename_max_length_without_postfix) {
-        // the filename too long to create file. the way as following doesn't work, case filename encoding error: 
+        // the filename too long to create file. the way as following doesn't work, case filename encoding error:
         // base_name.resize(filename_max_length_without_postfix - 1), because this is string on char not wstring on wchar.
         // there is another stupid way, random name from 'a' to 'z'
         base_name.resize(16);
-        generate( base_name.begin(), base_name.end(), 
+        generate( base_name.begin(), base_name.end(),
                   [] () {return('a' + rand() % ('z' - 'a'));} );
         base_name = "(rename)" + base_name;
     }
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
- 
+
     // download all pictures
 //const vector<string>& urls = caoliu_topics_webpage.getPicturesUrlsList();
 //for (const auto& e : urls) {
@@ -245,7 +245,7 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     g_mtx.lock();
     cout << "  \"" << base_name << "\" - ";
     if (b_download_pics_success && b_downloaded_seed_success) {
-        cout << success_info; 
+        cout << success_info;
     } else {
         cout << fail_info << " (download error from " << topic_url << ". ";
         if (!b_download_pics_success) {
@@ -335,12 +335,12 @@ Caoliu::Caoliu ( AvClass av_class,
                 e.join();
             }
         }
-        
+
         if (!threads_list.empty()) {
             cout << setprecision(1) << setiosflags(ios::fixed);
             cout << "  " << RichTxt::bold_on << RichTxt::underline_on << "<---- "
                  << 100.0 * parsed_topics_cnt / valid_topics_urls_list.size()
-                 << "% ---->" << RichTxt::underline_off << RichTxt::bold_off << endl; 
+                 << "% ---->" << RichTxt::underline_off << RichTxt::bold_off << endl;
             cout << resetiosflags(ios::fixed);
         }
     }
@@ -366,7 +366,7 @@ Caoliu::Caoliu ( AvClass av_class,
         cout << setprecision(1) << setiosflags(ios::fixed);
         cout << "  " << RichTxt::bold_on << RichTxt::underline_on << "<---- "
              << 100.0 * parsed_topics_cnt / valid_topics_urls_list.size()
-             << "% ---->" << RichTxt::underline_off << RichTxt::bold_off << endl; 
+             << "% ---->" << RichTxt::underline_off << RichTxt::bold_off << endl;
         cout << resetiosflags(ios::fixed);
     }
 
