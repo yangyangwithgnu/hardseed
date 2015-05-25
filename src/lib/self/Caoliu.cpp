@@ -13,7 +13,7 @@
 #include "CaoliuTopicWebpage.h"
 #include "RmdownSeedWebpage.h"
 #include "../helper/RichTxt.h"
-
+#include <fstream>
 
 using namespace std;
 
@@ -22,7 +22,20 @@ static mutex g_mtx;
 static const string&
 getPortalWebpageUrl (void)
 {
-    static const string portal_url("http://www.t66y.com/");
+    string URL="http://www.t66y.com/";
+
+    ifstream out;
+    string str = "config.txt";
+    out.open(str.c_str(), ios::in);
+    string line;
+    std::getline(out,line);
+
+    if (out){
+        URL=line;
+    }
+
+
+    static const string portal_url(URL);
     return(portal_url);
 }
 
