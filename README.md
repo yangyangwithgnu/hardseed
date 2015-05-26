@@ -1,4 +1,4 @@
-#给不了你梦中情人，至少还有硬盘女神：hardseed
+<h1 align="center">给不了你梦中情人，至少还有硬盘女神：hardseed</h1>
 yangyangwithgnu@yeah.net  
 http://yangyangwithgnu.github.io/  
 2015-03-22 00:23:16
@@ -29,6 +29,7 @@ http://yangyangwithgnu.github.io/
 ##版本
 ----------------
 
+**[v0.2.12，优化，2015-05-26]**：0）先前 hardseed 中硬编码 aicheng 和 caoliu 论坛入口地址，地址一旦变更，每次需要重新调整代码，很是麻烦，现在我在本项目主页中放了一份配置文件 config/portals_list.json，hardseed 自动从该文件中获取最新论坛入口地址（安啦，我会及时更新的）；1）调整部分公共库代码。  
 **[v0.2.11，修正，2015-03-22]**：修正 aicheng 种子和图片解析错误的问题（别发邮件了哈，亲，邮箱都他妈快撑爆了） 。  
 **[v0.2.10，修正，2014-12-07]**：caoliu 地址变更，shit :-P  
 **[v0.2.09，修正，2014-11-30]**：caoliu 地址变更。  
@@ -170,7 +171,7 @@ $ git clone https://github.com/yangyangwithgnu/hardseed.git
 ```
 $ cd hardseed/build/
 $ cmake .
-$ make && make install
+$ make && sudo make install
 ```
  
 ####『osX』
