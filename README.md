@@ -286,8 +286,8 @@ failure (download error from http://cl.man.lv/htm_data/2/1407/1174338.html. pict
 **A11**：两方面原因。一方面，合集均是把以往的单个帖子合并一起再发布，完全重复；一方面，虽然帖子中有多部不同片子的图片，但实际上帖子中的种子只是其中一部片子的，没有意义。
 
 **Q12**：很多片子迅雷报违规资源，下载速度奇慢，如何破？  
-**A12**：ThunderSuperSpeedHacker（《论逆向工程的重要性》，唉，当年多么痴迷 (°Д°)），无它。前提你必须是迅雷会员，否则任何方法均无效。迅雷通过离线空间和高速通道两种途径为会员提速，一旦发现违规资源则关闭离线空间和高速通道两个途径，离线空间是否开启是在服务端控制，客户端的任何外力作用均无效，但是，高速通道是否开启则是在客户端控制，这就为第三方工具强制开启高速通道提供了环境，ThunderSuperSpeedHacker 可以做到。用法很简单，先退出迅雷相关进程（thunder.exe、thunderplatform.exe），再运行 ThunderSuperSpeedHacker 点击“破解”即可。那么，有了 ThunderSuperSpeedHacker 是否一定就能享受高速通道了么？不一定，ThunderSuperSpeedHacker 对迅雷版本敏感。对应迅雷 v7.9.37.4952 及后续版本，一旦 ThunderSuperSpeedHacker 介入将导致迅雷僵死。解决办法：  
-0）首先，下载老版本迅雷。网上有很多网站提供迅雷历史版本下载，不过，安全原则之一，尽可能从官网下载，所以，得从迅雷官网找到历史版本。在迅雷首页（http://www.kankan.com/ ）右上角有最新版迅雷下载地址，也就是说，要找到迅雷历史版本下载地址，只要找到迅雷官网首页某个历史快照即可，用时光机器（http://web.archive.org/web/ 墙外）很容易做到，比如，4 月 1 号的首页快照（http://web.archive.org/web/20150401032902/http://www.kankan.com/ ）对应版本 v7.9.34.4908，下载地址为 http://down.sandai.net/thunder7/Thunder_kk_7.9.34.4908Preview.exe ；  
+**A12**：第一，尽可能下新片，道理很简单，越新的片子被视为违规资源的可能性越小，具体而言，你应该用 hardseed 抓取最新帖子的种子，并且尽可能及时下载；第二，借住第三方工具一定程度绕开迅雷对违规资源的限制，ThunderSuperSpeedHacker（《论逆向工程的重要性》，唉，当年多么痴迷 (°Д°)）。前提你必须是迅雷会员，否则任何方法均无效。迅雷通过离线空间和高速通道两种途径为会员提速，一旦发现违规资源则关闭离线空间和高速通道两个途径，离线空间是否开启是在服务端控制，客户端的任何外力作用均无效，但是，高速通道是否开启则是在客户端控制，这就为第三方工具强制开启高速通道提供了环境，ThunderSuperSpeedHacker 可以做到。用法很简单，先退出迅雷相关进程（thunder.exe、thunderplatform.exe），再运行 ThunderSuperSpeedHacker 点击“破解”即可。那么，有了 ThunderSuperSpeedHacker 是否一定就能享受高速通道了么？不一定，ThunderSuperSpeedHacker 对迅雷版本敏感。对于迅雷 v7.9.37.4952 及后续版本，一旦 ThunderSuperSpeedHacker 介入将导致迅雷僵死。解决办法：  
+0）首先，下载老版本迅雷。有很多网站提供迅雷历史版本下载，不过，安全原则之一，尽可能从官网下载，所以，我只信任迅雷官网上的历史版本。在迅雷首页（http://www.kankan.com/ ）右上角有最新版迅雷下载地址，也就是说，要找到迅雷历史版本下载地址，只要找到迅雷官网首页某个历史快照即可，用时光机器（http://web.archive.org/web/ 墙外）很容易做到，比如，4 月 1 号的首页快照（http://web.archive.org/web/20150401032902/http://www.kankan.com/ ）对应版本 v7.9.34.4908，下载地址为 http://down.sandai.net/thunder7/Thunder_kk_7.9.34.4908Preview.exe ；  
 1）接着，防止自动升级。一旦运行迅雷，它将在后台自动强制升级至最新版，所以，你得暴力阻止其升级，删除升级相关程序（xlliveud.exe、liveudinstaller.exe、thunderliveupdate.xar）即可；  
 2）最后，使用 ThunderSuperSpeedHacker 破解违规资源高速通道限制即可。  
 
