@@ -66,7 +66,7 @@ parseNextpageUrl (const string& webpage_txt, const string& portal_url, string& n
         return(false);
     }
 
-    static const string keyword_href("href=\'");
+    static const string keyword_href("<a href=\"");
     const auto keyword_href_pos = webpage_txt.rfind(keyword_href, keyword_nextpage_pos);
     if (string::npos == keyword_href_pos) {
         cerr << "WARNING! parseNextpageUrl() cannot find the keyword " << keyword_href << ". " << endl;
@@ -74,7 +74,7 @@ parseNextpageUrl (const string& webpage_txt, const string& portal_url, string& n
     }
 
     const auto nextpage_suburl_begin_pos = keyword_href_pos + keyword_href.size();
-    const auto nextpage_suburl_end_pos = webpage_txt.find("'", nextpage_suburl_begin_pos);
+    const auto nextpage_suburl_end_pos = webpage_txt.find("\"", nextpage_suburl_begin_pos);
     if (string::npos == nextpage_suburl_end_pos) {
         cerr << "WARNING! parseNextpageUrl() cannot find the keyword '. " << endl;
         return(false);
