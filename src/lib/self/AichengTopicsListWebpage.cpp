@@ -16,21 +16,24 @@ parseTitlesAndUrls ( const string& webpage_txt,
                      vector<pair<string, string>>& titles_and_urls_list ) 
 {
     const unsigned size_back = titles_and_urls_list.size();
+//cout << webpage_txt << endl;
 
-    size_t keyword_topic_url_begin_pos = 0, keyword_topic_url_end_pos = 0;
-    static const vector<string> rule_topic_keywords_list = { "防止盗号", "版规", "求 片 區" }; // "防止盗号" must be the first, because
-                                                                                               // "版规" and "防止盗号" successively appear
-                                                                                               // in the same topics list webpage
-                                                                                               // http://www.ac168.info/bt/simple/index.php?f16.html
-    for (const auto& e : rule_topic_keywords_list) {
-        keyword_topic_url_begin_pos = webpage_txt.find(e);
-        if (string::npos != keyword_topic_url_begin_pos) {
-            break;
-        }
-    }
-    if (string::npos == keyword_topic_url_begin_pos) {
-        keyword_topic_url_begin_pos = 0;
-    }
+    const auto topics_list_txt_pos = webpage_txt.find(R"(style="border-top:0">普通主题</td></tr>)");
+    size_t keyword_topic_url_begin_pos = ((string::npos == topics_list_txt_pos) ? 0 : topics_list_txt_pos);
+    size_t keyword_topic_url_end_pos = 0;
+    //static const vector<string> rule_topic_keywords_list = { "", "版规", "求 片 區" }; // "防止盗号" must be the first, because
+                                                                                               //// "版规" and "防止盗号" successively appear
+                                                                                               //// in the same topics list webpage
+                                                                                               //// http://www.ac168.info/bt/simple/index.php?f16.html
+    //for (const auto& e : rule_topic_keywords_list) {
+        //keyword_topic_url_begin_pos = webpage_txt.find(e);
+        //if (string::npos != keyword_topic_url_begin_pos) {
+            //break;
+        //}
+    //}
+    //if (string::npos == keyword_topic_url_begin_pos) {
+        //keyword_topic_url_begin_pos = 0;
+    //}
 
     while (true) {
         // parse topic URL
