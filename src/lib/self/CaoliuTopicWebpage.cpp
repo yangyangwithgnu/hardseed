@@ -78,7 +78,7 @@ parsePicturesUrls (const string& webpage_txt, vector<string>& pictures_urls_list
     }
 
     // the list may be on the webpage at the same time
-    static const vector<pair<string, string>> begin_and_end_keywords_list = { make_pair("<img src='", "'"), 
+    static const vector<pair<string, string>> begin_and_end_keywords_list = { make_pair("<input src='", "'"), 
                                                                               make_pair("input type='image' src='", "'") };
     
     bool b_ok = false;
