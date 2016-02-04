@@ -214,8 +214,12 @@ parseTopicsRangeArgument ( const vector<string>& topicsrange_arguments_list,
 static void
 getPortalUrls (string& caoliu_portal_url, string& aicheng_portal_url)
 {
-    static const string portals_file_url("https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/config/portals_list.json");
-    Webpage portals_list_webpage(portals_file_url);
+#ifdef CYGWIN
+    caoliu_portal_url = "http://cl.bearhk.info/";
+    aicheng_portal_url = "http://www.ac168.info/bt/";
+#else
+    static const string portals_file_url("http://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/config/portals_list.json");
+    Webpage portals_list_webpage(portals_file_url, "", "http://127.0.0.1:8087");
     if (!portals_list_webpage.isLoaded()) {
         cerr << "ERROR! fail to load " << portals_file_url << endl;
         exit(EXIT_FAILURE);
@@ -232,11 +236,11 @@ getPortalUrls (string& caoliu_portal_url, string& aicheng_portal_url)
     }
 
     // caoliu 和 aicheng 论坛入口 URL 以 json 格式存放在本项目托管空间中，格式如下：
-    /* 
+    /*
      * {
      *     "caoliu": "http://cl.clme.me/",
      *     "aicheng": "http://www.ac168.info/",
-     * } 
+     * }
      */
     caoliu_portal_url = json_portal_urls_list["caoliu"].string_value();
     aicheng_portal_url = json_portal_urls_list["aicheng"].string_value();
@@ -244,6 +248,8 @@ getPortalUrls (string& caoliu_portal_url, string& aicheng_portal_url)
         cerr << "ERROR! fail to parse caoliu and aicheng portal URL. " << endl;
         exit(EXIT_FAILURE);
     }
+#endif
+
 }
 
 int

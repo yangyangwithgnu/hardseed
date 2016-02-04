@@ -1,7 +1,7 @@
 <h1 align="center">给不了你梦中情人，至少还有硬盘女神：hardseed</h1>
 yangyangwithgnu@yeah.net  
 http://yangyangwithgnu.github.io/  
-2016-01-31 22:53:51
+2016-02-04 14:53:51
 
 
 ##谢谢
@@ -29,6 +29,7 @@ http://yangyangwithgnu.github.io/
 ##版本
 ----------------
 
+**[v0.2.14-1，修正，2016-02-04]**：0）行了、行了，我抱歉，不知道有这么多 win 用户需要 hardseed，之前是我狭隘了，只考虑到 unix-like 用户。编译好的 win 版本程序送你，位于 bin\build_4_win.7z；1）另外，osX 下的构建方面进行了细化。新年快乐！  
 **[v0.2.14，修正，2016-01-31]**：0）忽略解析 aicheng 站务相关帖子。  
 **[v0.2.13，修正，2016-01-17]**：0）修正 caoliu 翻页的错误。  
 **[v0.2.12，优化，2015-05-26]**：0）先前 hardseed 中硬编码 aicheng 和 caoliu 论坛入口地址，地址一旦变更，每次需要重新调整代码，很是麻烦，现在我在本项目主页中放了一份配置文件 config/portals_list.json，hardseed 自动从该文件中获取最新论坛入口地址（安啦，我会及时更新的）；1）调整部分公共库代码。  
@@ -177,7 +178,7 @@ $ make && sudo make install
 ```
  
 ####『osX』
-先将 build/CMakeLists.txt 中的  
+首先，将 build/CMakeLists.txt 中的  
 ```
 TARGET_LINK_LIBRARIES(hardseed curl pthread)
 ```
@@ -185,7 +186,34 @@ TARGET_LINK_LIBRARIES(hardseed curl pthread)
 ```
 TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
 ```
-其他同 linux 构建方法。
+
+然后，将 build/CMakeLists.txt 中
+```
+## osX
+##>>>>>>>>>>>>>>>>>>>>>>
+
+#SET(CMAKE_CXX_COMPILER "g++")
+#SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
+#SET(CMAKE_BUILD_TYPE release)
+#ADD_EXECUTABLE(hardseed ${SRC_LIST})
+#TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
+#INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
+```
+第一列的 # 删除；
+
+接着，将 build/CMakeLists.txt 中
+```
+# release
+SET(CMAKE_CXX_COMPILER "g++")
+SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
+SET(CMAKE_BUILD_TYPE release)
+ADD_EXECUTABLE(hardseed ${SRC_LIST})
+TARGET_LINK_LIBRARIES(hardseed curl pthread)
+INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
+```
+删掉；
+
+最后，剩下步骤同 linux 构建方法。
 
 
 
@@ -193,7 +221,7 @@ TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
 **亲，听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
 
 ####『windows』  
-先进入 hardseed\bin\windows\，找到并选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 alt-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，再在 CMD 中键入
+先进入 hardseed\bin\，解压 build_4_win.7z，选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 alt-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，在 CMD 中键入
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
@@ -212,7 +240,7 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 
 ###【FQA】  
 
-**Q1**：为何 windows 版的可执行文件目录 hardseed\bin\windows\ 下有一堆 cyg\*.dll 文件？  
+**Q1**：为何 windows 版的可执行文件目录 build_4_win\ 下有一堆 cyg\*.dll 文件？  
 **A1**：hardseed 是用 C++ 编写的遵循 SUS（单一 unix 规范）的原生 linux 程序，理论上，在任何 unix-like（linux、BSD、osX） 系统上均可正常源码编译，唯独不支持 windows，为让 hardseed 具备跨平台能力，须借由某种工具（或环境）将 hardseed 转换成 windows 下的执行程序。cygwin 就是这种环境，我把 hardseed 源码纳入 cygwin 环境中重新编译，即可生成 windows 下的可执行程序 hardseed.exe，在这个过程中，cygwin 会加入些自己的代码和中转库到 hardseed.exe 中，cyg\*.dll 就是各类中转库。
 
 **Q2**：为何运行 windows 版的执行程序总有如下警告
