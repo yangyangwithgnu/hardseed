@@ -26,7 +26,7 @@ SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 SET(CMAKE_BUILD_TYPE release)
 ADD_EXECUTABLE(hardseed ${SRC_LIST})
 TARGET_LINK_LIBRARIES(hardseed curl pthread)
-INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
+INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
 
 #<<<<<<<<<<<<<<<<<<<<<<
 
@@ -52,6 +52,6 @@ INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
 #SET(CMAKE_BUILD_TYPE release)
 #ADD_EXECUTABLE(hardseed ${SRC_LIST})
 #TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
-#INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
+#INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
 
 ##<<<<<<<<<<<<<<<<<<<<<<

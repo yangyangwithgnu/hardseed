@@ -173,7 +173,7 @@ $ git clone https://github.com/yangyangwithgnu/hardseed.git
 ```
 $ cd hardseed/build/
 $ cmake .
-$ make && sudo make install
+$ make && make install
 ```
  
 ####『osX』
