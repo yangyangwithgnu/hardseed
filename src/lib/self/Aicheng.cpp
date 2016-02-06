@@ -80,9 +80,6 @@ parseValidTopicsUrls ( Aicheng::AvClass av_class,
     valid_topics_urls_list.clear();
 
     string current_url = getTopicsListWebpageUrl(portal_url, av_class);
-//cerr << current_url << endl;
-//int ii;
-//cin >> ii;
     bool b_stop = false;
     unsigned topics_cnt = 0;
     while (!current_url.empty() && !b_stop) {
@@ -321,7 +318,9 @@ Aicheng::Aicheng ( const string& portal_url,
     }
 
     vector<thread> threads_list;
-    for (unsigned i = (valid_topics_urls_list.size() / threads_total) * threads_total; i < valid_topics_urls_list.size(); ++i) {
+    for ( unsigned i = (valid_topics_urls_list.size() / threads_total) * threads_total;
+          i < valid_topics_urls_list.size();
+          ++i ) {
         ++parsed_topics_cnt;
         threads_list.push_back(thread( &downloadTopicPicsAndSeed,
                                        ref(valid_topics_urls_list[i]),

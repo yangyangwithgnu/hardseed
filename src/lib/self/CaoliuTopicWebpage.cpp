@@ -36,6 +36,7 @@ parsePicturesUrlsHelper ( const string& webpage_txt,
         bool b_ignore_url = false;
         static const vector<string> ignore_urls_keywords_list = {
                                                                   "iceimg.com",
+                                                                  "picuphost.com",
                                                                   // caoliu froum selfie member's logo.
                                                                   // http://ww4.sinaimg.cn/mw690/005uMz33gw1egsm41zq6qj30f80b4gm9.jpg
                                                                   // >>>>
@@ -79,7 +80,8 @@ parsePicturesUrls (const string& webpage_txt, vector<string>& pictures_urls_list
 
     // the list may be on the webpage at the same time
     static const vector<pair<string, string>> begin_and_end_keywords_list = { make_pair("<img src='", "'"), 
-                                                                              make_pair("input type='image' src='", "'") };
+                                                                              make_pair("input type='image' src='", "'"),
+                                                                              make_pair("<input src='", "'") };
     
     bool b_ok = false;
     for (const auto& e : begin_and_end_keywords_list) {
