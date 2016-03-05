@@ -25,7 +25,11 @@ SET(CMAKE_CXX_COMPILER "g++")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 SET(CMAKE_BUILD_TYPE release)
 ADD_EXECUTABLE(hardseed ${SRC_LIST})
-TARGET_LINK_LIBRARIES(hardseed curl pthread)
+IF(APPLE)
+  TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
+ELSE()
+  TARGET_LINK_LIBRARIES(hardseed curl pthread)
+ENDIF()
 INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
 
 #<<<<<<<<<<<<<<<<<<<<<<
@@ -40,18 +44,5 @@ INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
 #ADD_EXECUTABLE(hardseed ${SRC_LIST})
 #target_link_libraries(hardseed /bin/cygcurl-4.dll)
 #target_link_libraries(hardseed /lib/libiconv.a)
-
-##<<<<<<<<<<<<<<<<<<<<<<
-
-
-## osX
-##>>>>>>>>>>>>>>>>>>>>>>
-
-#SET(CMAKE_CXX_COMPILER "g++")
-#SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
-#SET(CMAKE_BUILD_TYPE release)
-#ADD_EXECUTABLE(hardseed ${SRC_LIST})
-#TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
-#INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
 
 ##<<<<<<<<<<<<<<<<<<<<<<
