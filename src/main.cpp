@@ -215,7 +215,7 @@ static void
 getPortalUrls (string& caoliu_portal_url, string& aicheng_portal_url)
 {
 //#ifdef CYGWIN
-    caoliu_portal_url = "http://cl.bearhk.info/";
+    caoliu_portal_url = "http://t66y.com/";
     aicheng_portal_url = "http://www.ac168.info/bt/";
 //#else
     //static const string portals_file_url("https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/config/portals_list.json");
