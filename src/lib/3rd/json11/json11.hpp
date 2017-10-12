@@ -56,7 +56,23 @@
 #include <memory>
 #include <initializer_list>
 
+#ifdef _MSC_VER
+    #if _MSC_VER <= 1800 // VS 2013
+        #ifndef noexcept
+            #define noexcept throw()
+        #endif
+
+        #ifndef snprintf
+            #define snprintf _snprintf_s
+        #endif
+    #endif
+#endif
+
 namespace json11 {
+
+enum JsonParse {
+    STANDARD, COMMENTS
+};
 
 class JsonValue;
 
@@ -91,14 +107,14 @@ public:
 
     // Implicit constructor: map-like objects (std::map, std::unordered_map, etc)
     template <class M, typename std::enable_if<
-        std::is_constructible<std::string, typename M::key_type>::value
-        && std::is_constructible<Json, typename M::mapped_type>::value,
+        std::is_constructible<std::string, decltype(std::declval<M>().begin()->first)>::value
+        && std::is_constructible<Json, decltype(std::declval<M>().begin()->second)>::value,
             int>::type = 0>
     Json(const M & m) : Json(object(m.begin(), m.end())) {}
 
     // Implicit constructor: vector-like objects (std::list, std::vector, std::set, etc)
     template <class V, typename std::enable_if<
-        std::is_constructible<Json, typename V::value_type>::value,
+        std::is_constructible<Json, decltype(*std::declval<V>().begin())>::value,
             int>::type = 0>
     Json(const V & v) : Json(array(v.begin(), v.end())) {}
 
@@ -145,17 +161,33 @@ public:
     }
 
     // Parse. If parse fails, return Json() and assign an error message to err.
-    static Json parse(const std::string & in, std::string & err);
-    static Json parse(const char * in, std::string & err) {
+    static Json parse(const std::string & in,
+                      std::string & err,
+                      JsonParse strategy = JsonParse::STANDARD);
+    static Json parse(const char * in,
+                      std::string & err,
+                      JsonParse strategy = JsonParse::STANDARD) {
         if (in) {
-            return parse(std::string(in), err);
+            return parse(std::string(in), err, strategy);
         } else {
             err = "null input";
             return nullptr;
         }
     }
     // Parse multiple objects, concatenated or separated by whitespace
-    static std::vector<Json> parse_multi(const std::string & in, std::string & err);
+    static std::vector<Json> parse_multi(
+        const std::string & in,
+        std::string::size_type & parser_stop_pos,
+        std::string & err,
+        JsonParse strategy = JsonParse::STANDARD);
+
+    static inline std::vector<Json> parse_multi(
+        const std::string & in,
+        std::string & err,
+        JsonParse strategy = JsonParse::STANDARD) {
+        std::string::size_type parser_stop_pos;
+        return parse_multi(in, parser_stop_pos, err, strategy);
+    }
 
     bool operator== (const Json &rhs) const;
     bool operator<  (const Json &rhs) const;
