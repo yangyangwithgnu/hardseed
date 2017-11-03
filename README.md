@@ -15,7 +15,7 @@ http://yangyangwithgnu.github.io/
 **二手书**：书，我提高开发技能的重要手段之一，随着职业生涯的发展，书籍也在不断增多，对我而言，一本书最多读三遍，再往后，几乎没有什么营养吸收，这部分书对我已基本无用，但对其他人可能仍有价值，所以，为合理利用资源，我决定低价出售这些书，希望达到两个目的：0）用售出的钱购买更多新书（没当过雷锋的朋友 (๑´ڡ`๑)）；1）你低价购得需要的书（虽然二手）。到 https://github.com/yangyangwithgnu/used_books 看看有无你钟意的。
 
 
-##公告
+## 公告
 ----------------
 
 **讨论**：任何意见建议移步 https://www.v2ex.com/t/123175  
@@ -26,7 +26,7 @@ http://yangyangwithgnu.github.io/
 + 代理是一切的先决条件。你可以使用自己的代理工具，用 hardseed 的命令行选项 --proxy 指定本地中转地址及端口，也可以用我为你预配置的 goagent 代理工具，位于 https://github.com/yangyangwithgnu/goagent_out_of_box_yang
 
 
-##版本
+## 版本
 ----------------
 
 **[v0.2.14-1，修正，2016-02-04]**：0）行了、行了，我抱歉，不知道有这么多 win 用户需要 hardseed，之前是我狭隘了，只考虑到 unix-like 用户。编译好的 win 版本程序送你，位于 bin\build_4_win.7z；1）另外，osX 下的构建方面进行了细化。新年快乐！  
@@ -49,7 +49,7 @@ http://yangyangwithgnu.github.io/
 **[v0.1.00，修正，2014-07-21]**：caoliu 论坛增加了反机器人机制，若翻页过快则视为机器人行为，下载页面为空白页。此版本可应对它的反机器人机制。
 
 
-##演示  
+## 演示  
 ----------------
 *hardseed*  
 ![hardseed gif demo](https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/pic/hardseed.gif)  
@@ -61,7 +61,7 @@ http://yangyangwithgnu.github.io/
 http://v.youku.com/v_show/id_XNzQxOTk0NTE2.html
 
 
-##man
+## man
 ----------------
 
 **hardseed** is a batch seeds and pictures download utiltiy from CaoLiu and AiCheng forum. It's easy and simple to use. Usually, you could issue it as follow:
@@ -140,34 +140,34 @@ The default http://127.0.0.1:8087.
 That's all. Any suggestions let me know by yangyangwithgnu@yeah.net or http://yangyangwithgnu.github.io/, big thanks to you. Kiddo, take care of your body. :-)  
 
 
-##中文
+## 中文
 --------
 
 hardseed 希望带给你（硬盘）女神！女神的种子和图片。  
 
-###【翻墙】  
+### 【翻墙】  
 你知道，这一切的一切都在墙外，所以你得具备翻墙环境，hardseed 才能帮你拉女神。hardseed 支持 goagent、shadowsocks、SSH、VPN （PPTP 和 openVPN）等各类代理模式，甚至你可以同时使用多种代理以极速下载。从普及度、稳定性、高效性来看，goagent 最优。“我一小白，平时工作压力本来就大，就想看看女神轻松下，你还让我折腾代理！没人性！”，嘚，亲，咱是做服务的。我帮你配置了一份开箱即用的 goagent，位于 https://github.com/yangyangwithgnu/goagent_out_of_box_yang ，下载后，linux 用户，命令行中运行
 ```
 $ python proxy.py
 ```
 windows 亲，双击运行 goagent.exe （**管理员权限**）。  
 
-###【下载】
+### 【下载】
 
-####『windows』
+#### 『windows』
 亲，往右上看，找到“download ZIP”，点击下载。
 
-####『linux』
+#### 『linux』
 ```
 $ git clone https://github.com/yangyangwithgnu/hardseed.git
 ```
 
-###【源码安装】
+### 【源码安装】
 
 ####『windows』  
 这基本没 windows 用户什么事儿，除非你有 cygwin，否则你没法编译源码，没事，帮你弄好了，我的定位是牙医界的服务人员，服务很重要，二进制执行程序位于 hardseed\bin\build_4_win.7z。
  
-####『linux』
+#### 『linux』
 0）唯一依赖 libcurl，请自行安装；  
 1）代码采用 C++11 编写，gcc 版本不低于 4.7.1。  
 2）命令行下运行：  
@@ -177,7 +177,7 @@ $ cmake .
 $ make && make install
 ```
  
-####『osX』
+#### 『osX』
 首先，将 build/CMakeLists.txt 中的  
 ```
 TARGET_LINK_LIBRARIES(hardseed curl pthread)
@@ -217,17 +217,17 @@ INSTALL(PROGRAMS hardseed DESTINATION /usr/bin/)
 
 
 
-###【使用】  
+### 【使用】  
 **亲，听好了，运行 hardseed 前务必确保代理程序已正常运行，否则，别说女神，蚊子都碰不到。**
 
-####『windows』  
+#### 『windows』  
 先进入 hardseed\bin\，解压 build_4_win.7z，选中 hardseed.exe，右键设置**以管理员权限运行该程序**，接着键入 alt-d 将光标定位到文件管理器的地址栏中，键入 CMD 启动命令行窗口，在 CMD 中键入
 ```
 X:\hardseed\bin\windows> hardseed.exe
 ```
 这时，hardseed 开始玩命儿地为你下载女神图片和种子，经过 2 分 8 秒，找到类似 C:\\[aicheng_asia_mosaicked][1~128]@20140822\ 的目录，女神们那儿等你！
 
-####『linux』  
+#### 『linux』  
 同 windows 下运行一样，全用默认命令行参数运行
 ```
 $ hardseed
@@ -238,7 +238,7 @@ $ hardseed --saveas-path ~/downloads --topics-range 256 --av-class aicheng_west
 ```
 其中，--saveas-path 指定存放路径为 ~/downloads/；--topics-range 指定解析的帖子范围从第 1 张到第 256 张帖子；--av-class 指定女神类型为欧美。完整命令行选项请 --hlep 查看。
 
-###【FQA】  
+### 【FQA】  
 
 **Q1**：为何 windows 版的可执行文件目录 build_4_win\ 下有一堆 cyg\*.dll 文件？  
 **A1**：hardseed 是用 C++ 编写的遵循 SUS（单一 unix 规范）的原生 linux 程序，理论上，在任何 unix-like（linux、BSD、osX） 系统上均可正常源码编译，唯独不支持 windows，为让 hardseed 具备跨平台能力，须借由某种工具（或环境）将 hardseed 转换成 windows 下的执行程序。cygwin 就是这种环境，我把 hardseed 源码纳入 cygwin 环境中重新编译，即可生成 windows 下的可执行程序 hardseed.exe，在这个过程中，cygwin 会加入些自己的代码和中转库到 hardseed.exe 中，cyg\*.dll 就是各类中转库。
@@ -336,7 +336,7 @@ X:\> rd /S C:\[aicheng_west][1~128]@010825\
 * 如果你仍坚持使用 goagent，请 --concurrent-tasks 减小至 4 或者更小的数字。
 
 
-##忠告
+## 忠告
 -------------
 
 你，党之栋梁、国之人才，注意身体，千万！
