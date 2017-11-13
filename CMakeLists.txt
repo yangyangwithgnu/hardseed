@@ -1,14 +1,24 @@
-PROJECT(main)
+cmake_minimum_required(VERSION 3.5)
 
+PROJECT(hardseed)
 
-SET(SRC_LIST ../src/main.cpp
-             ../src/lib/self/TopicsListWebpage.cpp ../src/lib/self/AichengTopicsListWebpage.cpp ../src/lib/self/CaoliuTopicsListWebpage.cpp
-             ../src/lib/self/TopicWebpage.cpp ../src/lib/self/AichengTopicWebpage.cpp ../src/lib/self/CaoliuTopicWebpage.cpp
-             ../src/lib/self/SeedWebpage.cpp ../src/lib/self/JandownSeedWebpage.cpp ../src/lib/self/RmdownSeedWebpage.cpp
-             ../src/lib/self/Aicheng.cpp ../src/lib/self/Caoliu.cpp
-             ../src/lib/helper/Webpage.cpp
-             ../src/lib/helper/Time.cpp ../src/lib/helper/CmdlineOption.cpp ../src/lib/helper/Misc.cpp
-             ../src/lib/3rd/json11/json11.cpp)
+SET(SRC_LIST ./src/main.cpp
+             ./src/lib/self/TopicsListWebpage.cpp
+             ./src/lib/self/AichengTopicsListWebpage.cpp
+             ./src/lib/self/CaoliuTopicsListWebpage.cpp
+             ./src/lib/self/TopicWebpage.cpp
+             ./src/lib/self/AichengTopicWebpage.cpp
+             ./src/lib/self/CaoliuTopicWebpage.cpp
+             ./src/lib/self/SeedWebpage.cpp
+             ./src/lib/self/JandownSeedWebpage.cpp
+             ./src/lib/self/RmdownSeedWebpage.cpp
+             ./src/lib/self/Aicheng.cpp
+             ./src/lib/self/Caoliu.cpp
+             ./src/lib/helper/Webpage.cpp
+             ./src/lib/helper/Time.cpp
+             ./src/lib/helper/CmdlineOption.cpp
+             ./src/lib/helper/Misc.cpp
+             ./src/lib/3rd/json11/json11.cpp)
 
 # linux
 #>>>>>>>>>>>>>>>>>>>>>>
@@ -52,6 +62,6 @@ SET(CMAKE_CXX_FLAGS "-std=c++11 -O3")
 SET(CMAKE_BUILD_TYPE release)
 ADD_EXECUTABLE(hardseed ${SRC_LIST})
 TARGET_LINK_LIBRARIES(hardseed curl pthread iconv)
-INSTALL(PROGRAMS hardseed DESTINATION /usr/local/bin)
+INSTALL(PROGRAMS build/hardseed DESTINATION /usr/local/bin)
 
 ##<<<<<<<<<<<<<<<<<<<<<<
