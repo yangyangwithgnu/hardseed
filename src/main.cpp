@@ -215,7 +215,7 @@ static void
 getPortalUrls (string& caoliu_portal_url, string& aicheng_portal_url)
 {
 //#ifdef CYGWIN
-    caoliu_portal_url = "http://t66y.com/";
+    caoliu_portal_url = "http://www.t66y.com/";
     aicheng_portal_url = "http://www.ac168.info/bt/";
 //#else
     //static const string portals_file_url("https://raw.githubusercontent.com/yangyangwithgnu/hardseed/master/config/portals_list.json");
@@ -288,14 +288,14 @@ main (int argc, char* argv[])
     // --av-class 
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     cout << "Your command arguments: " << endl;
-    string av_class_name("aicheng_asia_mosaicked");
+    string av_class_name("caoliu_selfie");
     cmdline_arguments_list = cmdline_options.getArgumentsList("--av-class");
     if (!cmdline_arguments_list.empty()) {
         av_class_name = cmdline_arguments_list[0];
     }
 
-    bool b_aicheng = true;
-    Caoliu::AvClass caoliu_av_class = Caoliu::asia_mosaicked_original;
+    bool b_aicheng = false;
+    Caoliu::AvClass caoliu_av_class = Caoliu::selfie;
     Aicheng::AvClass aicheng_av_class = Aicheng::asia_mosaicked;
     if ("caoliu_west_original" == av_class_name) {
         caoliu_av_class = Caoliu::west_original;
@@ -471,7 +471,7 @@ main (int argc, char* argv[])
     cout << RichTxt::bold_off << "\b\b\"; " << endl;
 
     // --proxy. prompt user to use proxy, because the caoliu bbs maybe block IP
-    vector<string> proxy_addrs_list = {"http://127.0.0.1:8087"}; // the default proxy is GoAgent
+    vector<string> proxy_addrs_list = {""}; // the default proxy is NOTHING
     cmdline_arguments_list = cmdline_options.getArgumentsList("--proxy");
     if (!cmdline_arguments_list.empty()) {
         proxy_addrs_list = cmdline_arguments_list;
