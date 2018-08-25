@@ -41,7 +41,7 @@ getTopicsListWebpagePartUrl (Caoliu::AvClass av_class)
     static const string asia_non_mosaicked_original_part_url("thread0806.php?fid=2");
 
     // selfie
-    static const string selfie_part_url("thread0806.php?fid=16");
+    static const string selfie_part_url("thread0806.php?fid=16&search=1");
 
     switch (av_class) {
         case Caoliu::west_reposted: 
@@ -175,7 +175,10 @@ downloadTopicPicsAndSeed ( const string& topic_url,
     // 0) delete the web logo info;
     // 1) clear the "/" in topictitle string, if the "/" present in filename,
     // linux will treat it as directory, again, clear the "\" for windows;
-    static const vector<string> keyword_logos_list = {"  草榴社區  - powered by phpwind.net"};
+    static const vector<string> keyword_logos_list = {
+        "  草榴社區  - powered by phpwind.net",
+        " - 達蓋爾的旗幟 | 草榴社區 - t66y.com"
+    };
     const string& topic_webpage_title = caoliu_topics_webpage.getTitle();
     auto keyword_logo_pos = string::npos;
     for (const auto& f : keyword_logos_list) {
