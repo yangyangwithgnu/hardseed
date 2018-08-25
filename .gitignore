@@ -75,6 +75,8 @@ distribute/*
 cmake_build
 .cmake_build
 gen
+cmake-build-debug
+.cmake-build-debug
 
 # Bram
 plsdontbreak
